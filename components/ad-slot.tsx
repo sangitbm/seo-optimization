@@ -19,6 +19,8 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
   const adRef = useRef<HTMLModElement>(null);
 
   useEffect(() => {
+    if (process.env.NODE_ENV === "development") return;
+
     try {
       if (adRef.current && !adRef.current.getAttribute("data-adsbygoogle-status")) {
         // @ts-ignore
@@ -28,6 +30,22 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
       console.error("AdSense initialization error:", err);
     }
   }, []);
+
+  if (process.env.NODE_ENV === "development") {
+    return (
+      <div
+        className={`flex flex-col items-center justify-center border border-dashed border-border/80 bg-muted/40 p-4 text-center rounded-lg ${sizeClasses[variant]} ${className}`}
+        aria-label="Advertisement Placeholder (Dev Mode)"
+      >
+        <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+          AdSense Slot ({variant})
+        </span>
+        <span className="text-[11px] text-muted-foreground mt-1 max-w-xs">
+          Ads do not render on localhost. They will display in production once your domain status is "Ready" in AdSense.
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -46,3 +64,4 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
     </div>
   );
 }
+
