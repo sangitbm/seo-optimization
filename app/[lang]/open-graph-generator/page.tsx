@@ -1,3 +1,4 @@
+import { ToolStructuredData } from "@/components/tool-structured-data";
 import { createToolMetadata } from "@/lib/metadata";
 import { getToolBySlug } from "@/lib/tools-data";
 import { OpenGraphGeneratorTool } from "@/components/tools/open-graph-generator";
@@ -14,5 +15,10 @@ import type { Locale } from "@/i18n-config";
 export default async function OpenGraphGeneratorPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-  return <OpenGraphGeneratorTool dict={dict} />;
+  return (
+    <>
+      <ToolStructuredData tool={tool} lang={lang} />
+      <OpenGraphGeneratorTool dict={dict}  />
+    </>
+  );
 }

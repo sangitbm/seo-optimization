@@ -70,9 +70,28 @@ export function createWebsiteSchema() {
     url: SITE_URL,
     description:
       "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, and more.",
+    potentialAction: [
+      {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/en?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    ],
+  };
+}
+
+export function createSiteLinksSearchBoxSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
-      target: `${SITE_URL}/?q={search_term_string}`,
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/en?q={search_term_string}`,
+      },
       "query-input": "required name=search_term_string",
     },
   };

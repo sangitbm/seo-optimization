@@ -6,11 +6,12 @@ import { AdSlot } from "@/components/ad-slot";
 import { getPopularTools, getRecentTools } from "@/lib/tools-data";
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";
-import { createWebsiteSchema, createFAQSchema } from "@/lib/structured-data";
+import { createWebsiteSchema, createFAQSchema, createSiteLinksSearchBoxSchema } from "@/lib/structured-data";
 import { safeJsonLd } from "@/lib/utils";
 import { Shield, Zap, Globe } from "lucide-react";
 
 const websiteSchema = createWebsiteSchema();
+const siteLinksSchema = createSiteLinksSearchBoxSchema();
 const faqSchema = createFAQSchema([
   {
     question: "Are these SEO tools really free?",
@@ -40,6 +41,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(siteLinksSchema) }}
       />
       <script
         type="application/ld+json"
