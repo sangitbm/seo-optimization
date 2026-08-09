@@ -7,14 +7,21 @@ export const metadata = createMetadata({
   slug: "contact",
 });
 
-export default function ContactPage() {
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
+
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  const t = dict?.legal?.contact || {};
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-4xl font-bold tracking-tight">Contact Us</h1>
+      <h1 className="mb-8 text-4xl font-bold tracking-tight">{t.title || "Contact Us"}</h1>
       
       <div className="prose prose-violet dark:prose-invert max-w-none">
         <p className="text-lg text-muted-foreground mb-8">
-          Have a question, suggestion, or encountered an issue with one of our tools? We'd love to hear from you.
+          {t.desc || "Have a question, suggestion, or encountered an issue with one of our tools? We'd love to hear from you."}
         </p>
 
         <div className="grid gap-8 sm:grid-cols-2 mb-12">
@@ -22,9 +29,9 @@ export default function ContactPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-900/30 mb-4">
               <Mail className="h-5 w-5 text-violet-600 dark:text-violet-400" />
             </div>
-            <h3 className="font-semibold text-lg mb-2">Email Us</h3>
+            <h3 className="font-semibold text-lg mb-2">{t.emailTitle || "Email Us"}</h3>
             <p className="text-muted-foreground mb-4">
-              For support or general inquiries, email us directly.
+              {t.emailDesc || "For support or general inquiries, email us directly."}
             </p>
             <a href="mailto:sanmusic455@gmail.com" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
               sanmusic455@gmail.com
@@ -35,7 +42,7 @@ export default function ContactPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-900/30 mb-4">
               <MapPin className="h-5 w-5 text-violet-600 dark:text-violet-400" />
             </div>
-            <h3 className="font-semibold text-lg mb-2">Location</h3>
+            <h3 className="font-semibold text-lg mb-2">{t.locationTitle || "Location"}</h3>
             <p className="text-muted-foreground">
               Kathmandu<br />
               Nepal

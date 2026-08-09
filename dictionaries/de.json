@@ -224,5 +224,45 @@
         }
       ]
     }
+  },
+  "legal": {
+    "about": {
+      "title": "About Us",
+      "mission": "Our Mission",
+      "missionText1": "Founded in 2025, SEO Utilities has come a long way. Our passion for creating clean, developer-friendly SEO tools drove us to build a platform that runs entirely in your browser.",
+      "missionText2": "We believe that essential webmaster tools should be free, fast, and accessible without requiring users to create accounts or sacrifice their privacy. Every tool processes your data locally.",
+      "whyChooseUs": "Why Choose Us?",
+      "whyFast": "Lightning Fast: Our tools are built with modern web technologies to ensure instant results.",
+      "whyPrivacy": "Privacy First: Your data never leaves your browser. Zero tracking.",
+      "whyFree": "Always Free: We are committed to keeping our core tools 100% free forever.",
+      "whyDev": "Developer Focused: Generated code is clean, semantic, and ready for production."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "desc": "Have a question, suggestion, or encountered an issue with one of our tools? We'd love to hear from you.",
+      "emailTitle": "Email Us",
+      "emailDesc": "For support or general inquiries, email us directly.",
+      "locationTitle": "Location"
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "p1": "At SEO Utilities, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by SEO Utilities and how we use it.",
+      "localTitle": "Local Processing & Client-Side Tools",
+      "localText": "We do not collect or store your inputs. Almost all of the tools provided on SEO Utilities run entirely client-side (within your browser).",
+      "logTitle": "Log Files",
+      "logText": "SEO Utilities follows a standard procedure of using log files.",
+      "adsTitle": "Google DoubleClick DART Cookie",
+      "adsText": "Google uses DART cookies to serve ads based on visits. You may decline the use of DART cookies by visiting the Google ad network Privacy Policy.",
+      "consentTitle": "Consent",
+      "consentText": "By using our website, you hereby consent to our Privacy Policy."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "p1": "Welcome to SEO Utilities! These terms and conditions outline the rules and regulations for the use of SEO Utilities's Website.",
+      "licenseTitle": "License",
+      "licenseText": "Unless otherwise stated, SEO Utilities and/or its licensors own the intellectual property rights for all material on SEO Utilities. You may use our free tools and the output they generate for both personal and commercial projects without restriction.",
+      "userCommentsTitle": "Disclaimer",
+      "userCommentsText": "To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Our tools are provided 'as is' without any warranty."
+    }
   }
 }

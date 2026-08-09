@@ -224,5 +224,45 @@
         }
       ]
     }
+  },
+  "legal": {
+    "about": {
+      "title": "À Propos",
+      "mission": "Notre Mission",
+      "missionText1": "Fondé en 2025, SEO Utilities a pour passion de créer des outils propres et respectueux de la vie privée.",
+      "missionText2": "Nous croyons que les outils essentiels doivent être gratuits et rapides.",
+      "whyChooseUs": "Pourquoi nous choisir ?",
+      "whyFast": "Ultra Rapide",
+      "whyPrivacy": "Confidentialité d'abord",
+      "whyFree": "Toujours Gratuit",
+      "whyDev": "Axé Développeur"
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "desc": "Une question ou suggestion ? Contactez-nous !",
+      "emailTitle": "Email",
+      "emailDesc": "Pour l'assistance.",
+      "locationTitle": "Emplacement"
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité",
+      "p1": "La protection de votre vie privée est notre priorité.",
+      "localTitle": "Traitement Local",
+      "localText": "Nous ne stockons pas vos données. Tout s'exécute localement.",
+      "logTitle": "Fichiers Journaux",
+      "logText": "Nous utilisons des fichiers journaux standard.",
+      "adsTitle": "Cookies DART",
+      "adsText": "Google utilise des cookies DART.",
+      "consentTitle": "Consentement",
+      "consentText": "En utilisant notre site, vous acceptez cette politique."
+    },
+    "terms": {
+      "title": "Conditions d'Utilisation",
+      "p1": "Bienvenue sur SEO Utilities !",
+      "licenseTitle": "Licence",
+      "licenseText": "L'utilisation de nos outils est sans restriction.",
+      "userCommentsTitle": "Avertissement",
+      "userCommentsText": "Outils fournis 'tels quels'."
+    }
   }
 }

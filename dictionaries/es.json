@@ -224,5 +224,45 @@
         }
       ]
     }
+  },
+  "legal": {
+    "about": {
+      "title": "Sobre Nosotros",
+      "mission": "Nuestra Misión",
+      "missionText1": "Fundada en 2025, SEO Utilities ha recorrido un largo camino. Nuestra pasión por crear herramientas SEO amigables para desarrolladores nos llevó a construir esta plataforma en el navegador.",
+      "missionText2": "Creemos que las herramientas esenciales para webmasters deben ser gratuitas, rápidas y accesibles sin sacrificar la privacidad.",
+      "whyChooseUs": "¿Por qué elegirnos?",
+      "whyFast": "Rayo Rápido: Resultados instantáneos.",
+      "whyPrivacy": "Privacidad Primero: Tus datos nunca salen de tu navegador.",
+      "whyFree": "Siempre Gratis: Herramientas 100% gratuitas.",
+      "whyDev": "Enfoque en el Desarrollador: Código listo para producción."
+    },
+    "contact": {
+      "title": "Contáctenos",
+      "desc": "¿Tienes preguntas o sugerencias? Nos encantaría escucharte.",
+      "emailTitle": "Envíanos un correo",
+      "emailDesc": "Para soporte o consultas generales.",
+      "locationTitle": "Ubicación"
+    },
+    "privacy": {
+      "title": "Política de Privacidad",
+      "p1": "En SEO Utilities, tu privacidad es nuestra prioridad.",
+      "localTitle": "Procesamiento Local",
+      "localText": "No recopilamos ni almacenamos tus entradas. Todas las herramientas se ejecutan en tu navegador.",
+      "logTitle": "Archivos de Registro",
+      "logText": "Seguimos un procedimiento estándar de uso de archivos de registro.",
+      "adsTitle": "Cookies de Google DART",
+      "adsText": "Google utiliza cookies DART para mostrar anuncios.",
+      "consentTitle": "Consentimiento",
+      "consentText": "Al usar nuestro sitio web, aceptas nuestra Política de Privacidad."
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "p1": "¡Bienvenido a SEO Utilities! Estos términos describen las reglas de uso.",
+      "licenseTitle": "Licencia",
+      "licenseText": "Puedes utilizar nuestras herramientas gratuitas y su resultado para proyectos personales y comerciales sin restricciones.",
+      "userCommentsTitle": "Aviso Legal",
+      "userCommentsText": "Nuestras herramientas se proporcionan 'tal cual' sin ninguna garantía."
+    }
   }
 }
