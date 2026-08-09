@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -35,6 +36,7 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [qrSvg, setQrSvg] = useState<string>("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.qr_code_generator || {};
@@ -74,14 +76,16 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
     }
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(generateQR, 200);
-    return () => clearTimeout(timeout);
-  }, [text, size, fgColor, bgColor]);
+  const handleChange = () => {
+    setQrDataUrl("");
+    setQrSvg("");
+  };
 
   const handleGenerateClick = async () => {
-    await generateQR();
-    toast.success("QR Code generated!");
+    showAd(async () => {
+      await generateQR();
+      toast.success("QR Code generated!");
+    });
   };
 
   const downloadPNG = () => {
@@ -113,11 +117,11 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label>{t.urlLabel || "URL or Text"}</Label>
-              <Input value={text} onChange={(e) => setText(e.target.value)} placeholder={t.urlPlaceholder || "https://example.com"} className="h-12 text-base" />
+              <Input value={text} onChange={(e) => { setText(e.target.value); handleChange(); }} placeholder={t.urlPlaceholder || "https://example.com"} className="h-12 text-base" />
             </div>
             <div className="space-y-2">
               <Label>{t.sizeLabel || "Size"}</Label>
-              <Select value={size} onValueChange={setSize}>
+              <Select value={size} onValueChange={(v) => { setSize(v); handleChange(); }}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="128">128 × 128</SelectItem>
@@ -131,15 +135,15 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
               <div className="space-y-2">
                 <Label>{t.colorLabel || "Foreground Color"}</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
-                  <Input value={fgColor} onChange={(e) => setFgColor(e.target.value)} />
+                  <input type="color" value={fgColor} onChange={(e) => { setFgColor(e.target.value); handleChange(); }} className="h-10 w-10 cursor-pointer rounded border" />
+                  <Input value={fgColor} onChange={(e) => { setFgColor(e.target.value); handleChange(); }} />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{t.bgLabel || "Background Color"}</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
-                  <Input value={bgColor} onChange={(e) => setBgColor(e.target.value)} />
+                  <input type="color" value={bgColor} onChange={(e) => { setBgColor(e.target.value); handleChange(); }} className="h-10 w-10 cursor-pointer rounded border" />
+                  <Input value={bgColor} onChange={(e) => { setBgColor(e.target.value); handleChange(); }} />
                 </div>
               </div>
             </div>

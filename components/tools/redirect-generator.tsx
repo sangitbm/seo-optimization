@@ -13,6 +13,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -61,16 +62,19 @@ const faqs = [
 
 export function RedirectGeneratorTool({ dict }: { dict?: any }) {
   const [redirects, setRedirects] = useState<Redirect[]>([{ from: "/old-page", to: "/new-page", type: "301" }]);
+  const [isGenerated, setIsGenerated] = useState(false);
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.redirect_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
 
-  const add = () => setRedirects([...redirects, { from: "", to: "", type: "301" }]);
-  const remove = (i: number) => setRedirects(redirects.filter((_, idx) => idx !== i));
+  const add = () => { setRedirects([...redirects, { from: "", to: "", type: "301" }]); setIsGenerated(false); };
+  const remove = (i: number) => { setRedirects(redirects.filter((_, idx) => idx !== i)); setIsGenerated(false); };
   const update = (i: number, key: keyof Redirect, value: string) => {
     setRedirects(redirects.map((r, idx) => idx === i ? { ...r, [key]: value } : r));
+    setIsGenerated(false);
   };
 
   return (
@@ -114,7 +118,10 @@ export function RedirectGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter at least one redirect rule");
                 return;
               }
-              toast.success(t.successGenerate || "Redirect rules generated successfully!");
+              showAd(() => {
+                setIsGenerated(true);
+                toast.success(t.successGenerate || "Redirect rules generated successfully!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -124,7 +131,8 @@ export function RedirectGeneratorTool({ dict }: { dict?: any }) {
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="apache" className="mt-6">
+      {isGenerated && (
+        <Tabs defaultValue="apache" className="mt-6">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="apache">Apache</TabsTrigger>
           <TabsTrigger value="nginx">Nginx</TabsTrigger>
@@ -157,9 +165,10 @@ export function RedirectGeneratorTool({ dict }: { dict?: any }) {
           </div>
         </TabsContent>
       </Tabs>
+      )}
 
       <div className="mt-4">
-        <ResetButton onReset={() => setRedirects([{ from: "/old-page", to: "/new-page", type: "301" }])} />
+        <ResetButton onReset={() => { setRedirects([{ from: "/old-page", to: "/new-page", type: "301" }]); setIsGenerated(false); }} />
       </div>
     </ToolLayout>
   );

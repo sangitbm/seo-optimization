@@ -12,6 +12,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -110,24 +111,28 @@ const faqs = [
 
 export function SitemapGeneratorTool({ dict }: { dict?: any }) {
   const [entries, setEntries] = useState<SitemapEntry[]>([{ ...defaultEntry }]);
+  const [outputXML, setOutputXML] = useState("");
+  const [outputHTML, setOutputHTML] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.sitemap_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
 
-  const addEntry = () => setEntries([...entries, { ...defaultEntry }]);
+  const addEntry = () => { setEntries([...entries, { ...defaultEntry }]); setOutputXML(""); setOutputHTML(""); };
 
   const removeEntry = (index: number) => {
     setEntries(entries.filter((_, i) => i !== index));
+    setOutputXML("");
+    setOutputHTML("");
   };
 
   const updateEntry = (index: number, key: keyof SitemapEntry, value: string) => {
     setEntries(entries.map((e, i) => (i === index ? { ...e, [key]: value } : e)));
+    setOutputXML("");
+    setOutputHTML("");
   };
-
-  const xmlOutput = generateXML(entries);
-  const htmlOutput = generateHTML(entries);
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -189,7 +194,11 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
                 toast.error("Please enter at least one URL");
                 return;
               }
-              toast.success(t.generatedCode || "Sitemaps generated successfully!");
+              showAd(() => {
+                setOutputXML(generateXML(entries));
+                setOutputHTML(generateHTML(entries));
+                toast.success(t.generatedCode || "Sitemaps generated successfully!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -199,15 +208,17 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
         </CardContent>
       </Card>
 
+      {outputXML && (
       <div className="mt-6 space-y-6">
-        <CodePreview code={xmlOutput} language="xml" label={t.generatedCode || "XML Sitemap"} />
+        <CodePreview code={outputXML} language="xml" label={t.generatedCode || "XML Sitemap"} />
         <div className="flex flex-wrap gap-2">
-          <CopyButton text={xmlOutput} label={ui.copy || "Copy XML"} />
-          <DownloadButton content={xmlOutput} filename="sitemap.xml" mimeType="application/xml" label={ui.download || "Download XML"} />
-          <DownloadButton content={htmlOutput} filename="sitemap.html" mimeType="text/html" label={ui.download || "Download HTML"} />
-          <ResetButton onReset={() => setEntries([{ ...defaultEntry }])} />
+          <CopyButton text={outputXML} label={ui.copy || "Copy XML"} />
+          <DownloadButton content={outputXML} filename="sitemap.xml" mimeType="application/xml" label={ui.download || "Download XML"} />
+          <DownloadButton content={outputHTML} filename="sitemap.html" mimeType="text/html" label={ui.download || "Download HTML"} />
+          <ResetButton onReset={() => { setEntries([{ ...defaultEntry }]); setOutputXML(""); setOutputHTML(""); }} />
         </div>
       </div>
+      )}
     </ToolLayout>
   );
 }

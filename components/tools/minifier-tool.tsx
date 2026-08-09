@@ -12,6 +12,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import type { Tool } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -41,12 +42,13 @@ export function MinifierTool({
   dict,
 }: MinifierProps) {
   const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"minify" | "beautify">("minify");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.[tool.slug.replace(/-/g, '_')] || {};
 
-  const output = input ? (mode === "minify" ? minify(input) : beautify(input)) : "";
   const inputSize = new Blob([input]).size;
   const outputSize = output ? new Blob([output]).size : 0;
   const savings = inputSize > 0 ? (((inputSize - outputSize) / inputSize) * 100).toFixed(1) : "0";
@@ -66,14 +68,17 @@ export function MinifierTool({
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} rows={12} className="font-mono text-sm" />
+          <Textarea value={input} onChange={(e) => { setInput(e.target.value); setOutput(""); }} placeholder={placeholder} rows={12} className="font-mono text-sm" />
           <Button
             onClick={() => {
               if (!input.trim()) {
                 toast.error(t.errorEmpty || "Please paste some code first");
                 return;
               }
-              toast.success(mode === "minify" ? (t.successMinify || "Code minified successfully!") : (t.successBeautify || "Code beautified successfully!"));
+              showAd(() => {
+                setOutput(mode === "minify" ? minify(input) : beautify(input));
+                toast.success(mode === "minify" ? (t.successMinify || "Code minified successfully!") : (t.successBeautify || "Code beautified successfully!"));
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
@@ -102,7 +107,7 @@ export function MinifierTool({
           <div className="flex flex-wrap gap-2">
             <CopyButton text={output} label={ui.copy || "Copy"} />
             <DownloadButton content={output} filename={`output.${fileExtension}`} mimeType={mimeType} label={ui.download || `Download .${fileExtension}`} />
-            <ResetButton onReset={() => setInput("")} />
+            <ResetButton onReset={() => { setInput(""); setOutput(""); }} />
           </div>
         </div>
       )}

@@ -10,6 +10,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -57,7 +58,8 @@ const faqs = [
 
 export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
   const [text, setText] = useState("");
-  const analysis = useMemo(() => analyzeText(text), [text]);
+  const [analysis, setAnalysis] = useState<ReturnType<typeof analyzeText> | null>(null);
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.keyword_density_checker || {};
@@ -65,7 +67,7 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
   const toolSeoTips = t.seoTips || seoTips;
 
   const csvReport = useMemo(() => {
-    if (!analysis.keywords.length) return "";
+    if (!analysis || !analysis.keywords.length) return "";
     const lines = ["Rank,Keyword,Count,Density (%)"];
     analysis.keywords.forEach((kw, idx) => {
       lines.push(`${idx + 1},"${kw.word}",${kw.count},${kw.density}%`);
@@ -78,14 +80,17 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
       <Card>
         <CardHeader><CardTitle className="text-lg">{t.inputLabel || "Paste Your Content"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">
-          <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.inputPlaceholder || "Paste your article or content here..."} rows={10} className="font-mono text-sm" />
+          <Textarea value={text} onChange={(e) => { setText(e.target.value); setAnalysis(null); }} placeholder={t.inputPlaceholder || "Paste your article or content here..."} rows={10} className="font-mono text-sm" />
           <Button
             onClick={() => {
               if (!text.trim()) {
                 toast.error(t.errorEmpty || "Please paste your text first");
                 return;
               }
-              toast.success(t.successAnalyze || "Keyword density analyzed!");
+              showAd(() => {
+                setAnalysis(analyzeText(text));
+                toast.success(t.successAnalyze || "Keyword density analyzed!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
@@ -95,7 +100,7 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
         </CardContent>
       </Card>
 
-      {text && (
+      {analysis && (
         <div className="mt-6 space-y-6">
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -161,7 +166,7 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
                 <DownloadButton content={csvReport} filename="keyword-density.csv" mimeType="text/csv" label={ui.download || "Download CSV"} />
               </>
             )}
-            <ResetButton onReset={() => setText("")} />
+            <ResetButton onReset={() => { setText(""); setAnalysis(null); }} />
           </div>
         </div>
       )}

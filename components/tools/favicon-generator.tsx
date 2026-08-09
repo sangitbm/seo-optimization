@@ -8,6 +8,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -41,6 +42,7 @@ export function FaviconGeneratorTool({ dict }: { dict?: any }) {
   const [image, setImage] = useState<string | null>(null);
   const [previews, setPreviews] = useState<{ size: number; dataUrl: string }[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.favicon_generator || {};
@@ -59,23 +61,7 @@ export function FaviconGeneratorTool({ dict }: { dict?: any }) {
     reader.onload = () => {
       const src = reader.result as string;
       setImage(src);
-
-      // Generate resized previews
-      const img = new window.Image();
-      img.onload = () => {
-        const results: { size: number; dataUrl: string }[] = [];
-        for (const size of SIZES) {
-          const canvas = document.createElement("canvas");
-          canvas.width = size;
-          canvas.height = size;
-          const ctx = canvas.getContext("2d")!;
-          ctx.drawImage(img, 0, 0, size, size);
-          results.push({ size, dataUrl: canvas.toDataURL("image/png") });
-        }
-        setPreviews(results);
-        toast.success("Favicons generated!");
-      };
-      img.src = src;
+      setPreviews([]);
     };
     reader.readAsDataURL(file);
   };
@@ -141,7 +127,23 @@ export function FaviconGeneratorTool({ dict }: { dict?: any }) {
                 fileRef.current?.click();
                 return;
               }
-              toast.success("Favicons generated in multiple sizes!");
+              showAd(() => {
+                const img = new window.Image();
+                img.onload = () => {
+                  const results: { size: number; dataUrl: string }[] = [];
+                  for (const size of SIZES) {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext("2d")!;
+                    ctx.drawImage(img, 0, 0, size, size);
+                    results.push({ size, dataUrl: canvas.toDataURL("image/png") });
+                  }
+                  setPreviews(results);
+                  toast.success("Favicons generated in multiple sizes!");
+                };
+                img.src = image;
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

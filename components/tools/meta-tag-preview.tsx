@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -40,6 +41,8 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
+  const [preview, setPreview] = useState({ title: "", description: "", url: "", image: "" });
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.meta_tag_preview || {};
@@ -77,7 +80,10 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter a title or description first");
                 return;
               }
-              toast.success(t.successUpdate || "Previews updated successfully!");
+              showAd(() => {
+                setPreview({ title, description, url, image });
+                toast.success(t.successUpdate || "Previews updated successfully!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -103,18 +109,18 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-2">{t.desktopTab || "Desktop"}</p>
                   <div className="rounded-lg border border-border bg-white p-4 dark:bg-zinc-950 max-w-xl">
-                    <p className="text-sm text-green-700 dark:text-green-500 truncate">{url || "https://example.com"}</p>
-                    <h3 className="text-xl font-medium text-blue-700 dark:text-blue-400 hover:underline cursor-pointer truncate">{title || "Page Title"}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{description || "Page description will appear here..."}</p>
+                    <p className="text-sm text-green-700 dark:text-green-500 truncate">{preview.url || "https://example.com"}</p>
+                    <h3 className="text-xl font-medium text-blue-700 dark:text-blue-400 hover:underline cursor-pointer truncate">{preview.title || "Page Title"}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{preview.description || "Page description will appear here..."}</p>
                   </div>
                 </div>
                 {/* Mobile */}
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-2">{t.mobileTab || "Mobile"}</p>
                   <div className="rounded-lg border border-border bg-white p-3 dark:bg-zinc-950 max-w-sm">
-                    <p className="text-xs text-green-700 dark:text-green-500 truncate">{url || "https://example.com"}</p>
-                    <h3 className="text-base font-medium text-blue-700 dark:text-blue-400 truncate">{title || "Page Title"}</h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">{description || "Page description..."}</p>
+                    <p className="text-xs text-green-700 dark:text-green-500 truncate">{preview.url || "https://example.com"}</p>
+                    <h3 className="text-base font-medium text-blue-700 dark:text-blue-400 truncate">{preview.title || "Page Title"}</h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">{preview.description || "Page description..."}</p>
                   </div>
                 </div>
               </div>
@@ -128,12 +134,12 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
             <CardContent>
               <div className="max-w-lg overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900">
                 <div className="aspect-[1.91/1] bg-gray-100 dark:bg-zinc-800 flex items-center justify-center text-muted-foreground">
-                  {image ? "Image Preview" : "No image set"}
+                  {preview.image ? "Image Preview" : "No image set"}
                 </div>
                 <div className="p-3">
-                  <p className="text-xs uppercase text-gray-500 tracking-wide">{url ? safeHostname(url) : "example.com"}</p>
-                  <p className="font-semibold text-sm mt-1">{title || "Page Title"}</p>
-                  <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{description || "Description"}</p>
+                  <p className="text-xs uppercase text-gray-500 tracking-wide">{preview.url ? safeHostname(preview.url) : "example.com"}</p>
+                  <p className="font-semibold text-sm mt-1">{preview.title || "Page Title"}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{preview.description || "Description"}</p>
                 </div>
               </div>
             </CardContent>
@@ -146,12 +152,12 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
             <CardContent>
               <div className="max-w-lg overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-zinc-900">
                 <div className="aspect-[2/1] bg-gray-100 dark:bg-zinc-800 flex items-center justify-center text-muted-foreground">
-                  {image ? "Image Preview" : "No image set"}
+                  {preview.image ? "Image Preview" : "No image set"}
                 </div>
                 <div className="p-3">
-                  <p className="text-xs text-gray-500">{url ? safeHostname(url) : "example.com"}</p>
-                  <p className="font-medium text-sm">{title || "Page Title"}</p>
-                  <p className="text-xs text-gray-500 line-clamp-2">{description || "Description"}</p>
+                  <p className="text-xs text-gray-500">{preview.url ? safeHostname(preview.url) : "example.com"}</p>
+                  <p className="font-medium text-sm">{preview.title || "Page Title"}</p>
+                  <p className="text-xs text-gray-500 line-clamp-2">{preview.description || "Description"}</p>
                 </div>
               </div>
             </CardContent>
@@ -160,7 +166,7 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
       </Tabs>
 
       <div className="mt-4">
-        <ResetButton onReset={() => { setTitle(""); setDescription(""); setUrl(""); setImage(""); }} />
+        <ResetButton onReset={() => { setTitle(""); setDescription(""); setUrl(""); setImage(""); setPreview({ title: "", description: "", url: "", image: "" }); }} />
       </div>
     </ToolLayout>
   );

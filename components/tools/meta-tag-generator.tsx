@@ -20,6 +20,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -146,6 +147,8 @@ const faqs = [
 
 export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState<MetaState>(defaultState);
+  const [output, setOutput] = useState("");
+  const { showAd } = useAd();
   
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.meta_tag_generator || {};
@@ -155,9 +158,8 @@ export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
 
   const update = (key: keyof MetaState, value: string) => {
     setState((prev) => ({ ...prev, [key]: value }));
+    setOutput("");
   };
-
-  const output = generateHTML(state);
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -408,7 +410,10 @@ export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
             toast.error(t.errorEmpty || "Please enter a title or description first");
             return;
           }
-          toast.success(t.successGen || "Meta Tags generated successfully!");
+          showAd(() => {
+            setOutput(generateHTML(state));
+            toast.success(t.successGen || "Meta Tags generated successfully!");
+          });
         }}
         size="lg"
         className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-6"
@@ -450,7 +455,7 @@ export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
               mimeType="text/html"
               label={ui.download || "Download HTML"}
             />
-            <ResetButton onReset={() => setState(defaultState)} />
+            <ResetButton onReset={() => { setState(defaultState); setOutput(""); }} />
           </div>
         </div>
       )}

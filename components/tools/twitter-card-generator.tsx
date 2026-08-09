@@ -13,6 +13,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -43,13 +44,14 @@ const faqs = [
 
 export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState(defaultState);
+  const [output, setOutput] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.twitter_card_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
-  const update = (k: string, v: string) => setState((p) => ({ ...p, [k]: v }));
-  const output = generateMeta(state);
+  const update = (k: string, v: string) => { setState((p) => ({ ...p, [k]: v })); setOutput(""); };
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -91,7 +93,10 @@ export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
                   toast.error(t.errorEmpty || "Please enter a title or description first");
                   return;
                 }
-                toast.success(t.successGenerate || "Twitter Card tags generated successfully!");
+                showAd(() => {
+                  setOutput(generateMeta(state));
+                  toast.success(t.successGenerate || "Twitter Card tags generated successfully!");
+                });
               }}
               size="lg"
               className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -135,7 +140,7 @@ export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
           <div className="flex flex-wrap gap-2">
             <CopyButton text={output} label={ui.copy || "Copy HTML"} />
             <DownloadButton content={output} filename="twitter-cards.html" mimeType="text/html" label={ui.download || "Download HTML"} />
-            <ResetButton onReset={() => setState(defaultState)} />
+            <ResetButton onReset={() => { setState(defaultState); setOutput(""); }} />
           </div>
         </div>
       )}

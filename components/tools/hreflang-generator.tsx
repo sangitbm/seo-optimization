@@ -11,6 +11,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -35,22 +36,20 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
     { lang: "en", url: "" },
     { lang: "x-default", url: "" },
   ]);
+  const [output, setOutput] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.hreflang_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
 
-  const add = () => setEntries([...entries, { lang: "", url: "" }]);
-  const remove = (i: number) => setEntries(entries.filter((_, idx) => idx !== i));
+  const add = () => { setEntries([...entries, { lang: "", url: "" }]); setOutput(""); };
+  const remove = (i: number) => { setEntries(entries.filter((_, idx) => idx !== i)); setOutput(""); };
   const update = (i: number, key: keyof HreflangEntry, value: string) => {
     setEntries(entries.map((e, idx) => idx === i ? { ...e, [key]: value } : e));
+    setOutput("");
   };
-
-  const output = entries
-    .filter((e) => e.lang && e.url)
-    .map((e) => `<link rel="alternate" hreflang="${e.lang}" href="${e.url}">`)
-    .join("\n");
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -83,7 +82,14 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter at least one URL");
                 return;
               }
-              toast.success(t.generatedCode || "Hreflang Tags generated!");
+              showAd(() => {
+                const out = entries
+                  .filter((e) => e.lang && e.url)
+                  .map((e) => `<link rel="alternate" hreflang="${e.lang}" href="${e.url}">`)
+                  .join("\n");
+                setOutput(out);
+                toast.success(t.generatedCode || "Hreflang Tags generated!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -99,7 +105,7 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
           <div className="flex flex-wrap gap-2">
             <CopyButton text={output} label={ui.copy || "Copy HTML"} />
             <DownloadButton content={output} filename="hreflang-tags.html" mimeType="text/html" label={ui.download || "Download HTML"} />
-            <ResetButton onReset={() => setEntries([{ lang: "en", url: "" }, { lang: "x-default", url: "" }])} />
+            <ResetButton onReset={() => { setEntries([{ lang: "en", url: "" }, { lang: "x-default", url: "" }]); setOutput(""); }} />
           </div>
         </div>
       )}

@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { AdProvider } from "@/components/providers/ad-provider";
 import "../globals.css";
 import { i18n } from "../../i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
@@ -91,10 +92,12 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
-          <Header dict={dict} />
-          <main className="flex-1">{children}</main>
-          <Footer dict={dict} lang={lang} />
-          <Toaster richColors position="bottom-right" />
+          <AdProvider>
+            <Header dict={dict} />
+            <main className="flex-1">{children}</main>
+            <Footer dict={dict} lang={lang} />
+            <Toaster richColors position="bottom-right" />
+          </AdProvider>
         </ThemeProvider>
         {/* AdSense — must be outside <head> to avoid the data-nscript conflict */}
         <Script

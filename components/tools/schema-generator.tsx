@@ -13,6 +13,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -256,6 +257,8 @@ const faqs = [
 export function SchemaGeneratorTool({ dict }: { dict?: any }) {
   const [activeType, setActiveType] = useState<SchemaType>("Organization");
   const [data, setData] = useState<Record<string, Record<string, string>>>({});
+  const [output, setOutput] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.schema_generator || {};
@@ -269,9 +272,8 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
       ...prev,
       [activeType]: { ...prev[activeType], [key]: value },
     }));
+    setOutput("");
   };
-
-  const output = generateSchema(activeType, currentData);
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -284,7 +286,7 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
             {schemaTypes.map((type) => (
               <button
                 key={type}
-                onClick={() => setActiveType(type)}
+                onClick={() => { setActiveType(type); setOutput(""); }}
                 className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                   activeType === type
                     ? "bg-violet-600 text-white"
@@ -324,7 +326,10 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
           ))}
           <Button
             onClick={() => {
-              toast.success(t.successGenerate || `${activeType} Schema generated successfully!`);
+              showAd(() => {
+                setOutput(generateSchema(activeType, currentData));
+                toast.success(t.successGenerate || `${activeType} Schema generated successfully!`);
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-6"
@@ -334,15 +339,17 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
         </CardContent>
       </Card>
 
+      {output && (
       <div className="mt-6 space-y-4">
         <CodePreview code={output} language="json" label={t.generatedCode || "JSON-LD Output"} />
         <div className="flex flex-wrap gap-2">
           <CopyButton text={`<script type="application/ld+json">\n${output}\n</script>`} label={ui.copy || "Copy with Script Tag"} />
           <CopyButton text={output} label={t.copyJson || "Copy JSON"} variant="outline" />
           <DownloadButton content={output} filename={`${activeType.toLowerCase()}-schema.json`} mimeType="application/json" label={ui.download || "Download JSON"} />
-          <ResetButton onReset={() => setData((prev) => ({ ...prev, [activeType]: {} }))} />
+          <ResetButton onReset={() => { setData((prev) => ({ ...prev, [activeType]: {} })); setOutput(""); }} />
         </div>
       </div>
+      )}
     </ToolLayout>
   );
 }

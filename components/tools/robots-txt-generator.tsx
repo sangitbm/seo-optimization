@@ -12,6 +12,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -65,25 +66,30 @@ const faqs = [
 export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
   const [blocks, setBlocks] = useState<UserAgentBlock[]>([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]);
   const [sitemapUrl, setSitemapUrl] = useState("");
+  const [output, setOutput] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.robots_txt_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
 
-  const addBlock = () => setBlocks([...blocks, { userAgent: "*", rules: [{ type: "Allow", path: "/" }], crawlDelay: "" }]);
-  const removeBlock = (i: number) => setBlocks(blocks.filter((_, idx) => idx !== i));
+  const addBlock = () => { setBlocks([...blocks, { userAgent: "*", rules: [{ type: "Allow", path: "/" }], crawlDelay: "" }]); setOutput(""); };
+  const removeBlock = (i: number) => { setBlocks(blocks.filter((_, idx) => idx !== i)); setOutput(""); };
 
   const addRule = (blockIndex: number) => {
     setBlocks(blocks.map((b, i) => i === blockIndex ? { ...b, rules: [...b.rules, { type: "Allow", path: "/" }] } : b));
+    setOutput("");
   };
 
   const removeRule = (blockIndex: number, ruleIndex: number) => {
     setBlocks(blocks.map((b, i) => i === blockIndex ? { ...b, rules: b.rules.filter((_, ri) => ri !== ruleIndex) } : b));
+    setOutput("");
   };
 
   const updateBlock = (i: number, key: keyof UserAgentBlock, value: string) => {
     setBlocks(blocks.map((b, idx) => idx === i ? { ...b, [key]: value } : b));
+    setOutput("");
   };
 
   const updateRule = (blockIndex: number, ruleIndex: number, key: keyof Rule, value: string) => {
@@ -91,9 +97,8 @@ export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
       ...b,
       rules: b.rules.map((r, ri) => ri === ruleIndex ? { ...r, [key]: value } : r),
     } : b));
+    setOutput("");
   };
-
-  const output = generate(blocks, sitemapUrl);
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -158,14 +163,17 @@ export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
           <CardContent className="pt-6">
             <div className="space-y-2">
               <Label>{t.sitemapUrl || "Sitemap URL"}</Label>
-              <Input value={sitemapUrl} onChange={(e) => setSitemapUrl(e.target.value)} placeholder="https://example.com/sitemap.xml" />
+              <Input value={sitemapUrl} onChange={(e) => { setSitemapUrl(e.target.value); setOutput(""); }} placeholder="https://example.com/sitemap.xml" />
             </div>
           </CardContent>
         </Card>
 
         <Button
           onClick={() => {
-            toast.success(t.generatedCode || "robots.txt generated successfully!");
+            showAd(() => {
+              setOutput(generate(blocks, sitemapUrl));
+              toast.success(t.generatedCode || "robots.txt generated successfully!");
+            });
           }}
           size="lg"
           className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
@@ -174,14 +182,16 @@ export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
         </Button>
       </div>
 
+      {output && (
       <div className="mt-6 space-y-4">
         <CodePreview code={output} language="text" label={t.generatedCode || "robots.txt"} />
         <div className="flex flex-wrap gap-2">
           <CopyButton text={output} label={ui.copy || "Copy"} />
           <DownloadButton content={output} filename="robots.txt" label={ui.download || "Download"} />
-          <ResetButton onReset={() => { setBlocks([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]); setSitemapUrl(""); }} />
+          <ResetButton onReset={() => { setBlocks([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]); setSitemapUrl(""); setOutput(""); }} />
         </div>
       </div>
+      )}
     </ToolLayout>
   );
 }

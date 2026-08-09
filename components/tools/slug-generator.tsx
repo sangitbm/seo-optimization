@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { ToolLayout } from "@/components/tool-layout";
 import { CopyButton } from "@/components/copy-button";
 import { ResetButton } from "@/components/reset-button";
+import { useAd } from "@/components/providers/ad-provider";
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -48,13 +49,15 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
   const [separator, setSeparator] = useState("-");
   const [lowercase, setLowercase] = useState(true);
   const [maxLength, setMaxLength] = useState(0);
+  const [slug, setSlug] = useState("");
+  const { showAd } = useAd();
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.slug_generator || {};
   const toolFaqs = t.faqs || faqs;
   const toolSeoTips = t.seoTips || seoTips;
 
-  const slug = useMemo(() => generateSlug(text, separator, lowercase, maxLength), [text, separator, lowercase, maxLength]);
+  const handleChange = () => setSlug("");
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -63,12 +66,12 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label>{t.inputLabel || "Title or Text"}</Label>
-            <Input value={text} onChange={(e) => setText(e.target.value)} placeholder={t.inputPlaceholder || "How to Generate SEO-Friendly URLs"} className="h-12 text-base" />
+            <Input value={text} onChange={(e) => { setText(e.target.value); handleChange(); }} placeholder={t.inputPlaceholder || "How to Generate SEO-Friendly URLs"} className="h-12 text-base" />
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="space-y-2">
               <Label>Separator</Label>
-              <Select value={separator} onValueChange={setSeparator}>
+              <Select value={separator} onValueChange={(v) => { setSeparator(v); handleChange(); }}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="-">Hyphen (-)</SelectItem>
@@ -79,10 +82,10 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
             </div>
             <div className="space-y-2">
               <Label>Max Length (0 = unlimited)</Label>
-              <Input type="number" min="0" value={maxLength} onChange={(e) => setMaxLength(parseInt(e.target.value) || 0)} />
+              <Input type="number" min="0" value={maxLength} onChange={(e) => { setMaxLength(parseInt(e.target.value) || 0); handleChange(); }} />
             </div>
             <div className="flex items-end gap-2 pb-0.5">
-              <Switch checked={lowercase} onCheckedChange={setLowercase} id="lowercase-switch" />
+              <Switch checked={lowercase} onCheckedChange={(v) => { setLowercase(v); handleChange(); }} id="lowercase-switch" />
               <Label htmlFor="lowercase-switch">Lowercase</Label>
             </div>
           </div>
@@ -92,7 +95,10 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter some text to generate a slug");
                 return;
               }
-              toast.success(t.successGenerate || "Slug generated successfully!");
+              showAd(() => {
+                setSlug(generateSlug(text, separator, lowercase, maxLength));
+                toast.success(t.successGenerate || "Slug generated successfully!");
+              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
@@ -111,7 +117,7 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
             <div className="mt-4 flex gap-2">
               <CopyButton text={slug} label={ui.copy || "Copy Slug"} />
               <CopyButton text={`https://example.com/${slug}`} label={t.copyUrl || "Copy Full URL"} variant="outline" />
-              <ResetButton onReset={() => setText("")} />
+              <ResetButton onReset={() => { setText(""); setSlug(""); }} />
             </div>
           </CardContent>
         </Card>
