@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "tools": "Outils",
+    "about": "À propos",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "hero": {
+    "title": "La Collection Ultime",
+    "titleHighlight": "d'Outils SEO Gratuits",
+    "subtitle": "Améliorez votre classement avec nos outils SEO pour développeurs. Sans inscription. Fonctionne entièrement dans votre navigateur.",
+    "ctaPrimary": "Parcourir les Outils",
+    "ctaSecondary": "Voir sur GitHub"
+  },
+  "search": {
+    "placeholder": "Rechercher parmi plus de 17 outils SEO..."
+  },
+  "categories": {
+    "popular": "Outils Populaires",
+    "popularDesc": "Nos utilitaires SEO les plus utilisés",
+    "all": "Tous les Outils",
+    "allDesc": "Recherchez et filtrez notre collection complète",
+    "recent": "Ajoutés Récemment",
+    "recentDesc": "Les derniers ajouts à notre boîte à outils"
+  }
+}

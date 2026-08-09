@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "tools": "Tools",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
+  },
+  "hero": {
+    "title": "Die ultimative Sammlung von",
+    "titleHighlight": "kostenlosen SEO-Tools",
+    "subtitle": "Verbessern Sie Ihr Suchmaschinen-Ranking mit unseren entwicklerfreundlichen SEO-Tools. Keine Anmeldung erforderlich. Läuft komplett im Browser.",
+    "ctaPrimary": "Tools durchsuchen",
+    "ctaSecondary": "Auf GitHub ansehen"
+  },
+  "search": {
+    "placeholder": "Über 17 SEO-Tools durchsuchen..."
+  },
+  "categories": {
+    "popular": "Beliebte Tools",
+    "popularDesc": "Unsere am häufigsten genutzten SEO-Tools",
+    "all": "Alle Tools",
+    "allDesc": "Durchsuchen und filtern Sie unsere komplette Sammlung",
+    "recent": "Kürzlich hinzugefügt",
+    "recentDesc": "Die neuesten Erweiterungen unserer Toolbox"
+  }
+}

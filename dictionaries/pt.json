@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Início",
+    "tools": "Ferramentas",
+    "about": "Sobre",
+    "contact": "Contato",
+    "privacy": "Privacidade",
+    "terms": "Termos"
+  },
+  "hero": {
+    "title": "A coleção definitiva de",
+    "titleHighlight": "Ferramentas SEO Gratuitas",
+    "subtitle": "Melhore o ranqueamento do seu site com nossas ferramentas SEO. Sem necessidade de cadastro. Roda totalmente no seu navegador.",
+    "ctaPrimary": "Explorar Ferramentas",
+    "ctaSecondary": "Ver no GitHub"
+  },
+  "search": {
+    "placeholder": "Pesquisar mais de 17 ferramentas SEO..."
+  },
+  "categories": {
+    "popular": "Ferramentas Populares",
+    "popularDesc": "Nossas utilidades SEO mais usadas",
+    "all": "Todas as Ferramentas",
+    "allDesc": "Pesquise e filtre nossa coleção completa",
+    "recent": "Adicionadas Recentemente",
+    "recentDesc": "As últimas adições ao nosso conjunto de ferramentas"
+  }
+}

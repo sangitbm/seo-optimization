@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Home",
+    "tools": "Strumenti",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "privacy": "Privacy",
+    "terms": "Termini"
+  },
+  "hero": {
+    "title": "La collezione definitiva di",
+    "titleHighlight": "Strumenti SEO Gratuiti",
+    "subtitle": "Migliora il posizionamento del tuo sito web con i nostri strumenti SEO. Nessuna registrazione. Funziona interamente nel browser.",
+    "ctaPrimary": "Sfoglia Strumenti",
+    "ctaSecondary": "Vedi su GitHub"
+  },
+  "search": {
+    "placeholder": "Cerca oltre 17 strumenti SEO..."
+  },
+  "categories": {
+    "popular": "Strumenti Popolari",
+    "popularDesc": "Le nostre utility SEO più utilizzate",
+    "all": "Tutti gli Strumenti",
+    "allDesc": "Cerca e filtra la nostra collezione completa",
+    "recent": "Aggiunti di Recente",
+    "recentDesc": "Le ultime novità del nostro toolkit"
+  }
+}

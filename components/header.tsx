@@ -107,6 +107,30 @@ export function Header() {
                 >
                   Español
                 </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("fr")}
+                  className={currentLocale === "fr" ? "bg-accent" : ""}
+                >
+                  Français
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("de")}
+                  className={currentLocale === "de" ? "bg-accent" : ""}
+                >
+                  Deutsch
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("it")}
+                  className={currentLocale === "it" ? "bg-accent" : ""}
+                >
+                  Italiano
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("pt")}
+                  className={currentLocale === "pt" ? "bg-accent" : ""}
+                >
+                  Português
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           )}
