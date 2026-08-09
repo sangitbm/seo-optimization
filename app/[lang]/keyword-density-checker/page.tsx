@@ -5,6 +5,11 @@ import { KeywordDensityCheckerTool } from "@/components/tools/keyword-density-ch
 const tool = getToolBySlug("keyword-density-checker")!;
 export const metadata = createToolMetadata(tool);
 
-export default function KeywordDensityCheckerPage() {
-  return <KeywordDensityCheckerTool />;
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
+
+export default async function KeywordDensityCheckerPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  return <KeywordDensityCheckerTool dict={dict} />;
 }

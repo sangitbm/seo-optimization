@@ -349,6 +349,80 @@
           "answer": "Tailles standards et Apple Touch."
         }
       ]
+    },
+    "hreflang_generator": {
+      "urlsTitle": "Entrées d'URL et Langue",
+      "addUrl": "Ajouter une URL",
+      "urlLabel": "URL",
+      "languageLabel": "Langue",
+      "regionLabel": "Région (Optionnel)",
+      "defaultLabel": "Définir comme x-default",
+      "generateBtn": "Générer les Balises",
+      "generatedCode": "Balises Hreflang",
+      "seoTips": [
+        "Utilisez des URL absolues."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'une balise hreflang ?",
+          "answer": "Elle indique la langue de la page."
+        }
+      ]
+    },
+    "keyword_density_checker": {
+      "inputLabel": "Texte à Analyser",
+      "inputPlaceholder": "Collez votre contenu ici...",
+      "analyzeBtn": "Analyser la Densité",
+      "resultsTitle": "Résultats",
+      "wordCount": "Mots",
+      "charCount": "Caractères",
+      "uniqueWords": "Mots Uniques",
+      "keywordLabel": "Mot-Clé",
+      "countLabel": "Compte",
+      "densityLabel": "Densité",
+      "seoTips": [
+        "Visez une densité de 1-2%."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce que la densité ?",
+          "answer": "Le pourcentage d'apparition d'un mot."
+        }
+      ]
+    },
+    "qr_code_generator": {
+      "configTitle": "Contenu du QR Code",
+      "urlLabel": "URL ou Texte",
+      "urlPlaceholder": "https://exemple.com",
+      "colorLabel": "Couleur",
+      "bgLabel": "Fond",
+      "generateBtn": "Générer QR Code",
+      "previewTitle": "QR Code Généré",
+      "seoTips": [
+        "Utilisez les QR codes sur les supports physiques."
+      ],
+      "faqs": [
+        {
+          "question": "Les QR codes expirent-ils ?",
+          "answer": "Les QR codes statiques n'expirent jamais."
+        }
+      ]
+    },
+    "slug_generator": {
+      "configTitle": "Entrer le Texte",
+      "inputLabel": "Texte à Convertir",
+      "inputPlaceholder": "Entrez le titre ici...",
+      "generateBtn": "Générer le Slug",
+      "outputLabel": "Slug de l'URL",
+      "seoTips": [
+        "Gardez les slugs courts (3-5 mots)."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'un slug ?",
+          "answer": "La partie lisible d'une URL."
+        }
+      ]
     }
   },
   "legal": {

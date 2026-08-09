@@ -30,11 +30,16 @@ const faqs = [
   { question: "When should I use hreflang?", answer: "Use hreflang when you have the same content in multiple languages or regional variations (e.g., English for US vs UK)." },
 ];
 
-export function HreflangGeneratorTool() {
+export function HreflangGeneratorTool({ dict }: { dict?: any }) {
   const [entries, setEntries] = useState<HreflangEntry[]>([
     { lang: "en", url: "" },
     { lang: "x-default", url: "" },
   ]);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.hreflang_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const add = () => setEntries([...entries, { lang: "", url: "" }]);
   const remove = (i: number) => setEntries(entries.filter((_, idx) => idx !== i));
@@ -48,21 +53,21 @@ export function HreflangGeneratorTool() {
     .join("\n");
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg">Language Versions</CardTitle>
-          <Button onClick={add} size="sm" className="gap-1"><Plus className="h-4 w-4" /> Add</Button>
+          <CardTitle className="text-lg">{t.urlsTitle || "Language Versions"}</CardTitle>
+          <Button onClick={add} size="sm" className="gap-1"><Plus className="h-4 w-4" /> {t.addUrl || "Add"}</Button>
         </CardHeader>
         <CardContent className="space-y-3">
           {entries.map((entry, i) => (
             <div key={i} className="flex items-end gap-2">
               <div className="w-32 space-y-1">
-                <Label>Language</Label>
+                <Label>{t.languageLabel || "Language"}</Label>
                 <Input placeholder="en-US" value={entry.lang} onChange={(e) => update(i, "lang", e.target.value)} />
               </div>
               <div className="flex-1 space-y-1">
-                <Label>URL</Label>
+                <Label>{t.urlLabel || "URL"}</Label>
                 <Input placeholder="https://example.com/en/" value={entry.url} onChange={(e) => update(i, "url", e.target.value)} />
               </div>
               {entries.length > 1 && (
@@ -75,25 +80,25 @@ export function HreflangGeneratorTool() {
           <Button
             onClick={() => {
               if (!entries.some((e) => e.url.trim())) {
-                toast.error("Please enter at least one URL");
+                toast.error(t.errorEmpty || "Please enter at least one URL");
                 return;
               }
-              toast.success("Hreflang Tags generated!");
+              toast.success(t.generatedCode || "Hreflang Tags generated!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <Globe className="h-5 w-5" /> Generate Hreflang Tags
+            <Globe className="h-5 w-5" /> {t.generateBtn || "Generate Hreflang Tags"}
           </Button>
         </CardContent>
       </Card>
 
       {output && (
         <div className="mt-6 space-y-4">
-          <CodePreview code={output} language="html" label="Hreflang Tags" />
+          <CodePreview code={output} language="html" label={t.generatedCode || "Hreflang Tags"} />
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={output} label="Copy HTML" />
-            <DownloadButton content={output} filename="hreflang-tags.html" mimeType="text/html" label="Download HTML" />
+            <CopyButton text={output} label={ui.copy || "Copy HTML"} />
+            <DownloadButton content={output} filename="hreflang-tags.html" mimeType="text/html" label={ui.download || "Download HTML"} />
             <ResetButton onReset={() => setEntries([{ lang: "en", url: "" }, { lang: "x-default", url: "" }])} />
           </div>
         </div>

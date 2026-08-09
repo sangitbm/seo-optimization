@@ -27,7 +27,7 @@ const faqs = [
   { question: "What formats can I download?", answer: "You can download QR codes as PNG (raster) for web use or SVG (vector) for print use at any size without quality loss." },
 ];
 
-export function QRCodeGeneratorTool() {
+export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
   const [text, setText] = useState("https://example.com");
   const [size, setSize] = useState("256");
   const [fgColor, setFgColor] = useState("#000000");
@@ -35,6 +35,11 @@ export function QRCodeGeneratorTool() {
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [qrSvg, setQrSvg] = useState<string>("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.qr_code_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const generateQR = async () => {
     if (!text) {
@@ -101,17 +106,17 @@ export function QRCodeGeneratorTool() {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <CardHeader><CardTitle className="text-lg">QR Code Settings</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-lg">{t.configTitle || "QR Code Settings"}</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>URL or Text</Label>
-              <Input value={text} onChange={(e) => setText(e.target.value)} placeholder="https://example.com" className="h-12 text-base" />
+              <Label>{t.urlLabel || "URL or Text"}</Label>
+              <Input value={text} onChange={(e) => setText(e.target.value)} placeholder={t.urlPlaceholder || "https://example.com"} className="h-12 text-base" />
             </div>
             <div className="space-y-2">
-              <Label>Size</Label>
+              <Label>{t.sizeLabel || "Size"}</Label>
               <Select value={size} onValueChange={setSize}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -124,14 +129,14 @@ export function QRCodeGeneratorTool() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Foreground Color</Label>
+                <Label>{t.colorLabel || "Foreground Color"}</Label>
                 <div className="flex gap-2">
                   <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
                   <Input value={fgColor} onChange={(e) => setFgColor(e.target.value)} />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>Background Color</Label>
+                <Label>{t.bgLabel || "Background Color"}</Label>
                 <div className="flex gap-2">
                   <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
                   <Input value={bgColor} onChange={(e) => setBgColor(e.target.value)} />
@@ -143,20 +148,20 @@ export function QRCodeGeneratorTool() {
               size="lg"
               className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
             >
-              <QrCode className="h-5 w-5" /> Generate QR Code
+              <QrCode className="h-5 w-5" /> {t.generateBtn || "Generate QR Code"}
             </Button>
           </CardContent>
         </Card>
 
         <div className="space-y-4">
           <Card>
-            <CardHeader><CardTitle className="text-lg">Preview</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-lg">{t.previewTitle || "Preview"}</CardTitle></CardHeader>
             <CardContent className="flex items-center justify-center">
               {qrDataUrl ? (
                 <img src={qrDataUrl} alt="QR Code" className="rounded-lg" style={{ width: Math.min(parseInt(size), 300), height: Math.min(parseInt(size), 300) }} />
               ) : (
                 <div className="flex h-64 w-64 items-center justify-center rounded-lg border-2 border-dashed border-border text-muted-foreground">
-                  Enter text to generate
+                  {t.enterTextToGenerate || "Enter text to generate"}
                 </div>
               )}
             </CardContent>
@@ -164,10 +169,10 @@ export function QRCodeGeneratorTool() {
           {qrDataUrl && (
             <div className="flex flex-wrap gap-2">
               <Button onClick={downloadPNG} className="gap-2">
-                <Download className="h-4 w-4" /> Download PNG
+                <Download className="h-4 w-4" /> {ui.download || "Download"} PNG
               </Button>
               <Button onClick={downloadSVG} variant="outline" className="gap-2">
-                <Download className="h-4 w-4" /> Download SVG
+                <Download className="h-4 w-4" /> {ui.download || "Download"} SVG
               </Button>
               <ResetButton onReset={() => { setText(""); setQrDataUrl(""); setQrSvg(""); }} />
             </div>

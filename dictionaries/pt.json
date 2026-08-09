@@ -362,6 +362,86 @@
           "answer": "Standard 16x16, 32x32, and Apple Touch Icon sizes."
         }
       ]
+    },
+    "hreflang_generator": {
+      "urlsTitle": "URL & Language Entries",
+      "addUrl": "Add URL",
+      "urlLabel": "URL",
+      "languageLabel": "Language",
+      "regionLabel": "Region (Optional)",
+      "defaultLabel": "Set as x-default (fallback)",
+      "generateBtn": "Generate Hreflang Tags",
+      "generatedCode": "Hreflang Tags",
+      "seoTips": [
+        "Use absolute URLs (including https://) for all hreflang tags.",
+        "Always include a self-referencing hreflang tag.",
+        "The 'x-default' tag is used for unmatched languages (often English)."
+      ],
+      "faqs": [
+        {
+          "question": "What is an hreflang tag?",
+          "answer": "It tells search engines which language you are using on a specific page, so the search engine can serve that result to users searching in that language."
+        }
+      ]
+    },
+    "keyword_density_checker": {
+      "inputLabel": "Text to Analyze",
+      "inputPlaceholder": "Paste your article or webpage content here...",
+      "analyzeBtn": "Analyze Density",
+      "resultsTitle": "Analysis Results",
+      "wordCount": "Word Count",
+      "charCount": "Characters",
+      "uniqueWords": "Unique Words",
+      "keywordLabel": "Keyword",
+      "countLabel": "Count",
+      "densityLabel": "Density",
+      "seoTips": [
+        "Aim for a keyword density of 1-2%. Avoid keyword stuffing.",
+        "Focus on natural language and semantic variations (LSI keywords)."
+      ],
+      "faqs": [
+        {
+          "question": "What is keyword density?",
+          "answer": "The percentage of times a keyword or phrase appears on a web page compared to the total number of words on the page."
+        }
+      ]
+    },
+    "qr_code_generator": {
+      "configTitle": "QR Code Content",
+      "urlLabel": "URL or Text",
+      "urlPlaceholder": "https://example.com",
+      "colorLabel": "Foreground Color",
+      "bgLabel": "Background Color",
+      "generateBtn": "Generate QR Code",
+      "previewTitle": "Generated QR Code",
+      "seoTips": [
+        "Use QR codes on physical marketing materials to drive offline traffic to your website.",
+        "Track QR code scans by using a URL with UTM parameters."
+      ],
+      "faqs": [
+        {
+          "question": "Do QR codes expire?",
+          "answer": "Static QR codes (like these) never expire because the URL is encoded directly in the image."
+        }
+      ]
+    },
+    "slug_generator": {
+      "configTitle": "Enter Text",
+      "inputLabel": "Text to Convert",
+      "inputPlaceholder": "Enter your blog post title or text here...",
+      "generateBtn": "Generate Slug",
+      "outputLabel": "URL Slug",
+      "seoTips": [
+        "Keep slugs short and descriptive (3-5 words).",
+        "Remove stop words (a, and, the) from your slugs.",
+        "Use hyphens to separate words. Don't use underscores."
+      ],
+      "faqs": [
+        {
+          "question": "What is a URL slug?",
+          "answer": "The part of a URL that identifies a particular page on a website in an easy-to-read form."
+        }
+      ]
     }
   },
   "legal": {

@@ -43,22 +43,27 @@ const faqs = [
   { question: "Why are SEO-friendly URLs important?", answer: "Clean, descriptive URLs help search engines understand your content and improve click-through rates from search results." },
 ];
 
-export function SlugGeneratorTool() {
+export function SlugGeneratorTool({ dict }: { dict?: any }) {
   const [text, setText] = useState("");
   const [separator, setSeparator] = useState("-");
   const [lowercase, setLowercase] = useState(true);
   const [maxLength, setMaxLength] = useState(0);
 
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.slug_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
+
   const slug = useMemo(() => generateSlug(text, separator, lowercase, maxLength), [text, separator, lowercase, maxLength]);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
-        <CardHeader><CardTitle className="text-lg">Input</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-lg">{t.configTitle || "Input"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Title or Text</Label>
-            <Input value={text} onChange={(e) => setText(e.target.value)} placeholder="How to Generate SEO-Friendly URLs" className="h-12 text-base" />
+            <Label>{t.inputLabel || "Title or Text"}</Label>
+            <Input value={text} onChange={(e) => setText(e.target.value)} placeholder={t.inputPlaceholder || "How to Generate SEO-Friendly URLs"} className="h-12 text-base" />
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="space-y-2">
@@ -81,31 +86,31 @@ export function SlugGeneratorTool() {
               <Label htmlFor="lowercase-switch">Lowercase</Label>
             </div>
           </div>
-          <Button
+            <Button
             onClick={() => {
               if (!text.trim()) {
-                toast.error("Please enter some text to generate a slug");
+                toast.error(t.errorEmpty || "Please enter some text to generate a slug");
                 return;
               }
-              toast.success("Slug generated successfully!");
+              toast.success(t.successGenerate || "Slug generated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <Wand2 className="h-5 w-5" /> Generate Slug
+            <Wand2 className="h-5 w-5" /> {t.generateBtn || "Generate Slug"}
           </Button>
         </CardContent>
       </Card>
 
       {slug && (
         <Card className="mt-6">
-          <CardHeader><CardTitle className="text-lg">Generated Slug</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-lg">{t.outputLabel || "Generated Slug"}</CardTitle></CardHeader>
           <CardContent>
             <div className="rounded-lg bg-muted p-4 font-mono text-lg break-all">{slug}</div>
-            <p className="mt-2 text-sm text-muted-foreground">Full URL example: https://example.com/{slug}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t.fullUrlExample || "Full URL example"}: https://example.com/{slug}</p>
             <div className="mt-4 flex gap-2">
-              <CopyButton text={slug} label="Copy Slug" />
-              <CopyButton text={`https://example.com/${slug}`} label="Copy Full URL" variant="outline" />
+              <CopyButton text={slug} label={ui.copy || "Copy Slug"} />
+              <CopyButton text={`https://example.com/${slug}`} label={t.copyUrl || "Copy Full URL"} variant="outline" />
               <ResetButton onReset={() => setText("")} />
             </div>
           </CardContent>

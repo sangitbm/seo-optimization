@@ -356,6 +356,80 @@
           "answer": "Tamaños estándar de 16x16, 32x32 y Apple Touch."
         }
       ]
+    },
+    "hreflang_generator": {
+      "urlsTitle": "Entradas de URL e Idioma",
+      "addUrl": "Añadir URL",
+      "urlLabel": "URL",
+      "languageLabel": "Idioma",
+      "regionLabel": "Región (Opcional)",
+      "defaultLabel": "Establecer como x-default (respaldo)",
+      "generateBtn": "Generar Etiquetas Hreflang",
+      "generatedCode": "Etiquetas Hreflang",
+      "seoTips": [
+        "Usa URLs absolutas (incluyendo https://)."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es una etiqueta hreflang?",
+          "answer": "Le dice a los motores de búsqueda qué idioma usas."
+        }
+      ]
+    },
+    "keyword_density_checker": {
+      "inputLabel": "Texto a Analizar",
+      "inputPlaceholder": "Pega tu contenido aquí...",
+      "analyzeBtn": "Analizar Densidad",
+      "resultsTitle": "Resultados del Análisis",
+      "wordCount": "Palabras",
+      "charCount": "Caracteres",
+      "uniqueWords": "Palabras Únicas",
+      "keywordLabel": "Palabra Clave",
+      "countLabel": "Recuento",
+      "densityLabel": "Densidad",
+      "seoTips": [
+        "Apunta a una densidad de 1-2%. Evita el relleno."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es la densidad de palabras clave?",
+          "answer": "El porcentaje de veces que aparece una palabra."
+        }
+      ]
+    },
+    "qr_code_generator": {
+      "configTitle": "Contenido del Código QR",
+      "urlLabel": "URL o Texto",
+      "urlPlaceholder": "https://ejemplo.com",
+      "colorLabel": "Color Frontal",
+      "bgLabel": "Color de Fondo",
+      "generateBtn": "Generar Código QR",
+      "previewTitle": "Código QR Generado",
+      "seoTips": [
+        "Usa códigos QR en material impreso."
+      ],
+      "faqs": [
+        {
+          "question": "¿Caducan los códigos QR?",
+          "answer": "Los códigos estáticos no caducan."
+        }
+      ]
+    },
+    "slug_generator": {
+      "configTitle": "Introducir Texto",
+      "inputLabel": "Texto a Convertir",
+      "inputPlaceholder": "Introduce el título aquí...",
+      "generateBtn": "Generar Slug",
+      "outputLabel": "Slug de URL",
+      "seoTips": [
+        "Mantén los slugs cortos (3-5 palabras)."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es un slug de URL?",
+          "answer": "La parte final amigable de una URL."
+        }
+      ]
     }
   },
   "legal": {

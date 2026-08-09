@@ -55,9 +55,14 @@ const faqs = [
   { question: "What is the ideal keyword density?", answer: "Most SEO experts recommend a keyword density of 1-2% for primary keywords. More important than density is natural, reader-friendly writing." },
 ];
 
-export function KeywordDensityCheckerTool() {
+export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
   const [text, setText] = useState("");
   const analysis = useMemo(() => analyzeText(text), [text]);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.keyword_density_checker || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const csvReport = useMemo(() => {
     if (!analysis.keywords.length) return "";
@@ -69,23 +74,23 @@ export function KeywordDensityCheckerTool() {
   }, [analysis]);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
-        <CardHeader><CardTitle className="text-lg">Paste Your Content</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-lg">{t.inputLabel || "Paste Your Content"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">
-          <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Paste your article or content here..." rows={10} className="font-mono text-sm" />
+          <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t.inputPlaceholder || "Paste your article or content here..."} rows={10} className="font-mono text-sm" />
           <Button
             onClick={() => {
               if (!text.trim()) {
-                toast.error("Please paste your text first");
+                toast.error(t.errorEmpty || "Please paste your text first");
                 return;
               }
-              toast.success("Keyword density analyzed!");
+              toast.success(t.successAnalyze || "Keyword density analyzed!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
           >
-            <Search className="h-5 w-5" /> Check Keyword Density
+            <Search className="h-5 w-5" /> {t.analyzeBtn || "Check Keyword Density"}
           </Button>
         </CardContent>
       </Card>
@@ -95,10 +100,10 @@ export function KeywordDensityCheckerTool() {
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { label: "Words", value: analysis.totalWords },
-              { label: "Characters", value: analysis.chars },
-              { label: "Sentences", value: analysis.sentences },
-              { label: "Paragraphs", value: analysis.paragraphs },
+              { label: t.wordCount || "Words", value: analysis.totalWords },
+              { label: t.charCount || "Characters", value: analysis.chars },
+              { label: t.sentences || "Sentences", value: analysis.sentences },
+              { label: t.paragraphs || "Paragraphs", value: analysis.paragraphs },
             ].map((stat) => (
               <Card key={stat.label}>
                 <CardContent className="p-4 text-center">
@@ -112,17 +117,17 @@ export function KeywordDensityCheckerTool() {
           {/* Keywords Table */}
           {analysis.keywords.length > 0 && (
             <Card>
-              <CardHeader><CardTitle className="text-lg">Keyword Density Analysis</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-lg">{t.resultsTitle || "Keyword Density Analysis"}</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-border text-left font-medium text-muted-foreground">
                         <th className="pb-3 pr-4">#</th>
-                        <th className="pb-3">Keyword</th>
-                        <th className="pb-3 text-right">Count</th>
-                        <th className="pb-3 text-right">Density</th>
-                        <th className="pb-3 pl-4 w-1/3">Distribution</th>
+                        <th className="pb-3">{t.keywordLabel || "Keyword"}</th>
+                        <th className="pb-3 text-right">{t.countLabel || "Count"}</th>
+                        <th className="pb-3 text-right">{t.densityLabel || "Density"}</th>
+                        <th className="pb-3 pl-4 w-1/3">{t.distribution || "Distribution"}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -152,8 +157,8 @@ export function KeywordDensityCheckerTool() {
           <div className="flex flex-wrap gap-2">
             {csvReport && (
               <>
-                <CopyButton text={csvReport} label="Copy CSV" />
-                <DownloadButton content={csvReport} filename="keyword-density.csv" mimeType="text/csv" label="Download CSV" />
+                <CopyButton text={csvReport} label={ui.copy || "Copy CSV"} />
+                <DownloadButton content={csvReport} filename="keyword-density.csv" mimeType="text/csv" label={ui.download || "Download CSV"} />
               </>
             )}
             <ResetButton onReset={() => setText("")} />
