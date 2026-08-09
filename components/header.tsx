@@ -21,7 +21,7 @@ import {
 import { categories, getToolsByCategory } from "@/lib/tools-data";
 import { i18n } from "@/i18n-config";
 
-export function Header() {
+export function Header({ dict }: { dict?: any }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -60,28 +60,28 @@ export function Header() {
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <Link
-            href="/"
+            href={`/${currentLocale}`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Home
+            {dict?.home || "Home"}
           </Link>
           <Link
-            href="/#tools"
+            href={`/${currentLocale}/#tools`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Tools
+            {dict?.tools || "Tools"}
           </Link>
           <Link
-            href="/#faq"
+            href={`/${currentLocale}/#faq`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             FAQ
           </Link>
           <Link
-            href="/about"
+            href={`/${currentLocale}/about`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            About
+            {dict?.about || "About"}
           </Link>
         </nav>
 
@@ -167,11 +167,11 @@ export function Header() {
               </SheetTitle>
               <nav className="mt-6 flex flex-col gap-1">
                 <Link
-                  href="/"
+                  href={`/${currentLocale}`}
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
-                  Home
+                  {dict?.home || "Home"}
                 </Link>
                 {categories.map((cat) => (
                   <div key={cat} className="mt-4">

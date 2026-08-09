@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ToolGrid } from "./tool-grid";
 import { categories, searchTools, tools, type ToolCategory } from "@/lib/tools-data";
 
-export function ToolSearch() {
+export function ToolSearch({ dict }: { dict?: any }) {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<ToolCategory | "All">("All");
 
@@ -21,7 +21,7 @@ export function ToolSearch() {
       <div className="relative mb-6">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
-          placeholder="Search tools..."
+          placeholder={dict?.placeholder || "Search tools..."}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="pl-10 h-12 text-base"

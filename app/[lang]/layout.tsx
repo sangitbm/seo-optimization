@@ -7,6 +7,8 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "../globals.css";
 import { i18n } from "../../i18n-config";
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -79,6 +81,7 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
 
   return (
     <html
@@ -88,9 +91,9 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
-          <Header />
+          <Header dict={dict.navigation} />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer dict={dict.navigation} lang={lang} />
           <Toaster richColors position="bottom-right" />
         </ThemeProvider>
         {/* AdSense — must be outside <head> to avoid the data-nscript conflict */}

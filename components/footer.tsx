@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { categories, getToolsByCategory } from "@/lib/tools-data";
 
-export function Footer() {
+export function Footer({ dict, lang }: { dict?: any; lang: string }) {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       {/* Ad slot */}
@@ -41,7 +41,7 @@ export function Footer() {
                 {getToolsByCategory(cat as any).map((tool) => (
                   <li key={tool.slug}>
                     <Link
-                      href={`/${tool.slug}`}
+                      href={`/${lang}/${tool.slug}`}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {tool.name}
@@ -61,28 +61,28 @@ export function Footer() {
           </p>
           <div className="flex gap-6 flex-wrap justify-center">
             <Link
-              href="/about"
+              href={`/${lang}/about`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              About
+              {dict?.about || "About"}
             </Link>
             <Link
-              href="/contact"
+              href={`/${lang}/contact`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Contact
+              {dict?.contact || "Contact"}
             </Link>
             <Link
-              href="/privacy"
+              href={`/${lang}/privacy`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Privacy Policy
+              {dict?.privacy || "Privacy Policy"}
             </Link>
             <Link
-              href="/terms"
+              href={`/${lang}/terms`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Terms of Service
+              {dict?.terms || "Terms of Service"}
             </Link>
           </div>
         </div>

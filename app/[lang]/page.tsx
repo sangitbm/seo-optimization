@@ -4,6 +4,8 @@ import { ToolGrid } from "@/components/tool-grid";
 import { FAQSection } from "@/components/faq-section";
 import { AdSlot } from "@/components/ad-slot";
 import { getPopularTools, getRecentTools } from "@/lib/tools-data";
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
 import { createWebsiteSchema, createFAQSchema } from "@/lib/structured-data";
 import { safeJsonLd } from "@/lib/utils";
 import { Shield, Zap, Globe } from "lucide-react";
@@ -27,7 +29,9 @@ const faqSchema = createFAQSchema([
   },
 ]);
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
   const popularTools = getPopularTools();
   const recentTools = getRecentTools(6);
 
@@ -42,17 +46,17 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
 
-      <Hero />
+      <Hero dict={dict.hero} lang={lang} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Popular Tools */}
         <section className="py-16">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Popular Tools
+              {dict.categories.popular}
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Our most-used SEO utilities
+              {dict.categories.popularDesc}
             </p>
           </div>
           <ToolGrid tools={popularTools} />
@@ -64,13 +68,13 @@ export default function HomePage() {
         <section id="tools" className="scroll-mt-20 py-16">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              All Tools
+              {dict.categories.all}
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Search and filter our complete collection of SEO tools
+              {dict.categories.allDesc}
             </p>
           </div>
-          <ToolSearch />
+          <ToolSearch dict={dict.search} />
         </section>
 
         <AdSlot variant="in-content" className="my-4" />
@@ -79,10 +83,10 @@ export default function HomePage() {
         <section className="py-16">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Recently Added
+              {dict.categories.recent}
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              The latest additions to our toolkit
+              {dict.categories.recentDesc}
             </p>
           </div>
           <ToolGrid tools={recentTools} />
