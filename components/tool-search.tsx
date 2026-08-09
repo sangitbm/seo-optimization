@@ -15,6 +15,15 @@ export function ToolSearch({ dict, lang = "en" }: { dict?: any; lang?: string })
     (t) => activeCategory === "All" || t.category === activeCategory
   );
 
+  // Group filtered tools by category
+  const groupedTools = categories.reduce((acc, cat) => {
+    const catTools = filtered.filter((t) => t.category === cat);
+    if (catTools.length > 0) {
+      acc[cat] = catTools;
+    }
+    return acc;
+  }, {} as Record<string, typeof tools>);
+
   return (
     <div>
       {/* Search Input */}
@@ -54,7 +63,21 @@ export function ToolSearch({ dict, lang = "en" }: { dict?: any; lang?: string })
         })}
       </div>
 
-      <ToolGrid tools={filtered} dict={dict} lang={lang} />
+      <div className="space-y-12">
+        {Object.entries(groupedTools).map(([category, categoryTools]) => (
+          <div key={category} className="space-y-6">
+            <h3 className="text-2xl font-bold tracking-tight border-b pb-2">
+              {dict?.categoriesMap?.[category] || category}
+            </h3>
+            <ToolGrid tools={categoryTools} dict={dict} lang={lang} />
+          </div>
+        ))}
+        {Object.keys(groupedTools).length === 0 && (
+          <div className="text-center py-12 text-muted-foreground">
+            No tools found matching your criteria.
+          </div>
+        )}
+      </div>
     </div>
   );
 }
