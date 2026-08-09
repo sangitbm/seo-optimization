@@ -223,6 +223,77 @@
           "answer": "Meta descriptions should be between 150-160 characters."
         }
       ]
+    },
+    "robots_txt_generator": {
+      "basic": "Basic Rules",
+      "advanced": "Advanced",
+      "basicTitle": "Basic Configuration",
+      "defaultRule": "Default Rule",
+      "allowAll": "Allow all robots (index everything)",
+      "disallowAll": "Disallow all robots (index nothing)",
+      "customRules": "Custom Rules",
+      "userAgent": "User Agent",
+      "directive": "Directive",
+      "path": "Path",
+      "addRule": "Add Rule",
+      "sitemapUrl": "Sitemap URL",
+      "delay": "Crawl Delay",
+      "generateBtn": "Generate robots.txt",
+      "generatedCode": "Generated robots.txt",
+      "seoTips": [
+        "Be careful with Disallow: / as it blocks all search engines from indexing your site.",
+        "Always include a link to your XML sitemap at the bottom of your robots.txt file.",
+        "Use the Crawl-delay directive sparingly, as Googlebot doesn't strictly follow it."
+      ],
+      "faqs": [
+        {
+          "question": "What is a robots.txt file?",
+          "answer": "A robots.txt file tells search engine crawlers which URLs the crawler can access on your site."
+        },
+        {
+          "question": "Do I need a robots.txt file?",
+          "answer": "Yes, it's highly recommended to control crawler traffic and keep private areas out of search results."
+        }
+      ]
+    },
+    "sitemap_generator": {
+      "basic": "Sitemap Config",
+      "urls": "URLs",
+      "baseUrl": "Base URL",
+      "priority": "Default Priority",
+      "changefreq": "Default Change Frequency",
+      "addUrl": "Add URL",
+      "urlPath": "URL Path",
+      "generateBtn": "Generate sitemap.xml",
+      "generatedCode": "Generated sitemap.xml",
+      "seoTips": [
+        "Only include canonical, indexable URLs in your sitemap.",
+        "Submit your sitemap to Google Search Console to speed up indexing.",
+        "Keep your sitemap under 50MB and 50,000 URLs."
+      ],
+      "faqs": [
+        {
+          "question": "What is an XML Sitemap?",
+          "answer": "An XML sitemap is a file that lists a website's essential pages, making sure search engines can find and crawl them all."
+        }
+      ]
+    },
+    "canonical_url_generator": {
+      "configTitle": "Canonical Tag Builder",
+      "urlLabel": "Page URL",
+      "urlPlaceholder": "https://example.com/page",
+      "generateBtn": "Generate Tag",
+      "generatedCode": "Generated Canonical Tag",
+      "seoTips": [
+        "Every indexable page should have a self-referencing canonical tag.",
+        "Use absolute URLs (including https://) in canonical tags, not relative URLs."
+      ],
+      "faqs": [
+        {
+          "question": "What is a canonical URL?",
+          "answer": "A canonical URL is the URL of the best representative page from a group of duplicate pages."
+        }
+      ]
     }
   },
   "legal": {

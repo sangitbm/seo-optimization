@@ -223,6 +223,75 @@
           "answer": "Las meta descripciones deben tener entre 150-160 caracteres."
         }
       ]
+    },
+    "robots_txt_generator": {
+      "basic": "Reglas Básicas",
+      "advanced": "Avanzado",
+      "basicTitle": "Configuración Básica",
+      "defaultRule": "Regla por Defecto",
+      "allowAll": "Permitir todos los robots",
+      "disallowAll": "Bloquear todos los robots",
+      "customRules": "Reglas Personalizadas",
+      "userAgent": "Agente de Usuario",
+      "directive": "Directiva",
+      "path": "Ruta",
+      "addRule": "Añadir Regla",
+      "sitemapUrl": "URL del Sitemap",
+      "delay": "Retraso de Rastreo (Crawl Delay)",
+      "generateBtn": "Generar robots.txt",
+      "generatedCode": "robots.txt Generado",
+      "seoTips": [
+        "Ten cuidado con Disallow: / ya que bloquea la indexación de todo tu sitio.",
+        "Siempre incluye un enlace a tu sitemap XML."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es un archivo robots.txt?",
+          "answer": "Le dice a los rastreadores a qué URLs pueden acceder."
+        },
+        {
+          "question": "¿Necesito un archivo robots.txt?",
+          "answer": "Sí, es muy recomendable."
+        }
+      ]
+    },
+    "sitemap_generator": {
+      "basic": "Configuración del Sitemap",
+      "urls": "URLs",
+      "baseUrl": "URL Base",
+      "priority": "Prioridad por Defecto",
+      "changefreq": "Frecuencia de Cambio",
+      "addUrl": "Añadir URL",
+      "urlPath": "Ruta de URL",
+      "generateBtn": "Generar sitemap.xml",
+      "generatedCode": "sitemap.xml Generado",
+      "seoTips": [
+        "Solo incluye URLs canónicas e indexables.",
+        "Envía tu sitemap a Google Search Console."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es un Sitemap XML?",
+          "answer": "Es un archivo que enumera las páginas esenciales de un sitio web."
+        }
+      ]
+    },
+    "canonical_url_generator": {
+      "configTitle": "Constructor de Etiqueta Canónica",
+      "urlLabel": "URL de la Página",
+      "urlPlaceholder": "https://ejemplo.com/pagina",
+      "generateBtn": "Generar Etiqueta",
+      "generatedCode": "Etiqueta Canónica Generada",
+      "seoTips": [
+        "Cada página debe tener una etiqueta canónica que haga referencia a sí misma.",
+        "Usa URLs absolutas (incluyendo https://)."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es una URL canónica?",
+          "answer": "Es la URL representativa de un grupo de páginas duplicadas."
+        }
+      ]
     }
   },
   "legal": {

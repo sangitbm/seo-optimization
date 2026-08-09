@@ -5,6 +5,11 @@ import { CanonicalUrlGeneratorTool } from "@/components/tools/canonical-url-gene
 const tool = getToolBySlug("canonical-url-generator")!;
 export const metadata = createToolMetadata(tool);
 
-export default function CanonicalUrlGeneratorPage() {
-  return <CanonicalUrlGeneratorTool />;
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
+
+export default async function CanonicalUrlGeneratorPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  return <CanonicalUrlGeneratorTool dict={dict} />;
 }

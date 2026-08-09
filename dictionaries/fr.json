@@ -223,6 +223,68 @@
           "answer": "Les méta-descriptions doivent compter entre 150 et 160 caractères."
         }
       ]
+    },
+    "robots_txt_generator": {
+      "basic": "Règles de base",
+      "advanced": "Avancé",
+      "basicTitle": "Configuration",
+      "defaultRule": "Règle par défaut",
+      "allowAll": "Autoriser tous les robots",
+      "disallowAll": "Bloquer tous les robots",
+      "customRules": "Règles personnalisées",
+      "userAgent": "Agent utilisateur",
+      "directive": "Directive",
+      "path": "Chemin",
+      "addRule": "Ajouter une règle",
+      "sitemapUrl": "URL du Sitemap",
+      "delay": "Délai d'exploration",
+      "generateBtn": "Générer robots.txt",
+      "generatedCode": "robots.txt Généré",
+      "seoTips": [
+        "Soyez prudent avec Disallow: /"
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'un fichier robots.txt ?",
+          "answer": "Il indique aux robots les URL accessibles."
+        }
+      ]
+    },
+    "sitemap_generator": {
+      "basic": "Configuration",
+      "urls": "URLs",
+      "baseUrl": "URL de base",
+      "priority": "Priorité",
+      "changefreq": "Fréquence",
+      "addUrl": "Ajouter une URL",
+      "urlPath": "Chemin",
+      "generateBtn": "Générer sitemap.xml",
+      "generatedCode": "sitemap.xml Généré",
+      "seoTips": [
+        "Soumettez votre sitemap à Google Search Console."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'un Sitemap XML ?",
+          "answer": "Il liste les pages essentielles du site."
+        }
+      ]
+    },
+    "canonical_url_generator": {
+      "configTitle": "Générateur Canonique",
+      "urlLabel": "URL de la page",
+      "urlPlaceholder": "https://exemple.com/page",
+      "generateBtn": "Générer la balise",
+      "generatedCode": "Balise Canonique",
+      "seoTips": [
+        "Utilisez des URL absolues."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'une URL canonique ?",
+          "answer": "C'est l'URL représentative d'une page."
+        }
+      ]
     }
   },
   "legal": {

@@ -108,8 +108,13 @@ const faqs = [
   { question: "Where should I place my sitemap?", answer: "Place your sitemap.xml in the root of your domain (e.g., https://example.com/sitemap.xml) and reference it in your robots.txt file." },
 ];
 
-export function SitemapGeneratorTool() {
+export function SitemapGeneratorTool({ dict }: { dict?: any }) {
   const [entries, setEntries] = useState<SitemapEntry[]>([{ ...defaultEntry }]);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.sitemap_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const addEntry = () => setEntries([...entries, { ...defaultEntry }]);
 
@@ -125,12 +130,12 @@ export function SitemapGeneratorTool() {
   const htmlOutput = generateHTML(entries);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg">URL Entries</CardTitle>
+          <CardTitle className="text-lg">{t.urls || "URL Entries"}</CardTitle>
           <Button onClick={addEntry} size="sm" className="gap-1">
-            <Plus className="h-4 w-4" /> Add URL
+            <Plus className="h-4 w-4" /> {t.addUrl || "Add URL"}
           </Button>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -150,7 +155,7 @@ export function SitemapGeneratorTool() {
                   <Input placeholder="https://example.com/page" value={entry.url} onChange={(e) => updateEntry(index, "url", e.target.value)} />
                 </div>
                 <div className="space-y-1">
-                  <Label>Priority</Label>
+                  <Label>{t.priority || "Priority"}</Label>
                   <Select value={entry.priority} onValueChange={(v) => updateEntry(index, "priority", v)}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -161,7 +166,7 @@ export function SitemapGeneratorTool() {
                   </Select>
                 </div>
                 <div className="space-y-1">
-                  <Label>Change Frequency</Label>
+                  <Label>{t.changefreq || "Change Frequency"}</Label>
                   <Select value={entry.changefreq} onValueChange={(v) => updateEntry(index, "changefreq", v)}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -184,22 +189,22 @@ export function SitemapGeneratorTool() {
                 toast.error("Please enter at least one URL");
                 return;
               }
-              toast.success("XML & HTML Sitemaps generated successfully!");
+              toast.success(t.generatedCode || "Sitemaps generated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <FileCode className="h-5 w-5" /> Generate Sitemap
+            <FileCode className="h-5 w-5" /> {t.generateBtn || "Generate Sitemap"}
           </Button>
         </CardContent>
       </Card>
 
       <div className="mt-6 space-y-6">
-        <CodePreview code={xmlOutput} language="xml" label="XML Sitemap" />
+        <CodePreview code={xmlOutput} language="xml" label={t.generatedCode || "XML Sitemap"} />
         <div className="flex flex-wrap gap-2">
-          <CopyButton text={xmlOutput} label="Copy XML" />
-          <DownloadButton content={xmlOutput} filename="sitemap.xml" mimeType="application/xml" label="Download XML" />
-          <DownloadButton content={htmlOutput} filename="sitemap.html" mimeType="text/html" label="Download HTML" />
+          <CopyButton text={xmlOutput} label={ui.copy || "Copy XML"} />
+          <DownloadButton content={xmlOutput} filename="sitemap.xml" mimeType="application/xml" label={ui.download || "Download XML"} />
+          <DownloadButton content={htmlOutput} filename="sitemap.html" mimeType="text/html" label={ui.download || "Download HTML"} />
           <ResetButton onReset={() => setEntries([{ ...defaultEntry }])} />
         </div>
       </div>

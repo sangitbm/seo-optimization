@@ -62,9 +62,14 @@ const faqs = [
   { question: "Where should robots.txt be placed?", answer: "It must be placed at the root of your domain: https://example.com/robots.txt" },
 ];
 
-export function RobotsTxtGeneratorTool() {
+export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
   const [blocks, setBlocks] = useState<UserAgentBlock[]>([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]);
   const [sitemapUrl, setSitemapUrl] = useState("");
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.robots_txt_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const addBlock = () => setBlocks([...blocks, { userAgent: "*", rules: [{ type: "Allow", path: "/" }], crawlDelay: "" }]);
   const removeBlock = (i: number) => setBlocks(blocks.filter((_, idx) => idx !== i));
@@ -91,12 +96,12 @@ export function RobotsTxtGeneratorTool() {
   const output = generate(blocks, sitemapUrl);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="space-y-4">
         {blocks.map((block, bi) => (
           <Card key={bi}>
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">User-Agent Block #{bi + 1}</CardTitle>
+              <CardTitle className="text-lg">{t.userAgent || "User-Agent"} #{bi + 1}</CardTitle>
               {blocks.length > 1 && (
                 <Button variant="ghost" size="icon" onClick={() => removeBlock(bi)} className="text-destructive h-8 w-8">
                   <Trash2 className="h-4 w-4" />
@@ -105,14 +110,14 @@ export function RobotsTxtGeneratorTool() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>User-Agent</Label>
+                <Label>{t.userAgent || "User-Agent"}</Label>
                 <Input value={block.userAgent} onChange={(e) => updateBlock(bi, "userAgent", e.target.value)} placeholder="*" />
               </div>
 
               {block.rules.map((rule, ri) => (
                 <div key={ri} className="flex items-end gap-2">
                   <div className="w-32 space-y-1">
-                    <Label>Directive</Label>
+                    <Label>{t.directive || "Directive"}</Label>
                     <Select value={rule.type} onValueChange={(v) => updateRule(bi, ri, "type", v)}>
                       <SelectTrigger><SelectValue /></SelectTrigger>
                       <SelectContent>
@@ -122,7 +127,7 @@ export function RobotsTxtGeneratorTool() {
                     </Select>
                   </div>
                   <div className="flex-1 space-y-1">
-                    <Label>Path</Label>
+                    <Label>{t.path || "Path"}</Label>
                     <Input value={rule.path} onChange={(e) => updateRule(bi, ri, "path", e.target.value)} placeholder="/" />
                   </div>
                   {block.rules.length > 1 && (
@@ -134,11 +139,11 @@ export function RobotsTxtGeneratorTool() {
               ))}
 
               <Button variant="outline" size="sm" onClick={() => addRule(bi)} className="gap-1">
-                <Plus className="h-3 w-3" /> Add Rule
+                <Plus className="h-3 w-3" /> {t.addRule || "Add Rule"}
               </Button>
 
               <div className="space-y-2">
-                <Label>Crawl Delay (seconds)</Label>
+                <Label>{t.delay || "Crawl Delay"}</Label>
                 <Input type="number" min="0" value={block.crawlDelay} onChange={(e) => updateBlock(bi, "crawlDelay", e.target.value)} placeholder="Optional" />
               </div>
             </CardContent>
@@ -146,13 +151,13 @@ export function RobotsTxtGeneratorTool() {
         ))}
 
         <Button variant="outline" onClick={addBlock} className="gap-1 w-full">
-          <Plus className="h-4 w-4" /> Add User-Agent Block
+          <Plus className="h-4 w-4" /> {t.userAgent || "Add User-Agent Block"}
         </Button>
 
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-2">
-              <Label>Sitemap URL</Label>
+              <Label>{t.sitemapUrl || "Sitemap URL"}</Label>
               <Input value={sitemapUrl} onChange={(e) => setSitemapUrl(e.target.value)} placeholder="https://example.com/sitemap.xml" />
             </div>
           </CardContent>
@@ -160,20 +165,20 @@ export function RobotsTxtGeneratorTool() {
 
         <Button
           onClick={() => {
-            toast.success("robots.txt generated successfully!");
+            toast.success(t.generatedCode || "robots.txt generated successfully!");
           }}
           size="lg"
           className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
         >
-          <Bot className="h-5 w-5" /> Generate robots.txt
+          <Bot className="h-5 w-5" /> {t.generateBtn || "Generate robots.txt"}
         </Button>
       </div>
 
       <div className="mt-6 space-y-4">
-        <CodePreview code={output} language="text" label="robots.txt" />
+        <CodePreview code={output} language="text" label={t.generatedCode || "robots.txt"} />
         <div className="flex flex-wrap gap-2">
-          <CopyButton text={output} label="Copy" />
-          <DownloadButton content={output} filename="robots.txt" label="Download robots.txt" />
+          <CopyButton text={output} label={ui.copy || "Copy"} />
+          <DownloadButton content={output} filename="robots.txt" label={ui.download || "Download"} />
           <ResetButton onReset={() => { setBlocks([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]); setSitemapUrl(""); }} />
         </div>
       </div>

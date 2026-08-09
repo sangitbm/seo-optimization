@@ -30,42 +30,47 @@ const faqs = [
   { question: "Can canonical tags point to a different domain?", answer: "Yes, cross-domain canonical tags are supported and can be used when content is syndicated across different domains." },
 ];
 
-export function CanonicalUrlGeneratorTool() {
+export function CanonicalUrlGeneratorTool({ dict }: { dict?: any }) {
   const [url, setUrl] = useState("");
   const output = url ? `<link rel="canonical" href="${url}">` : "";
 
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.canonical_url_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
+
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
-        <CardHeader><CardTitle className="text-lg">Enter Your Canonical URL</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-lg">{t.configTitle || "Enter Your Canonical URL"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="canonical-url">Page URL</Label>
-            <Input id="canonical-url" placeholder="https://example.com/my-page" value={url} onChange={(e) => setUrl(e.target.value)} className="h-12 text-base" />
-            <p className="text-xs text-muted-foreground">Enter the preferred URL for this page. Use the full absolute URL including protocol.</p>
+            <Label htmlFor="canonical-url">{t.urlLabel || "Page URL"}</Label>
+            <Input id="canonical-url" placeholder={t.urlPlaceholder || "https://example.com/my-page"} value={url} onChange={(e) => setUrl(e.target.value)} className="h-12 text-base" />
+            <p className="text-xs text-muted-foreground">{t.seoTips?.[1] || "Enter the preferred URL for this page. Use the full absolute URL including protocol."}</p>
           </div>
           <Button
             onClick={() => {
               if (!url.trim()) {
-                toast.error("Please enter a URL first");
+                toast.error(t.errorEmpty || "Please enter a URL first");
                 return;
               }
-              toast.success("Canonical Tag generated!");
+              toast.success(t.generatedCode || "Canonical Tag generated!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <Link2 className="h-5 w-5" /> Generate Canonical Tag
+            <Link2 className="h-5 w-5" /> {t.generateBtn || "Generate Canonical Tag"}
           </Button>
         </CardContent>
       </Card>
 
       {output && (
         <div className="mt-6 space-y-4">
-          <CodePreview code={output} language="html" label="Canonical Tag" />
+          <CodePreview code={output} language="html" label={t.generatedCode || "Canonical Tag"} />
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={output} label="Copy HTML" />
-            <DownloadButton content={output} filename="canonical.html" mimeType="text/html" label="Download HTML" />
+            <CopyButton text={output} label={ui.copy || "Copy HTML"} />
+            <DownloadButton content={output} filename="canonical.html" mimeType="text/html" label={ui.download || "Download HTML"} />
             <ResetButton onReset={() => setUrl("")} />
           </div>
         </div>
