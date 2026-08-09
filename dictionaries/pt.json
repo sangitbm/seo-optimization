@@ -24,5 +24,84 @@
     "allDesc": "Pesquise e filtre nossa coleção completa",
     "recent": "Adicionadas Recentemente",
     "recentDesc": "As últimas adições ao nosso conjunto de ferramentas"
+  },
+  "categoriesMap": {
+    "Meta Tags": "Meta Tags",
+    "Structured Data": "Dados Estruturados",
+    "Technical SEO": "SEO Técnico",
+    "Social Media": "Redes Sociais",
+    "Content": "Conteúdo",
+    "Code": "Código",
+    "Utilities": "Utilidades"
+  },
+  "toolsMap": {
+    "meta-tag-generator": {
+      "name": "Gerador de Meta Tags",
+      "shortDescription": "Gere título, descrição, tags OG, Twitter cards e mais."
+    },
+    "schema-generator": {
+      "name": "Gerador de Marcação Schema",
+      "shortDescription": "Crie dados estruturados JSON-LD para rich snippets."
+    },
+    "sitemap-generator": {
+      "name": "Gerador de Sitemap",
+      "shortDescription": "Crie sitemaps XML com configurações de prioridade e frequência."
+    },
+    "robots-txt-generator": {
+      "name": "Gerador de Robots.txt",
+      "shortDescription": "Crie robots.txt visualmente com regras de allow/disallow."
+    },
+    "open-graph-generator": {
+      "name": "Gerador de Imagens Open Graph",
+      "shortDescription": "Projete imagens OG com cores, texto e gradientes personalizados."
+    },
+    "twitter-card-generator": {
+      "name": "Gerador de Twitter Card",
+      "shortDescription": "Crie meta tags de Twitter Card com visualização ao vivo."
+    },
+    "canonical-url-generator": {
+      "name": "Gerador de URL Canônica",
+      "shortDescription": "Gere tags de link canônico para prevenção de conteúdo duplicado."
+    },
+    "hreflang-generator": {
+      "name": "Gerador Hreflang",
+      "shortDescription": "Crie tags hreflang para SEO multilíngue."
+    },
+    "redirect-generator": {
+      "name": "Gerador de Redirecionamentos",
+      "shortDescription": "Gere regras de redirecionamento para Apache, Nginx, Vercel e Netlify."
+    },
+    "keyword-density-checker": {
+      "name": "Verificador de Densidade de Palavras-chave",
+      "shortDescription": "Analise a contagem de palavras, frequência de palavras-chave e densidade."
+    },
+    "meta-tag-preview": {
+      "name": "Visualização de Meta Tag",
+      "shortDescription": "Visualize sua página no Google, Facebook e Twitter."
+    },
+    "favicon-generator": {
+      "name": "Gerador de Favicon",
+      "shortDescription": "Gere todos os tamanhos de favicon a partir de uma única imagem."
+    },
+    "slug-generator": {
+      "name": "Gerador de Slug",
+      "shortDescription": "Converta títulos em slugs de URL limpos e amigáveis para SEO."
+    },
+    "html-minifier": {
+      "name": "Minificador HTML",
+      "shortDescription": "Minifique e embeleze o código HTML para melhor desempenho."
+    },
+    "css-minifier": {
+      "name": "Minificador CSS",
+      "shortDescription": "Minifique e embeleze folhas de estilo CSS."
+    },
+    "js-minifier": {
+      "name": "Minificador JavaScript",
+      "shortDescription": "Minifique e embeleze o código JavaScript."
+    },
+    "qr-code-generator": {
+      "name": "Gerador de Código QR",
+      "shortDescription": "Gere códigos QR personalizáveis em PNG e SVG."
+    }
   }
 }

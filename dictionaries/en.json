@@ -24,5 +24,84 @@
     "allDesc": "Search and filter our complete collection of SEO tools",
     "recent": "Recently Added",
     "recentDesc": "The latest additions to our toolkit"
+  },
+  "categoriesMap": {
+    "Meta Tags": "Meta Tags",
+    "Structured Data": "Structured Data",
+    "Technical SEO": "Technical SEO",
+    "Social Media": "Social Media",
+    "Content": "Content",
+    "Code": "Code",
+    "Utilities": "Utilities"
+  },
+  "toolsMap": {
+    "meta-tag-generator": {
+      "name": "Meta Tag Generator",
+      "shortDescription": "Generate title, description, OG tags, Twitter cards and more."
+    },
+    "schema-generator": {
+      "name": "Schema Markup Generator",
+      "shortDescription": "Create JSON-LD structured data for rich snippets."
+    },
+    "sitemap-generator": {
+      "name": "Sitemap Generator",
+      "shortDescription": "Create XML sitemaps with priority and frequency settings."
+    },
+    "robots-txt-generator": {
+      "name": "Robots.txt Generator",
+      "shortDescription": "Build robots.txt visually with allow/disallow rules."
+    },
+    "open-graph-generator": {
+      "name": "Open Graph Image Generator",
+      "shortDescription": "Design OG images with custom colors, text, and gradients."
+    },
+    "twitter-card-generator": {
+      "name": "Twitter Card Generator",
+      "shortDescription": "Create Twitter Card meta tags with live preview."
+    },
+    "canonical-url-generator": {
+      "name": "Canonical URL Generator",
+      "shortDescription": "Generate canonical link tags for duplicate content prevention."
+    },
+    "hreflang-generator": {
+      "name": "Hreflang Generator",
+      "shortDescription": "Create hreflang tags for multilingual SEO."
+    },
+    "redirect-generator": {
+      "name": "Redirect Generator",
+      "shortDescription": "Generate redirect rules for Apache, Nginx, Vercel & Netlify."
+    },
+    "keyword-density-checker": {
+      "name": "Keyword Density Checker",
+      "shortDescription": "Analyze word count, keyword frequency, and density."
+    },
+    "meta-tag-preview": {
+      "name": "Meta Tag Preview",
+      "shortDescription": "Preview your page on Google, Facebook, and Twitter."
+    },
+    "favicon-generator": {
+      "name": "Favicon Generator",
+      "shortDescription": "Generate all favicon sizes from a single image."
+    },
+    "slug-generator": {
+      "name": "Slug Generator",
+      "shortDescription": "Convert titles into clean, SEO-friendly URL slugs."
+    },
+    "html-minifier": {
+      "name": "HTML Minifier",
+      "shortDescription": "Minify and beautify HTML code for better performance."
+    },
+    "css-minifier": {
+      "name": "CSS Minifier",
+      "shortDescription": "Minify and beautify CSS stylesheets."
+    },
+    "js-minifier": {
+      "name": "JavaScript Minifier",
+      "shortDescription": "Minify and beautify JavaScript code."
+    },
+    "qr-code-generator": {
+      "name": "QR Code Generator",
+      "shortDescription": "Generate customizable QR codes in PNG and SVG."
+    }
   }
 }

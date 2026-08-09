@@ -24,5 +24,84 @@
     "allDesc": "Busca y filtra nuestra colección completa de herramientas SEO",
     "recent": "Añadidos Recientemente",
     "recentDesc": "Las últimas incorporaciones a nuestro conjunto de herramientas"
+  },
+  "categoriesMap": {
+    "Meta Tags": "Etiquetas Meta",
+    "Structured Data": "Datos Estructurados",
+    "Technical SEO": "SEO Técnico",
+    "Social Media": "Redes Sociales",
+    "Content": "Contenido",
+    "Code": "Código",
+    "Utilities": "Utilidades"
+  },
+  "toolsMap": {
+    "meta-tag-generator": {
+      "name": "Generador de Etiquetas Meta",
+      "shortDescription": "Genera títulos, descripciones, etiquetas OG, Twitter cards y más."
+    },
+    "schema-generator": {
+      "name": "Generador de Marcado Schema",
+      "shortDescription": "Crea datos estructurados JSON-LD para rich snippets."
+    },
+    "sitemap-generator": {
+      "name": "Generador de Sitemap",
+      "shortDescription": "Crea sitemaps XML con ajustes de prioridad y frecuencia."
+    },
+    "robots-txt-generator": {
+      "name": "Generador de Robots.txt",
+      "shortDescription": "Crea robots.txt visualmente con reglas de allow/disallow."
+    },
+    "open-graph-generator": {
+      "name": "Generador de Imágenes Open Graph",
+      "shortDescription": "Diseña imágenes OG con colores, texto y degradados personalizados."
+    },
+    "twitter-card-generator": {
+      "name": "Generador de Twitter Card",
+      "shortDescription": "Crea etiquetas meta Twitter Card con vista previa en vivo."
+    },
+    "canonical-url-generator": {
+      "name": "Generador de URL Canónica",
+      "shortDescription": "Genera etiquetas de enlace canónico para prevenir contenido duplicado."
+    },
+    "hreflang-generator": {
+      "name": "Generador de Hreflang",
+      "shortDescription": "Crea etiquetas hreflang para SEO multilingüe."
+    },
+    "redirect-generator": {
+      "name": "Generador de Redirecciones",
+      "shortDescription": "Genera reglas de redirección para Apache, Nginx, Vercel y Netlify."
+    },
+    "keyword-density-checker": {
+      "name": "Comprobador de Densidad de Palabras Clave",
+      "shortDescription": "Analiza recuento de palabras, frecuencia de palabras clave y densidad."
+    },
+    "meta-tag-preview": {
+      "name": "Vista Previa de Etiquetas Meta",
+      "shortDescription": "Previsualiza tu página en Google, Facebook y Twitter."
+    },
+    "favicon-generator": {
+      "name": "Generador de Favicon",
+      "shortDescription": "Genera todos los tamaños de favicon desde una sola imagen."
+    },
+    "slug-generator": {
+      "name": "Generador de Slug",
+      "shortDescription": "Convierte títulos en slugs de URL limpios y amigables para SEO."
+    },
+    "html-minifier": {
+      "name": "Minificador HTML",
+      "shortDescription": "Minifica y embellece código HTML para mejor rendimiento."
+    },
+    "css-minifier": {
+      "name": "Minificador CSS",
+      "shortDescription": "Minifica y embellece hojas de estilo CSS."
+    },
+    "js-minifier": {
+      "name": "Minificador JavaScript",
+      "shortDescription": "Minifica y embellece código JavaScript."
+    },
+    "qr-code-generator": {
+      "name": "Generador de Código QR",
+      "shortDescription": "Genera códigos QR personalizables en PNG y SVG."
+    }
   }
 }

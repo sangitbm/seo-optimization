@@ -59,7 +59,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {dict.categories.popularDesc}
             </p>
           </div>
-          <ToolGrid tools={popularTools} />
+          <ToolGrid tools={popularTools} dict={dict} lang={lang} />
         </section>
 
         <AdSlot variant="banner" className="my-4" />
@@ -74,7 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {dict.categories.allDesc}
             </p>
           </div>
-          <ToolSearch dict={dict.search} />
+          <ToolSearch dict={dict} lang={lang} />
         </section>
 
         <AdSlot variant="in-content" className="my-4" />
@@ -89,7 +89,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {dict.categories.recentDesc}
             </p>
           </div>
-          <ToolGrid tools={recentTools} />
+          <ToolGrid tools={recentTools} dict={dict} lang={lang} />
         </section>
 
         {/* Features / About */}

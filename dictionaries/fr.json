@@ -24,5 +24,84 @@
     "allDesc": "Recherchez et filtrez notre collection complète",
     "recent": "Ajoutés Récemment",
     "recentDesc": "Les derniers ajouts à notre boîte à outils"
+  },
+  "categoriesMap": {
+    "Meta Tags": "Balises Meta",
+    "Structured Data": "Données Structurées",
+    "Technical SEO": "SEO Technique",
+    "Social Media": "Réseaux Sociaux",
+    "Content": "Contenu",
+    "Code": "Code",
+    "Utilities": "Utilitaires"
+  },
+  "toolsMap": {
+    "meta-tag-generator": {
+      "name": "Générateur de Balises Meta",
+      "shortDescription": "Générez titre, description, balises OG, cartes Twitter et plus."
+    },
+    "schema-generator": {
+      "name": "Générateur de Schéma",
+      "shortDescription": "Créez des données structurées JSON-LD pour les rich snippets."
+    },
+    "sitemap-generator": {
+      "name": "Générateur de Sitemap",
+      "shortDescription": "Créez des sitemaps XML avec paramètres de priorité et fréquence."
+    },
+    "robots-txt-generator": {
+      "name": "Générateur de Robots.txt",
+      "shortDescription": "Créez un robots.txt visuellement avec des règles allow/disallow."
+    },
+    "open-graph-generator": {
+      "name": "Générateur d'Images Open Graph",
+      "shortDescription": "Concevez des images OG avec couleurs, texte et dégradés personnalisés."
+    },
+    "twitter-card-generator": {
+      "name": "Générateur de Twitter Card",
+      "shortDescription": "Créez des balises meta Twitter Card avec aperçu en direct."
+    },
+    "canonical-url-generator": {
+      "name": "Générateur d'URL Canonique",
+      "shortDescription": "Générez des balises de lien canonique pour éviter le contenu dupliqué."
+    },
+    "hreflang-generator": {
+      "name": "Générateur Hreflang",
+      "shortDescription": "Créez des balises hreflang pour le SEO multilingue."
+    },
+    "redirect-generator": {
+      "name": "Générateur de Redirections",
+      "shortDescription": "Générez des règles de redirection pour Apache, Nginx, Vercel et Netlify."
+    },
+    "keyword-density-checker": {
+      "name": "Vérificateur de Densité de Mots-Clés",
+      "shortDescription": "Analysez le nombre de mots, la fréquence des mots-clés et la densité."
+    },
+    "meta-tag-preview": {
+      "name": "Aperçu des Balises Meta",
+      "shortDescription": "Prévisualisez votre page sur Google, Facebook et Twitter."
+    },
+    "favicon-generator": {
+      "name": "Générateur de Favicon",
+      "shortDescription": "Générez toutes les tailles de favicon à partir d'une seule image."
+    },
+    "slug-generator": {
+      "name": "Générateur de Slug",
+      "shortDescription": "Convertissez les titres en slugs d'URL propres et optimisés pour le SEO."
+    },
+    "html-minifier": {
+      "name": "Minificateur HTML",
+      "shortDescription": "Minifiez et embellissez le code HTML pour de meilleures performances."
+    },
+    "css-minifier": {
+      "name": "Minificateur CSS",
+      "shortDescription": "Minifiez et embellissez les feuilles de style CSS."
+    },
+    "js-minifier": {
+      "name": "Minificateur JavaScript",
+      "shortDescription": "Minifiez et embellissez le code JavaScript."
+    },
+    "qr-code-generator": {
+      "name": "Générateur de QR Code",
+      "shortDescription": "Générez des QR codes personnalisables en PNG et SVG."
+    }
   }
 }

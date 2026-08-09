@@ -91,9 +91,9 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
-          <Header dict={dict.navigation} />
+          <Header dict={dict} />
           <main className="flex-1">{children}</main>
-          <Footer dict={dict.navigation} lang={lang} />
+          <Footer dict={dict} lang={lang} />
           <Toaster richColors position="bottom-right" />
         </ThemeProvider>
         {/* AdSense — must be outside <head> to avoid the data-nscript conflict */}

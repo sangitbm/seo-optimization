@@ -63,13 +63,13 @@ export function Header({ dict }: { dict?: any }) {
             href={`/${currentLocale}`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.home || "Home"}
+            {dict?.navigation?.home || "Home"}
           </Link>
           <Link
             href={`/${currentLocale}/#tools`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.tools || "Tools"}
+            {dict?.navigation?.tools || "Tools"}
           </Link>
           <Link
             href={`/${currentLocale}/#faq`}
@@ -81,7 +81,7 @@ export function Header({ dict }: { dict?: any }) {
             href={`/${currentLocale}/about`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.about || "About"}
+            {dict?.navigation?.about || "About"}
           </Link>
         </nav>
 
@@ -171,14 +171,18 @@ export function Header({ dict }: { dict?: any }) {
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
-                  {dict?.home || "Home"}
+                  {dict?.navigation?.home || "Home"}
                 </Link>
-                {categories.map((cat) => (
+                {categories.map((cat) => {
+                  const translatedCat = dict?.categoriesMap?.[cat] || cat;
+                  return (
                   <div key={cat} className="mt-4">
                     <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {cat}
+                      {translatedCat}
                     </p>
-                    {getToolsByCategory(cat).map((tool) => (
+                    {getToolsByCategory(cat).map((tool) => {
+                      const translatedName = dict?.toolsMap?.[tool.slug]?.name || tool.name;
+                      return (
                       <Link
                         key={tool.slug}
                         href={`/${currentLocale}/${tool.slug}`}
@@ -186,11 +190,13 @@ export function Header({ dict }: { dict?: any }) {
                         className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent"
                       >
                         <tool.icon className="h-4 w-4 text-muted-foreground" />
-                        {tool.name}
+                        {translatedName}
                       </Link>
-                    ))}
+                      )
+                    })}
                   </div>
-                ))}
+                  )
+                })}
               </nav>
             </SheetContent>
           </Sheet>

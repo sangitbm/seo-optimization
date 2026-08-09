@@ -4,9 +4,11 @@ import type { Tool } from "@/lib/tools-data";
 interface ToolGridProps {
   tools: Tool[];
   className?: string;
+  dict?: any;
+  lang?: string;
 }
 
-export function ToolGrid({ tools, className = "" }: ToolGridProps) {
+export function ToolGrid({ tools, className = "", dict, lang = "en" }: ToolGridProps) {
   if (tools.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -25,7 +27,7 @@ export function ToolGrid({ tools, className = "" }: ToolGridProps) {
       className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${className}`}
     >
       {tools.map((tool) => (
-        <ToolCard key={tool.slug} tool={tool} />
+        <ToolCard key={tool.slug} tool={tool} dict={dict} lang={lang} />
       ))}
     </div>
   );

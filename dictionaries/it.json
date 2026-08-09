@@ -24,5 +24,84 @@
     "allDesc": "Cerca e filtra la nostra collezione completa",
     "recent": "Aggiunti di Recente",
     "recentDesc": "Le ultime novità del nostro toolkit"
+  },
+  "categoriesMap": {
+    "Meta Tags": "Meta Tag",
+    "Structured Data": "Dati Strutturati",
+    "Technical SEO": "SEO Tecnico",
+    "Social Media": "Social Media",
+    "Content": "Contenuto",
+    "Code": "Codice",
+    "Utilities": "Utilità"
+  },
+  "toolsMap": {
+    "meta-tag-generator": {
+      "name": "Generatore di Meta Tag",
+      "shortDescription": "Genera titolo, descrizione, tag OG, Twitter card e altro."
+    },
+    "schema-generator": {
+      "name": "Generatore di Markup Schema",
+      "shortDescription": "Crea dati strutturati JSON-LD per rich snippet."
+    },
+    "sitemap-generator": {
+      "name": "Generatore di Sitemap",
+      "shortDescription": "Crea sitemap XML con impostazioni di priorità e frequenza."
+    },
+    "robots-txt-generator": {
+      "name": "Generatore di Robots.txt",
+      "shortDescription": "Costruisci robots.txt visivamente con regole allow/disallow."
+    },
+    "open-graph-generator": {
+      "name": "Generatore di Immagini Open Graph",
+      "shortDescription": "Progetta immagini OG con colori, testo e sfumature personalizzate."
+    },
+    "twitter-card-generator": {
+      "name": "Generatore di Twitter Card",
+      "shortDescription": "Crea meta tag Twitter Card con anteprima dal vivo."
+    },
+    "canonical-url-generator": {
+      "name": "Generatore di URL Canonico",
+      "shortDescription": "Genera tag di link canonici per prevenire contenuti duplicati."
+    },
+    "hreflang-generator": {
+      "name": "Generatore Hreflang",
+      "shortDescription": "Crea tag hreflang per SEO multilingue."
+    },
+    "redirect-generator": {
+      "name": "Generatore di Reindirizzamenti",
+      "shortDescription": "Genera regole di reindirizzamento per Apache, Nginx, Vercel e Netlify."
+    },
+    "keyword-density-checker": {
+      "name": "Controllo Densità Parole Chiave",
+      "shortDescription": "Analizza il conteggio delle parole, la frequenza delle parole chiave e la densità."
+    },
+    "meta-tag-preview": {
+      "name": "Anteprima Meta Tag",
+      "shortDescription": "Visualizza l'anteprima della tua pagina su Google, Facebook e Twitter."
+    },
+    "favicon-generator": {
+      "name": "Generatore di Favicon",
+      "shortDescription": "Genera tutte le dimensioni di favicon da una singola immagine."
+    },
+    "slug-generator": {
+      "name": "Generatore di Slug",
+      "shortDescription": "Converti i titoli in slug URL puliti e ottimizzati per la SEO."
+    },
+    "html-minifier": {
+      "name": "Minificatore HTML",
+      "shortDescription": "Minimizza e abbellisci il codice HTML per prestazioni migliori."
+    },
+    "css-minifier": {
+      "name": "Minificatore CSS",
+      "shortDescription": "Minimizza e abbellisci i fogli di stile CSS."
+    },
+    "js-minifier": {
+      "name": "Minificatore JavaScript",
+      "shortDescription": "Minimizza e abbellisci il codice JavaScript."
+    },
+    "qr-code-generator": {
+      "name": "Generatore di Codici QR",
+      "shortDescription": "Genera codici QR personalizzabili in PNG e SVG."
+    }
   }
 }

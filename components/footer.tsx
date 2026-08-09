@@ -34,23 +34,29 @@ export function Footer({ dict, lang }: { dict?: any; lang: string }) {
           </div>
 
           {/* Tool Categories */}
-          {["Meta Tags", "Technical SEO", "Code"].map((cat) => (
+          {categories.map((cat) => {
+            const translatedCat = dict?.categoriesMap?.[cat] || cat;
+            return (
             <div key={cat}>
-              <h3 className="mb-3 text-sm font-semibold">{cat}</h3>
+              <h3 className="mb-3 text-sm font-semibold">{translatedCat}</h3>
               <ul className="space-y-2">
-                {getToolsByCategory(cat as any).map((tool) => (
+                {getToolsByCategory(cat as any).map((tool) => {
+                  const translatedName = dict?.toolsMap?.[tool.slug]?.name || tool.name;
+                  return (
                   <li key={tool.slug}>
                     <Link
                       href={`/${lang}/${tool.slug}`}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {tool.name}
+                      {translatedName}
                     </Link>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
             </div>
-          ))}
+            )
+          })}
         </div>
 
         <Separator className="my-8" />
@@ -64,25 +70,25 @@ export function Footer({ dict, lang }: { dict?: any; lang: string }) {
               href={`/${lang}/about`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.about || "About"}
+              {dict?.navigation?.about || "About"}
             </Link>
             <Link
               href={`/${lang}/contact`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.contact || "Contact"}
+              {dict?.navigation?.contact || "Contact"}
             </Link>
             <Link
               href={`/${lang}/privacy`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.privacy || "Privacy Policy"}
+              {dict?.navigation?.privacy || "Privacy Policy"}
             </Link>
             <Link
               href={`/${lang}/terms`}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.terms || "Terms of Service"}
+              {dict?.navigation?.terms || "Terms of Service"}
             </Link>
           </div>
         </div>
