@@ -292,6 +292,70 @@
           "answer": "Es la URL representativa de un grupo de páginas duplicadas."
         }
       ]
+    },
+    "css_minifier": {
+      "inputLabel": "Entrada CSS",
+      "inputPlaceholder": "/* Pega tu CSS aquí */",
+      "minifyBtn": "Minificar CSS",
+      "outputLabel": "CSS Minificado",
+      "statsPrefix": "Minificado de",
+      "seoTips": [
+        "Minificar CSS reduce el tamaño del archivo y mejora la velocidad."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es la minificación CSS?",
+          "answer": "Elimina espacios y comentarios del código CSS."
+        }
+      ]
+    },
+    "html_minifier": {
+      "inputLabel": "Entrada HTML",
+      "inputPlaceholder": "<!-- Pega tu HTML aquí -->",
+      "minifyBtn": "Minificar HTML",
+      "outputLabel": "HTML Minificado",
+      "statsPrefix": "Minificado de",
+      "seoTips": [
+        "Minificar HTML disminuye el tiempo de carga."
+      ],
+      "faqs": [
+        {
+          "question": "¿Por qué minificar HTML?",
+          "answer": "Para reducir el tamaño de la página."
+        }
+      ]
+    },
+    "js_minifier": {
+      "inputLabel": "Entrada JavaScript",
+      "inputPlaceholder": "// Pega tu JavaScript aquí",
+      "minifyBtn": "Minificar JavaScript",
+      "outputLabel": "JavaScript Minificado",
+      "statsPrefix": "Minificado de",
+      "seoTips": [
+        "Los archivos JS grandes pueden bloquear el renderizado."
+      ],
+      "faqs": [
+        {
+          "question": "¿Minificar JS rompe el código?",
+          "answer": "No, elimina espacios de forma segura."
+        }
+      ]
+    },
+    "favicon_generator": {
+      "configTitle": "Subir y Configurar",
+      "uploadLabel": "Seleccionar Imagen",
+      "previewTitle": "Vista Previa del Favicon",
+      "generateBtn": "Generar Favicons",
+      "generatedCode": "Etiquetas HTML",
+      "seoTips": [
+        "Un favicon ayuda a los usuarios a identificar tu sitio."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué tamaños se generan?",
+          "answer": "Tamaños estándar de 16x16, 32x32 y Apple Touch."
+        }
+      ]
     }
   },
   "legal": {

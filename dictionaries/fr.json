@@ -285,6 +285,70 @@
           "answer": "C'est l'URL représentative d'une page."
         }
       ]
+    },
+    "css_minifier": {
+      "inputLabel": "Entrée CSS",
+      "inputPlaceholder": "/* Collez votre CSS ici */",
+      "minifyBtn": "Minifier CSS",
+      "outputLabel": "CSS Minifié",
+      "statsPrefix": "Minifié de",
+      "seoTips": [
+        "La minification CSS réduit la taille du fichier."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce que la minification CSS ?",
+          "answer": "Elle supprime les espaces et commentaires."
+        }
+      ]
+    },
+    "html_minifier": {
+      "inputLabel": "Entrée HTML",
+      "inputPlaceholder": "<!-- Collez votre HTML ici -->",
+      "minifyBtn": "Minifier HTML",
+      "outputLabel": "HTML Minifié",
+      "statsPrefix": "Minifié de",
+      "seoTips": [
+        "Minifier le HTML améliore la vitesse."
+      ],
+      "faqs": [
+        {
+          "question": "Pourquoi minifier le HTML ?",
+          "answer": "Pour réduire le poids de la page."
+        }
+      ]
+    },
+    "js_minifier": {
+      "inputLabel": "Entrée JavaScript",
+      "inputPlaceholder": "// Collez votre JS ici",
+      "minifyBtn": "Minifier JavaScript",
+      "outputLabel": "JS Minifié",
+      "statsPrefix": "Minifié de",
+      "seoTips": [
+        "Les gros fichiers JS bloquent le rendu."
+      ],
+      "faqs": [
+        {
+          "question": "La minification casse-t-elle le code ?",
+          "answer": "Non, c'est sécurisé."
+        }
+      ]
+    },
+    "favicon_generator": {
+      "configTitle": "Uploader et Configurer",
+      "uploadLabel": "Sélectionner une Image",
+      "previewTitle": "Aperçu du Favicon",
+      "generateBtn": "Générer les Favicons",
+      "generatedCode": "Balises HTML",
+      "seoTips": [
+        "Un favicon identifie votre site."
+      ],
+      "faqs": [
+        {
+          "question": "Quelles tailles sont générées ?",
+          "answer": "Tailles standards et Apple Touch."
+        }
+      ]
     }
   },
   "legal": {

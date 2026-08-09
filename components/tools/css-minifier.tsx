@@ -47,18 +47,22 @@ const faqs = [
   { question: "Can minified CSS cause issues?", answer: "No, minification only removes formatting. The CSS rules and their effects remain identical." },
 ];
 
-export function CSSMinifierTool() {
+export function CSSMinifierTool({ dict }: { dict?: any }) {
+  const t = dict?.tools_deep?.css_minifier || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
   return (
     <MinifierTool
       tool={tool}
       language="css"
       fileExtension="css"
       mimeType="text/css"
-      placeholder="body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n}"
+      placeholder={t.inputPlaceholder || "body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n}"}
       minify={minifyCSS}
       beautify={beautifyCSS}
-      seoTips={seoTips}
-      faqs={faqs}
+      seoTips={toolSeoTips}
+      faqs={toolFaqs}
+      dict={dict}
     />
   );
 }

@@ -37,10 +37,15 @@ function generateHTMLSnippet(): string {
 <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">`;
 }
 
-export function FaviconGeneratorTool() {
+export function FaviconGeneratorTool({ dict }: { dict?: any }) {
   const [image, setImage] = useState<string | null>(null);
   const [previews, setPreviews] = useState<{ size: number; dataUrl: string }[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.favicon_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -109,9 +114,9 @@ export function FaviconGeneratorTool() {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
-        <CardHeader><CardTitle className="text-lg">Upload Image</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-lg">{t.configTitle || "Upload Image"}</CardTitle></CardHeader>
         <CardContent>
           <div
             onClick={() => fileRef.current?.click()}
@@ -125,8 +130,8 @@ export function FaviconGeneratorTool() {
               </div>
             )}
             <div className="text-center">
-              <p className="font-medium">{image ? "Click to change image" : "Click to upload an image"}</p>
-              <p className="text-sm text-muted-foreground">PNG, JPG, SVG — any size</p>
+              <p className="font-medium">{image ? (t.changeImage || "Click to change image") : (t.uploadImage || "Click to upload an image")}</p>
+              <p className="text-sm text-muted-foreground">PNG, JPG, SVG — {t.anySize || "any size"}</p>
             </div>
           </div>
           <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
@@ -141,7 +146,7 @@ export function FaviconGeneratorTool() {
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <ImageIcon className="h-5 w-5" /> {image ? "Generate Favicons" : "Upload Image to Generate Favicons"}
+            <ImageIcon className="h-5 w-5" /> {image ? (t.generateBtn || "Generate Favicons") : (t.uploadBtn || "Upload Image to Generate Favicons")}
           </Button>
         </CardContent>
       </Card>
@@ -150,9 +155,9 @@ export function FaviconGeneratorTool() {
         <>
           <Card className="mt-6">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">Generated Favicons</CardTitle>
+              <CardTitle className="text-lg">{t.previewTitle || "Generated Favicons"}</CardTitle>
               <Button onClick={downloadAll} className="gap-2">
-                <Download className="h-4 w-4" /> Download ZIP
+                <Download className="h-4 w-4" /> {t.downloadZip || "Download ZIP"}
               </Button>
             </CardHeader>
             <CardContent>
@@ -167,7 +172,7 @@ export function FaviconGeneratorTool() {
                       <img src={p.dataUrl} alt={`${p.size}x${p.size}`} className="max-h-full max-w-full" style={{ imageRendering: p.size < 32 ? "pixelated" : "auto" }} />
                     </div>
                     <p className="text-xs font-medium">{p.size}×{p.size}</p>
-                    <p className="text-xs text-muted-foreground">Click to download</p>
+                    <p className="text-xs text-muted-foreground">{t.clickDownload || "Click to download"}</p>
                   </div>
                 ))}
               </div>
@@ -175,9 +180,9 @@ export function FaviconGeneratorTool() {
           </Card>
 
           <div className="mt-6 space-y-4">
-            <CodePreview code={generateHTMLSnippet()} language="html" label="HTML to add in <head>" />
+            <CodePreview code={generateHTMLSnippet()} language="html" label={t.generatedCode || "HTML to add in <head>"} />
             <div className="flex gap-2">
-              <CopyButton text={generateHTMLSnippet()} label="Copy HTML" />
+              <CopyButton text={generateHTMLSnippet()} label={ui.copy || "Copy HTML"} />
               <ResetButton onReset={() => { setImage(null); setPreviews([]); }} />
             </div>
           </div>

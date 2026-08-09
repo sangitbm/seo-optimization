@@ -53,18 +53,22 @@ const faqs = [
   { question: "Is it safe to minify HTML?", answer: "Yes, minification only removes unnecessary whitespace and comments. It doesn't change the functionality of your HTML." },
 ];
 
-export function HTMLMinifierTool() {
+export function HTMLMinifierTool({ dict }: { dict?: any }) {
+  const t = dict?.tools_deep?.html_minifier || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
   return (
     <MinifierTool
       tool={tool}
       language="html"
       fileExtension="html"
       mimeType="text/html"
-      placeholder='<div class="container">\n  <h1>Hello World</h1>\n  <p>This is a paragraph.</p>\n</div>'
+      placeholder={t.inputPlaceholder || '<div class="container">\n  <h1>Hello World</h1>\n  <p>This is a paragraph.</p>\n</div>'}
       minify={minifyHTML}
       beautify={beautifyHTML}
-      seoTips={seoTips}
-      faqs={faqs}
+      seoTips={toolSeoTips}
+      faqs={toolFaqs}
+      dict={dict}
     />
   );
 }

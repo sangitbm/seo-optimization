@@ -70,18 +70,22 @@ const faqs = [
   { question: "Does JS minification affect functionality?", answer: "Basic minification (removing whitespace and comments) does not change functionality. Advanced minification (variable renaming) can sometimes cause issues with certain code patterns." },
 ];
 
-export function JSMinifierTool() {
+export function JSMinifierTool({ dict }: { dict?: any }) {
+  const t = dict?.tools_deep?.js_minifier || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
   return (
     <MinifierTool
       tool={tool}
       language="javascript"
       fileExtension="js"
       mimeType="application/javascript"
-      placeholder='function greet(name) {\n  // Say hello\n  console.log("Hello, " + name + "!");\n}'
+      placeholder={t.inputPlaceholder || 'function greet(name) {\n  // Say hello\n  console.log("Hello, " + name + "!");\n}'}
       minify={minifyJS}
       beautify={beautifyJS}
-      seoTips={seoTips}
-      faqs={faqs}
+      seoTips={toolSeoTips}
+      faqs={toolFaqs}
+      dict={dict}
     />
   );
 }

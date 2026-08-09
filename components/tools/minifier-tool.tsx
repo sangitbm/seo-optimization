@@ -25,6 +25,7 @@ interface MinifierProps {
   beautify: (input: string) => string;
   seoTips: string[];
   faqs: { question: string; answer: string }[];
+  dict?: any;
 }
 
 export function MinifierTool({
@@ -37,9 +38,13 @@ export function MinifierTool({
   beautify,
   seoTips,
   faqs,
+  dict,
 }: MinifierProps) {
   const [input, setInput] = useState("");
   const [mode, setMode] = useState<"minify" | "beautify">("minify");
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.[tool.slug.replace(/-/g, '_')] || {};
 
   const output = input ? (mode === "minify" ? minify(input) : beautify(input)) : "";
   const inputSize = new Blob([input]).size;
@@ -51,7 +56,7 @@ export function MinifierTool({
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Input {language.toUpperCase()}</CardTitle>
+            <CardTitle className="text-lg">{t.inputLabel || `Input ${language.toUpperCase()}`}</CardTitle>
             <Tabs value={mode} onValueChange={(v) => setMode(v as "minify" | "beautify")}>
               <TabsList>
                 <TabsTrigger value="minify">Minify</TabsTrigger>
@@ -65,16 +70,16 @@ export function MinifierTool({
           <Button
             onClick={() => {
               if (!input.trim()) {
-                toast.error("Please paste some code first");
+                toast.error(t.errorEmpty || "Please paste some code first");
                 return;
               }
-              toast.success(mode === "minify" ? "Code minified successfully!" : "Code beautified successfully!");
+              toast.success(mode === "minify" ? (t.successMinify || "Code minified successfully!") : (t.successBeautify || "Code beautified successfully!"));
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
           >
             {mode === "minify" ? <Zap className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
-            {mode === "minify" ? `Minify ${language.toUpperCase()}` : `Beautify ${language.toUpperCase()}`}
+            {mode === "minify" ? (t.minifyBtn || `Minify ${language.toUpperCase()}`) : `Beautify ${language.toUpperCase()}`}
           </Button>
         </CardContent>
       </Card>
@@ -92,11 +97,11 @@ export function MinifierTool({
             )}
           </div>
 
-          <CodePreview code={output} language={language} label={`${mode === "minify" ? "Minified" : "Beautified"} Output`} />
+          <CodePreview code={output} language={language} label={`${mode === "minify" ? (t.outputLabel || "Minified") : "Beautified"} Output`} />
 
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={output} label="Copy" />
-            <DownloadButton content={output} filename={`output.${fileExtension}`} mimeType={mimeType} label={`Download .${fileExtension}`} />
+            <CopyButton text={output} label={ui.copy || "Copy"} />
+            <DownloadButton content={output} filename={`output.${fileExtension}`} mimeType={mimeType} label={ui.download || `Download .${fileExtension}`} />
             <ResetButton onReset={() => setInput("")} />
           </div>
         </div>

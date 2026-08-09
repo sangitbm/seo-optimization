@@ -294,6 +294,74 @@
           "answer": "A canonical URL is the URL of the best representative page from a group of duplicate pages."
         }
       ]
+    },
+    "css_minifier": {
+      "inputLabel": "CSS Input",
+      "inputPlaceholder": "/* Paste your CSS here */\n.example {\n  color: red;\n}",
+      "minifyBtn": "Minify CSS",
+      "outputLabel": "Minified CSS",
+      "statsPrefix": "Minified from",
+      "seoTips": [
+        "Minifying CSS reduces file size and improves page load speed.",
+        "Faster load times are a positive ranking factor for Google."
+      ],
+      "faqs": [
+        {
+          "question": "What is CSS minification?",
+          "answer": "It removes whitespace, comments, and unnecessary characters from CSS code without changing its functionality."
+        }
+      ]
+    },
+    "html_minifier": {
+      "inputLabel": "HTML Input",
+      "inputPlaceholder": "<!-- Paste your HTML here -->\n<div class=\"example\">\n  <p>Hello World</p>\n</div>",
+      "minifyBtn": "Minify HTML",
+      "outputLabel": "Minified HTML",
+      "statsPrefix": "Minified from",
+      "seoTips": [
+        "Minifying HTML can significantly decrease your Time to First Byte (TTFB).",
+        "Smaller HTML payloads reduce bandwidth usage and improve SEO."
+      ],
+      "faqs": [
+        {
+          "question": "Why minify HTML?",
+          "answer": "To reduce page size and improve loading speed."
+        }
+      ]
+    },
+    "js_minifier": {
+      "inputLabel": "JavaScript Input",
+      "inputPlaceholder": "// Paste your JavaScript here\nfunction example() {\n  console.log('Hello World');\n}",
+      "minifyBtn": "Minify JavaScript",
+      "outputLabel": "Minified JavaScript",
+      "statsPrefix": "Minified from",
+      "seoTips": [
+        "Large JavaScript files can block rendering. Always minify them.",
+        "Combine and minify JS files to reduce HTTP requests."
+      ],
+      "faqs": [
+        {
+          "question": "Does minifying JS break code?",
+          "answer": "No, minification safely removes spaces and shortens variables without altering the logic."
+        }
+      ]
+    },
+    "favicon_generator": {
+      "configTitle": "Upload & Configure",
+      "uploadLabel": "Select Image (PNG, JPG, SVG)",
+      "previewTitle": "Favicon Preview",
+      "generateBtn": "Generate Favicons",
+      "generatedCode": "HTML Tags",
+      "seoTips": [
+        "A favicon helps users easily identify your site in multiple browser tabs.",
+        "Google may display your favicon in mobile search results."
+      ],
+      "faqs": [
+        {
+          "question": "What sizes are generated?",
+          "answer": "Standard 16x16, 32x32, and Apple Touch Icon sizes."
+        }
+      ]
     }
   },
   "legal": {
