@@ -1,9 +1,10 @@
 "use client";
 
-import { Moon, Sun, Menu, X, Search } from "lucide-react";
+import { Moon, Sun, Menu, Globe, Search } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,14 +12,34 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { categories, getToolsByCategory } from "@/lib/tools-data";
+import { i18n } from "@/i18n-config";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => setMounted(true), []);
+
+  const switchLanguage = (newLocale: string) => {
+    if (!pathname) return;
+    const segments = pathname.split('/');
+    if (i18n.locales.includes(segments[1] as any)) {
+      segments[1] = newLocale;
+      router.push(segments.join('/'));
+    }
+  };
+
+  const currentLocale = pathname ? pathname.split('/')[1] : i18n.defaultLocale;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
@@ -57,7 +78,7 @@ export function Header() {
             FAQ
           </Link>
           <Link
-            href="/#about"
+            href="/about"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             About
@@ -66,6 +87,30 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          {/* Language Switcher */}
+          {mounted && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-accent transition-colors">
+                <Globe className="h-4 w-4" />
+                <span className="sr-only">Switch language</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("en")}
+                  className={currentLocale === "en" ? "bg-accent" : ""}
+                >
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => switchLanguage("es")}
+                  className={currentLocale === "es" ? "bg-accent" : ""}
+                >
+                  Español
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
           {mounted && (
             <Button
               variant="ghost"
@@ -112,7 +157,7 @@ export function Header() {
                     {getToolsByCategory(cat).map((tool) => (
                       <Link
                         key={tool.slug}
-                        href={`/${tool.slug}`}
+                        href={`/${currentLocale}/${tool.slug}`}
                         onClick={() => setMobileOpen(false)}
                         className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent"
                       >

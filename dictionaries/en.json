@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Home",
+    "tools": "Tools",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "hero": {
+    "title": "The Ultimate Collection of",
+    "titleHighlight": "Free SEO Tools",
+    "subtitle": "Boost your website's search rankings with our suite of developer-friendly SEO utilities. No sign-up required. Runs entirely in your browser.",
+    "ctaPrimary": "Browse Tools",
+    "ctaSecondary": "View on GitHub"
+  },
+  "search": {
+    "placeholder": "Search 17+ SEO tools..."
+  },
+  "categories": {
+    "popular": "Popular Tools",
+    "popularDesc": "Our most-used SEO utilities",
+    "all": "All Tools",
+    "allDesc": "Search and filter our complete collection of SEO tools",
+    "recent": "Recently Added",
+    "recentDesc": "The latest additions to our toolkit"
+  }
+}

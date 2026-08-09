@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos"
+  },
+  "hero": {
+    "title": "La Colección Definitiva de",
+    "titleHighlight": "Herramientas SEO Gratuitas",
+    "subtitle": "Mejora el posicionamiento de tu sitio web con nuestra suite de utilidades SEO para desarrolladores. Sin registro. Se ejecuta completamente en tu navegador.",
+    "ctaPrimary": "Explorar Herramientas",
+    "ctaSecondary": "Ver en GitHub"
+  },
+  "search": {
+    "placeholder": "Buscar 17+ herramientas SEO..."
+  },
+  "categories": {
+    "popular": "Herramientas Populares",
+    "popularDesc": "Nuestras utilidades SEO más utilizadas",
+    "all": "Todas las Herramientas",
+    "allDesc": "Busca y filtra nuestra colección completa de herramientas SEO",
+    "recent": "Añadidos Recientemente",
+    "recentDesc": "Las últimas incorporaciones a nuestro conjunto de herramientas"
+  }
+}
