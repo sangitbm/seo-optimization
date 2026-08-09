@@ -41,7 +41,7 @@ export async function generateMetadata({
     },
     description:
       "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, robots.txt, and more. No sign-up required.",
-    metadataBase: new URL("https://seo-utilities.com"),
+    metadataBase: new URL("https://seoopti.vercel.app"),
     alternates: {
       canonical: `/${lang}`,
       languages: languages,
@@ -50,7 +50,7 @@ export async function generateMetadata({
       title: "SEO Utilities — Free Online SEO Tools",
       description:
         "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, and more.",
-      url: `https://seo-utilities.com/${lang}`,
+      url: `https://seoopti.vercel.app/${lang}`,
       siteName: "SEO Utilities",
       type: "website",
       locale: lang === "es" ? "es_ES" : "en_US",
@@ -144,22 +144,22 @@ export default async function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://seo-utilities.com/#website",
-                  "url": "https://seo-utilities.com",
+                  "@id": "https://seoopti.vercel.app/#website",
+                  "url": "https://seoopti.vercel.app",
                   "name": "SEO Utilities",
                   "description": "Free online SEO tools for developers and marketers.",
                   "publisher": {
-                    "@id": "https://seo-utilities.com/#organization"
+                    "@id": "https://seoopti.vercel.app/#organization"
                   }
                 },
                 {
                   "@type": "Organization",
-                  "@id": "https://seo-utilities.com/#organization",
+                  "@id": "https://seoopti.vercel.app/#organization",
                   "name": "SEO Utilities",
-                  "url": "https://seo-utilities.com",
+                  "url": "https://seoopti.vercel.app",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://seo-utilities.com/favicon.ico"
+                    "url": "https://seoopti.vercel.app/favicon.ico"
                   }
                 }
               ]

@@ -1,6 +1,6 @@
 import { type Tool, tools } from "./tools-data";
 
-const SITE_URL = "https://seo-utilities.com";
+const SITE_URL = "https://seoopti.vercel.app";
 const SITE_NAME = "SEO Utilities";
 
 export function createMetadata({

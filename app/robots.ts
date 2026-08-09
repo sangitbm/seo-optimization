@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://seo-utilities.com/sitemap.xml",
+    sitemap: "https://seoopti.vercel.app/sitemap.xml",
   };
 }

@@ -5,7 +5,7 @@ import { getBlogPosts } from "@/lib/blog";
 import fs from "fs";
 import path from "path";
 
-const BASE_URL = "https://seo-utilities.com";
+const BASE_URL = "https://seoopti.vercel.app";
 
 function getBlogPostLastModified(slug: string, locale: string): Date {
   try {
