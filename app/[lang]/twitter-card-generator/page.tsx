@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { TwitterCardGeneratorTool } from "@/components/tools/twitter-card-generator";
 
 const tool = getToolBySlug("twitter-card-generator")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

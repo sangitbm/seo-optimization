@@ -4,7 +4,10 @@ import { MetaTagGeneratorTool } from "@/components/tools/meta-tag-generator";
 
 const tool = getToolBySlug("meta-tag-generator")!;
 
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

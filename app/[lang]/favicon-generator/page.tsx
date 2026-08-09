@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { FaviconGeneratorTool } from "@/components/tools/favicon-generator";
 
 const tool = getToolBySlug("favicon-generator")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

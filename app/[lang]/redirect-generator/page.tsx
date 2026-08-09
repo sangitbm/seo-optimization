@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { RedirectGeneratorTool } from "@/components/tools/redirect-generator";
 
 const tool = getToolBySlug("redirect-generator")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

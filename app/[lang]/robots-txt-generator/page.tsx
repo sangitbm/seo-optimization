@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { RobotsTxtGeneratorTool } from "@/components/tools/robots-txt-generator";
 
 const tool = getToolBySlug("robots-txt-generator")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

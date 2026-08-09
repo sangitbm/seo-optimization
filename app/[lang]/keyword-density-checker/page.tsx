@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { KeywordDensityCheckerTool } from "@/components/tools/keyword-density-checker";
 
 const tool = getToolBySlug("keyword-density-checker")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

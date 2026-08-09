@@ -99,12 +99,56 @@ export default async function RootLayout({
             <Toaster richColors position="bottom-right" />
           </AdProvider>
         </ThemeProvider>
-        {/* AdSense — must be outside <head> to avoid the data-nscript conflict */}
+        {/* AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4705897632786514"
           crossOrigin="anonymous"
           strategy="afterInteractive"
+        />
+        {/* Google Analytics 4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
+        {/* JSON-LD Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://seo-utilities.com/#website",
+                  "url": "https://seo-utilities.com",
+                  "name": "SEO Utilities",
+                  "description": "Free online SEO tools for developers and marketers.",
+                  "publisher": {
+                    "@id": "https://seo-utilities.com/#organization"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://seo-utilities.com/#organization",
+                  "name": "SEO Utilities",
+                  "url": "https://seo-utilities.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://seo-utilities.com/favicon.ico"
+                  }
+                }
+              ]
+            })
+          }}
         />
       </body>
     </html>

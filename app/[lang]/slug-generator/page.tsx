@@ -3,7 +3,10 @@ import { getToolBySlug } from "@/lib/tools-data";
 import { SlugGeneratorTool } from "@/components/tools/slug-generator";
 
 const tool = getToolBySlug("slug-generator")!;
-export const metadata = createToolMetadata(tool);
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return createToolMetadata(tool, lang);
+}
 
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/i18n-config";

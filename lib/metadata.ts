@@ -8,13 +8,16 @@ export function createMetadata({
   description,
   slug,
   noIndex = false,
+  lang,
 }: {
   title: string;
   description: string;
   slug?: string;
   noIndex?: boolean;
+  lang?: string;
 }) {
-  const url = slug ? `${SITE_URL}/${slug}` : SITE_URL;
+  const path = slug ? (lang ? `/${lang}/${slug}` : `/${slug}`) : (lang ? `/${lang}` : "");
+  const url = `${SITE_URL}${path}`;
 
   return {
     title: slug ? `${title} — Free Online Tool | ${SITE_NAME}` : title,
@@ -29,7 +32,7 @@ export function createMetadata({
       url,
       siteName: SITE_NAME,
       type: "website",
-      locale: "en_US",
+      locale: lang === "es" ? "es_ES" : lang === "fr" ? "fr_FR" : lang === "de" ? "de_DE" : lang === "it" ? "it_IT" : lang === "pt" ? "pt_PT" : "en_US",
     },
     twitter: {
       card: "summary_large_image" as const,
@@ -39,11 +42,12 @@ export function createMetadata({
   };
 }
 
-export function createToolMetadata(tool: Tool) {
+export function createToolMetadata(tool: Tool, lang: string) {
   return createMetadata({
     title: tool.name,
     description: tool.description,
     slug: tool.slug,
+    lang,
   });
 }
 
