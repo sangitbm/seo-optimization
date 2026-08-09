@@ -144,8 +144,14 @@ const faqs = [
   },
 ];
 
-export function MetaTagGeneratorTool() {
+export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState<MetaState>(defaultState);
+  
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.meta_tag_generator || {};
+  
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const update = (key: keyof MetaState, value: string) => {
     setState((prev) => ({ ...prev, [key]: value }));
@@ -154,26 +160,26 @@ export function MetaTagGeneratorTool() {
   const output = generateHTML(state);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Tabs defaultValue="basic" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="basic">Basic</TabsTrigger>
-          <TabsTrigger value="opengraph">Open Graph</TabsTrigger>
-          <TabsTrigger value="twitter">Twitter Card</TabsTrigger>
+          <TabsTrigger value="basic">{t.basic || "Basic"}</TabsTrigger>
+          <TabsTrigger value="opengraph">{t.openGraph || "Open Graph"}</TabsTrigger>
+          <TabsTrigger value="twitter">{t.twitterCard || "Twitter Card"}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="basic" className="space-y-4 mt-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Basic Meta Tags</CardTitle>
+              <CardTitle className="text-lg">{t.basicTitle || "Basic Meta Tags"}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="meta-title">Title</Label>
+                  <Label htmlFor="meta-title">{t.titleLabel || "Title"}</Label>
                   <Input
                     id="meta-title"
-                    placeholder="My Website Title"
+                    placeholder={t.titlePlaceholder || "My Website Title"}
                     value={state.title}
                     onChange={(e) => update("title", e.target.value)}
                   />
@@ -182,20 +188,20 @@ export function MetaTagGeneratorTool() {
                   </p>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="meta-canonical">Canonical URL</Label>
+                  <Label htmlFor="meta-canonical">{t.canonicalLabel || "Canonical URL"}</Label>
                   <Input
                     id="meta-canonical"
-                    placeholder="https://example.com/page"
+                    placeholder={t.canonicalPlaceholder || "https://example.com/page"}
                     value={state.canonicalUrl}
                     onChange={(e) => update("canonicalUrl", e.target.value)}
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="meta-description">Description</Label>
+                <Label htmlFor="meta-description">{t.descriptionLabel || "Description"}</Label>
                 <Textarea
                   id="meta-description"
-                  placeholder="A brief description of your page..."
+                  placeholder={t.descriptionPlaceholder || "A brief description of your page..."}
                   value={state.description}
                   onChange={(e) => update("description", e.target.value)}
                   rows={3}
@@ -205,17 +211,17 @@ export function MetaTagGeneratorTool() {
                 </p>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="meta-keywords">Keywords</Label>
+                <Label htmlFor="meta-keywords">{t.keywordsLabel || "Keywords"}</Label>
                 <Input
                   id="meta-keywords"
-                  placeholder="seo, tools, generator"
+                  placeholder={t.keywordsPlaceholder || "seo, tools, generator"}
                   value={state.keywords}
                   onChange={(e) => update("keywords", e.target.value)}
                 />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="meta-robots">Robots</Label>
+                  <Label htmlFor="meta-robots">{t.robotsLabel || "Robots"}</Label>
                   <Select
                     value={state.robots}
                     onValueChange={(v) => update("robots", v)}
@@ -255,21 +261,21 @@ export function MetaTagGeneratorTool() {
         <TabsContent value="opengraph" className="space-y-4 mt-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Open Graph Tags</CardTitle>
+              <CardTitle className="text-lg">{t.openGraph || "Open Graph Tags"}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="og-title">OG Title</Label>
+                  <Label htmlFor="og-title">{t.ogTitleLabel || "OG Title"}</Label>
                   <Input
                     id="og-title"
-                    placeholder="Leave empty to use page title"
+                    placeholder={t.ogTitlePlaceholder || "Leave empty to use page title"}
                     value={state.ogTitle}
                     onChange={(e) => update("ogTitle", e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="og-type">OG Type</Label>
+                  <Label htmlFor="og-type">{t.ogTypeLabel || "OG Type"}</Label>
                   <Select
                     value={state.ogType}
                     onValueChange={(v) => update("ogType", v)}
@@ -287,10 +293,10 @@ export function MetaTagGeneratorTool() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="og-description">OG Description</Label>
+                <Label htmlFor="og-description">{t.ogDescriptionLabel || "OG Description"}</Label>
                 <Textarea
                   id="og-description"
-                  placeholder="Leave empty to use page description"
+                  placeholder={t.ogDescriptionPlaceholder || "Leave empty to use page description"}
                   value={state.ogDescription}
                   onChange={(e) => update("ogDescription", e.target.value)}
                   rows={3}
@@ -298,29 +304,29 @@ export function MetaTagGeneratorTool() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="og-url">OG URL</Label>
+                  <Label htmlFor="og-url">{t.ogUrlLabel || "OG URL"}</Label>
                   <Input
                     id="og-url"
-                    placeholder="https://example.com"
+                    placeholder={t.ogUrlPlaceholder || "https://example.com"}
                     value={state.ogUrl}
                     onChange={(e) => update("ogUrl", e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="og-site-name">Site Name</Label>
+                  <Label htmlFor="og-site-name">{t.siteNameLabel || "Site Name"}</Label>
                   <Input
                     id="og-site-name"
-                    placeholder="My Website"
+                    placeholder={t.siteNamePlaceholder || "My Website"}
                     value={state.ogSiteName}
                     onChange={(e) => update("ogSiteName", e.target.value)}
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="og-image">OG Image URL</Label>
+                <Label htmlFor="og-image">{t.ogImageLabel || "OG Image URL"}</Label>
                 <Input
                   id="og-image"
-                  placeholder="https://example.com/image.jpg"
+                  placeholder={t.ogImagePlaceholder || "https://example.com/image.jpg"}
                   value={state.ogImage}
                   onChange={(e) => update("ogImage", e.target.value)}
                 />
@@ -332,12 +338,12 @@ export function MetaTagGeneratorTool() {
         <TabsContent value="twitter" className="space-y-4 mt-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Twitter Card Tags</CardTitle>
+              <CardTitle className="text-lg">{t.twitterCard || "Twitter Card Tags"}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="twitter-card">Card Type</Label>
+                  <Label htmlFor="twitter-card">{t.cardTypeLabel || "Card Type"}</Label>
                   <Select
                     value={state.twitterCard}
                     onValueChange={(v) => update("twitterCard", v)}
@@ -354,39 +360,39 @@ export function MetaTagGeneratorTool() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="twitter-site">@username</Label>
+                  <Label htmlFor="twitter-site">{t.twitterSiteLabel || "@username"}</Label>
                   <Input
                     id="twitter-site"
-                    placeholder="@yourusername"
+                    placeholder={t.twitterSitePlaceholder || "@yourusername"}
                     value={state.twitterSite}
                     onChange={(e) => update("twitterSite", e.target.value)}
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="twitter-title">Twitter Title</Label>
+                <Label htmlFor="twitter-title">{t.twitterTitleLabel || "Twitter Title"}</Label>
                 <Input
                   id="twitter-title"
-                  placeholder="Leave empty to use page title"
+                  placeholder={t.twitterTitlePlaceholder || "Leave empty to use page title"}
                   value={state.twitterTitle}
                   onChange={(e) => update("twitterTitle", e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="twitter-description">Twitter Description</Label>
+                <Label htmlFor="twitter-description">{t.twitterDescriptionLabel || "Twitter Description"}</Label>
                 <Textarea
                   id="twitter-description"
-                  placeholder="Leave empty to use page description"
+                  placeholder={t.twitterDescriptionPlaceholder || "Leave empty to use page description"}
                   value={state.twitterDescription}
                   onChange={(e) => update("twitterDescription", e.target.value)}
                   rows={3}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="twitter-image">Twitter Image URL</Label>
+                <Label htmlFor="twitter-image">{t.twitterImageLabel || "Twitter Image URL"}</Label>
                 <Input
                   id="twitter-image"
-                  placeholder="Leave empty to use OG image"
+                  placeholder={t.twitterImagePlaceholder || "Leave empty to use OG image"}
                   value={state.twitterImage}
                   onChange={(e) => update("twitterImage", e.target.value)}
                 />
@@ -399,22 +405,22 @@ export function MetaTagGeneratorTool() {
       <Button
         onClick={() => {
           if (!state.title.trim() && !state.description.trim()) {
-            toast.error("Please enter a title or description first");
+            toast.error(t.errorEmpty || "Please enter a title or description first");
             return;
           }
-          toast.success("Meta Tags generated successfully!");
+          toast.success(t.successGen || "Meta Tags generated successfully!");
         }}
         size="lg"
         className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-6"
       >
-        <Sparkles className="h-5 w-5" /> Generate Meta Tags
+        <Sparkles className="h-5 w-5" /> {t.generateBtn || "Generate Meta Tags"}
       </Button>
 
       {/* Live Preview */}
       {state.title && (
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle className="text-lg">Google Search Preview</CardTitle>
+            <CardTitle className="text-lg">{t.googlePreview || "Google Search Preview"}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="rounded-lg border border-border bg-white p-4 dark:bg-zinc-950">
@@ -425,7 +431,7 @@ export function MetaTagGeneratorTool() {
                 {state.title}
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                {state.description || "No description provided."}
+                {state.description || t.noDescription || "No description provided."}
               </p>
             </div>
           </CardContent>
@@ -435,14 +441,14 @@ export function MetaTagGeneratorTool() {
       {/* Output */}
       {output && (
         <div className="mt-6 space-y-4">
-          <CodePreview code={output} language="html" label="Generated HTML" />
+          <CodePreview code={output} language="html" label={t.generatedHtml || "Generated HTML"} />
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={output} label="Copy HTML" />
+            <CopyButton text={output} label={ui.copy || "Copy HTML"} />
             <DownloadButton
               content={output}
               filename="meta-tags.html"
               mimeType="text/html"
-              label="Download HTML"
+              label={ui.download || "Download HTML"}
             />
             <ResetButton onReset={() => setState(defaultState)} />
           </div>

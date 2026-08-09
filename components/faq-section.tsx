@@ -40,20 +40,22 @@ const homeFAQs = [
   },
 ];
 
-export function FAQSection() {
+export function FAQSection({ dict }: { dict?: any }) {
+  const faqsToUse = dict?.faq?.questions || homeFAQs;
+
   return (
     <section id="faq" className="scroll-mt-20">
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Frequently Asked Questions
+          {dict?.faq?.title || "Frequently Asked Questions"}
         </h2>
         <p className="mt-3 text-lg text-muted-foreground">
-          Everything you need to know about SEO Utilities
+          {dict?.features?.subtitle || "Everything you need to know about SEO Utilities"}
         </p>
       </div>
       <div className="mx-auto max-w-3xl">
         <Accordion defaultValue={[]} className="w-full">
-          {homeFAQs.map((faq, i) => (
+          {faqsToUse.map((faq: { question: string; answer: string }, i: number) => (
             <AccordionItem key={i} value={`faq-${i}`}>
               <AccordionTrigger className="text-left text-base">
                 {faq.question}

@@ -103,5 +103,126 @@
       "name": "Générateur de QR Code",
       "shortDescription": "Générez des QR codes personnalisables en PNG et SVG."
     }
+  },
+  "ui": {
+    "copy": "Copier",
+    "download": "Télécharger",
+    "reset": "Réinitialiser",
+    "generate": "Générer",
+    "preview": "Aperçu",
+    "livePreview": "Aperçu en Direct",
+    "code": "Code",
+    "success": "Succès",
+    "error": "Erreur",
+    "required": "Requis",
+    "optional": "Optionnel"
+  },
+  "features": {
+    "title": "Pourquoi SEO Utilities ?",
+    "subtitle": "Conçu pour la vitesse, la confidentialité et l'expérience développeur",
+    "fast": {
+      "title": "Ultra Rapide",
+      "desc": "Tous les outils s'exécutent dans votre navigateur sans requête serveur. Résultats instantanés."
+    },
+    "private": {
+      "title": "100% Privé",
+      "desc": "Vos données ne quittent jamais votre navigateur. Pas de suivi, pas de stockage sur serveur."
+    },
+    "seo": {
+      "title": "Optimisé SEO",
+      "desc": "Chaque outil suit les meilleures pratiques SEO et génère un code conforme pour la production."
+    }
+  },
+  "faqTitle": "Questions Fréquentes",
+  "faq": {
+    "questions": [
+      {
+        "question": "Ces outils SEO sont-ils vraiment gratuits ?",
+        "answer": "Oui ! Tous les outils sont gratuits sans inscription. Nous soutenons le site par des publicités non intrusives."
+      },
+      {
+        "question": "Mes données sont-elles en sécurité ?",
+        "answer": "Absolument. Tous les outils s'exécutent dans votre navigateur. Nous n'envoyons jamais vos données sur nos serveurs. Votre contenu reste privé."
+      },
+      {
+        "question": "Quels outils SEO sont disponibles ?",
+        "answer": "Nous proposons plus de 17 outils, dont un générateur de balises Meta, un générateur de schémas, un générateur de sitemap, etc."
+      },
+      {
+        "question": "Puis-je utiliser ces outils pour des projets commerciaux ?",
+        "answer": "Oui, vous pouvez utiliser le code généré à n'importe quelle fin, y compris des projets commerciaux."
+      },
+      {
+        "question": "Comment améliorer le SEO de mon site ?",
+        "answer": "Commencez par de bonnes balises meta, ajoutez des données structurées, créez un sitemap et assurez-vous de configurer robots.txt."
+      },
+      {
+        "question": "Ces outils fonctionnent-ils sur mobile ?",
+        "answer": "Oui ! Tous les outils s'adaptent parfaitement aux mobiles et tablettes."
+      }
+    ]
+  },
+  "tools_deep": {
+    "meta_tag_generator": {
+      "basic": "Basique",
+      "openGraph": "Open Graph",
+      "twitterCard": "Twitter Card",
+      "basicTitle": "Balises Meta de Base",
+      "titleLabel": "Titre",
+      "titlePlaceholder": "Titre de mon site",
+      "canonicalLabel": "URL Canonique",
+      "canonicalPlaceholder": "https://exemple.com/page",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Une brève description de votre page...",
+      "keywordsLabel": "Mots-clés",
+      "keywordsPlaceholder": "seo, outils, générateur",
+      "robotsLabel": "Robots",
+      "themeColorLabel": "Couleur du Thème",
+      "ogTitleLabel": "Titre OG",
+      "ogTitlePlaceholder": "Laisser vide pour utiliser le titre de la page",
+      "ogTypeLabel": "Type OG",
+      "ogDescriptionLabel": "Description OG",
+      "ogDescriptionPlaceholder": "Laisser vide pour utiliser la description de la page",
+      "ogUrlLabel": "URL OG",
+      "ogUrlPlaceholder": "https://exemple.com",
+      "siteNameLabel": "Nom du Site",
+      "siteNamePlaceholder": "Mon Site Web",
+      "ogImageLabel": "URL de l'Image OG",
+      "ogImagePlaceholder": "https://exemple.com/image.jpg",
+      "cardTypeLabel": "Type de Carte",
+      "twitterSiteLabel": "@utilisateur",
+      "twitterSitePlaceholder": "@votreutilisateur",
+      "twitterTitleLabel": "Titre Twitter",
+      "twitterTitlePlaceholder": "Laisser vide pour utiliser le titre de la page",
+      "twitterDescriptionLabel": "Description Twitter",
+      "twitterDescriptionPlaceholder": "Laisser vide pour utiliser la description de la page",
+      "twitterImageLabel": "URL de l'Image Twitter",
+      "twitterImagePlaceholder": "Laisser vide pour utiliser l'image OG",
+      "generateBtn": "Générer les Balises Meta",
+      "googlePreview": "Aperçu Google Search",
+      "generatedHtml": "HTML Généré",
+      "seoTips": [
+        "Gardez votre balise titre entre 50 et 60 caractères pour un affichage optimal.",
+        "Rédigez des méta-descriptions de 150 à 160 caractères incluant votre mot-clé cible.",
+        "Utilisez des balises titre et description uniques pour chaque page.",
+        "Incluez votre mot-clé principal au début de votre balise titre.",
+        "Définissez toujours une URL canonique pour éviter le contenu dupliqué.",
+        "Utilisez des titres Open Graph descriptifs pour un meilleur partage social."
+      ],
+      "faqs": [
+        {
+          "question": "Que sont les balises meta et pourquoi sont-elles importantes ?",
+          "answer": "Les balises meta fournissent des métadonnées sur une page web pour aider les moteurs de recherche."
+        },
+        {
+          "question": "Quelle doit être la longueur de mon méta titre ?",
+          "answer": "Google affiche généralement les 50 à 60 premiers caractères."
+        },
+        {
+          "question": "Quelle est la longueur optimale d'une méta-description ?",
+          "answer": "Les méta-descriptions doivent compter entre 150 et 160 caractères."
+        }
+      ]
+    }
   }
 }

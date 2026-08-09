@@ -103,5 +103,126 @@
       "name": "Gerador de Código QR",
       "shortDescription": "Gere códigos QR personalizáveis em PNG e SVG."
     }
+  },
+  "ui": {
+    "copy": "Copiar",
+    "download": "Baixar",
+    "reset": "Redefinir",
+    "generate": "Gerar",
+    "preview": "Visualizar",
+    "livePreview": "Prévia ao Vivo",
+    "code": "Código",
+    "success": "Sucesso",
+    "error": "Erro",
+    "required": "Obrigatório",
+    "optional": "Opcional"
+  },
+  "features": {
+    "title": "Por que SEO Utilities?",
+    "subtitle": "Construído para velocidade, privacidade e experiência do desenvolvedor",
+    "fast": {
+      "title": "Ultra Rápido",
+      "desc": "Todas as ferramentas rodam no seu navegador sem idas ao servidor. Resultados instantâneos."
+    },
+    "private": {
+      "title": "100% Privado",
+      "desc": "Seus dados nunca saem do seu navegador. Sem rastreamento, sem armazenamento em servidor."
+    },
+    "seo": {
+      "title": "Otimizado para SEO",
+      "desc": "Cada ferramenta segue as melhores práticas de SEO e gera saídas prontas para produção."
+    }
+  },
+  "faqTitle": "Perguntas Frequentes",
+  "faq": {
+    "questions": [
+      {
+        "question": "Essas ferramentas SEO são realmente gratuitas?",
+        "answer": "Sim! Todas as ferramentas são totalmente gratuitas, sem necessidade de cadastro."
+      },
+      {
+        "question": "Meus dados estão seguros?",
+        "answer": "Absolutamente. Todas as ferramentas rodam no seu navegador. Nunca enviamos dados para nossos servidores."
+      },
+      {
+        "question": "Quais ferramentas SEO estão disponíveis?",
+        "answer": "Oferecemos mais de 17 ferramentas, incluindo Gerador de Meta Tags, Gerador de Schema, Gerador de Sitemap, etc."
+      },
+      {
+        "question": "Posso usar essas ferramentas em projetos comerciais?",
+        "answer": "Sim, você pode usar o código gerado para qualquer finalidade, incluindo projetos comerciais."
+      },
+      {
+        "question": "Como melhoro o SEO do meu site?",
+        "answer": "Comece com meta tags adequadas, adicione dados estruturados, crie um sitemap e garanta que o robots.txt esteja configurado corretamente."
+      },
+      {
+        "question": "Essas ferramentas funcionam em dispositivos móveis?",
+        "answer": "Sim! Todas as ferramentas são responsivas e funcionam perfeitamente no celular."
+      }
+    ]
+  },
+  "tools_deep": {
+    "meta_tag_generator": {
+      "basic": "Basic",
+      "openGraph": "Open Graph",
+      "twitterCard": "Twitter Card",
+      "basicTitle": "Basic Meta Tags",
+      "titleLabel": "Title",
+      "titlePlaceholder": "My Website Title",
+      "canonicalLabel": "Canonical URL",
+      "canonicalPlaceholder": "https://example.com/page",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "A brief description of your page...",
+      "keywordsLabel": "Keywords",
+      "keywordsPlaceholder": "seo, tools, generator",
+      "robotsLabel": "Robots",
+      "themeColorLabel": "Theme Color",
+      "ogTitleLabel": "OG Title",
+      "ogTitlePlaceholder": "Leave empty to use page title",
+      "ogTypeLabel": "OG Type",
+      "ogDescriptionLabel": "OG Description",
+      "ogDescriptionPlaceholder": "Leave empty to use page description",
+      "ogUrlLabel": "OG URL",
+      "ogUrlPlaceholder": "https://example.com",
+      "siteNameLabel": "Site Name",
+      "siteNamePlaceholder": "My Website",
+      "ogImageLabel": "OG Image URL",
+      "ogImagePlaceholder": "https://example.com/image.jpg",
+      "cardTypeLabel": "Card Type",
+      "twitterSiteLabel": "@username",
+      "twitterSitePlaceholder": "@yourusername",
+      "twitterTitleLabel": "Twitter Title",
+      "twitterTitlePlaceholder": "Leave empty to use page title",
+      "twitterDescriptionLabel": "Twitter Description",
+      "twitterDescriptionPlaceholder": "Leave empty to use page description",
+      "twitterImageLabel": "Twitter Image URL",
+      "twitterImagePlaceholder": "Leave empty to use OG image",
+      "generateBtn": "Generate Meta Tags",
+      "googlePreview": "Google Search Preview",
+      "generatedHtml": "Generated HTML",
+      "seoTips": [
+        "Keep your title tag between 50-60 characters for optimal display in search results.",
+        "Write meta descriptions of 150-160 characters that include your target keyword.",
+        "Use unique title and description tags for every page on your site.",
+        "Include your primary keyword near the beginning of your title tag.",
+        "Always set a canonical URL to prevent duplicate content issues.",
+        "Use descriptive, keyword-rich Open Graph titles for better social sharing."
+      ],
+      "faqs": [
+        {
+          "question": "What are meta tags and why are they important?",
+          "answer": "Meta tags are HTML elements that provide metadata about a web page. They help search engines understand your content."
+        },
+        {
+          "question": "How long should my meta title be?",
+          "answer": "Google typically displays the first 50-60 characters of a title tag. Keep your titles concise."
+        },
+        {
+          "question": "What is the optimal meta description length?",
+          "answer": "Meta descriptions should be between 150-160 characters."
+        }
+      ]
+    }
   }
 }

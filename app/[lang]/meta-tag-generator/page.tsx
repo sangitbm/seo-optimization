@@ -6,6 +6,11 @@ const tool = getToolBySlug("meta-tag-generator")!;
 
 export const metadata = createToolMetadata(tool);
 
-export default function MetaTagGeneratorPage() {
-  return <MetaTagGeneratorTool />;
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
+
+export default async function MetaTagGeneratorPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  return <MetaTagGeneratorTool dict={dict} />;
 }

@@ -96,31 +96,28 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <section id="about" className="scroll-mt-20 py-16">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Why SEO Utilities?
+              {dict?.features?.title || "Why SEO Utilities?"}
             </h2>
             <p className="mt-3 text-lg text-muted-foreground">
-              Built for speed, privacy, and developer experience
+              {dict?.features?.subtitle || "Built for speed, privacy, and developer experience"}
             </p>
           </div>
           <div className="grid gap-8 sm:grid-cols-3">
             {[
               {
                 icon: Zap,
-                title: "Lightning Fast",
-                description:
-                  "All tools run in your browser with zero server round-trips. Get instant results without waiting.",
+                title: dict?.features?.fast?.title || "Lightning Fast",
+                description: dict?.features?.fast?.desc || "All tools run in your browser with zero server round-trips. Get instant results without waiting.",
               },
               {
                 icon: Shield,
-                title: "100% Private",
-                description:
-                  "Your data never leaves your browser. No tracking, no storage, no server-side processing.",
+                title: dict?.features?.private?.title || "100% Private",
+                description: dict?.features?.private?.desc || "Your data never leaves your browser. No tracking, no storage, no server-side processing.",
               },
               {
                 icon: Globe,
-                title: "SEO Optimized",
-                description:
-                  "Every tool follows SEO best practices and generates standards-compliant output ready for production.",
+                title: dict?.features?.seo?.title || "SEO Optimized",
+                description: dict?.features?.seo?.desc || "Every tool follows SEO best practices and generates standards-compliant output ready for production.",
               },
             ].map((feature) => (
               <div
@@ -141,7 +138,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
         {/* FAQ */}
         <section className="py-16">
-          <FAQSection />
+          <FAQSection dict={dict} />
         </section>
       </div>
     </>
