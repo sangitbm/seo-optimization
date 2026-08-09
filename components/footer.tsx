@@ -59,18 +59,30 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} SEO Utilities. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex gap-6 flex-wrap justify-center">
             <Link
-              href="/#about"
-              className="text-sm text-muted-foreground hover:text-foreground"
+              href="/about"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               About
             </Link>
             <Link
-              href="/#faq"
-              className="text-sm text-muted-foreground hover:text-foreground"
+              href="/contact"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              FAQ
+              Contact
+            </Link>
+            <Link
+              href="/privacy"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Terms of Service
             </Link>
           </div>
         </div>

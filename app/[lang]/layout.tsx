@@ -1,0 +1,106 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import "../globals.css";
+import { i18n } from "../../i18n-config";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  
+  const languages = i18n.locales.reduce((acc, locale) => {
+    acc[locale] = `/${locale}`;
+    return acc;
+  }, {} as Record<string, string>);
+
+  return {
+    title: {
+      default: "SEO Utilities — Free Online SEO Tools",
+      template: "%s | SEO Utilities",
+    },
+    description:
+      "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, robots.txt, and more. No sign-up required.",
+    metadataBase: new URL("https://seo-utilities.com"),
+    alternates: {
+      canonical: `/${lang}`,
+      languages: languages,
+    },
+    openGraph: {
+      title: "SEO Utilities — Free Online SEO Tools",
+      description:
+        "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, and more.",
+      url: `https://seo-utilities.com/${lang}`,
+      siteName: "SEO Utilities",
+      type: "website",
+      locale: lang === "es" ? "es_ES" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "SEO Utilities — Free Online SEO Tools",
+      description:
+        "Free online SEO tools for developers and marketers. No sign-up required.",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      "google-adsense-account": "ca-pub-4705897632786514",
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}>) {
+  const { lang } = await params;
+
+  return (
+    <html
+      lang={lang}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <ThemeProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <Toaster richColors position="bottom-right" />
+        </ThemeProvider>
+        {/* AdSense — must be outside <head> to avoid the data-nscript conflict */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4705897632786514"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </body>
+    </html>
+  );
+}
