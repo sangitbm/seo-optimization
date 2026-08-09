@@ -17,6 +17,9 @@ import {
   Sparkles,
   Tag,
   MessageSquareShare,
+  Link2,
+  Type,
+  KeyRound,
 } from "lucide-react";
 
 export interface Tool {
@@ -272,6 +275,45 @@ export const tools: Tool[] = [
     dateAdded: "2025-05-15",
     popular: true,
   },
+  {
+    name: "UTM Link Builder",
+    slug: "utm-builder",
+    description:
+      "Generate custom Google Analytics UTM tracking links to track your marketing campaigns accurately. Build links for social media, email, and CPC campaigns.",
+    shortDescription:
+      "Create Google Analytics UTM tracking URLs.",
+    icon: Link2,
+    category: "Utilities",
+    keywords: ["utm builder", "utm tracking", "google analytics link", "campaign url builder"],
+    dateAdded: "2026-08-09",
+    popular: true,
+  },
+  {
+    name: "Word & Character Counter",
+    slug: "word-counter",
+    description:
+      "A fast, free online word counter, character counter, and keyword density analyzer. Perfect for writing meta descriptions, tweets, and SEO-optimized blog content.",
+    shortDescription:
+      "Count words, characters, and analyze keyword density.",
+    icon: Type,
+    category: "Content",
+    keywords: ["word counter", "character count", "letter counter", "text length"],
+    dateAdded: "2026-08-09",
+    popular: false,
+  },
+  {
+    name: "Password Generator",
+    slug: "password-generator",
+    description:
+      "Generate secure, random passwords instantly. Customize length, include symbols, numbers, and uppercase letters. Keep your online accounts safe from hackers.",
+    shortDescription:
+      "Create strong, secure random passwords instantly.",
+    icon: KeyRound,
+    category: "Utilities",
+    keywords: ["password generator", "strong password", "random password", "secure password"],
+    dateAdded: "2026-08-09",
+    popular: true,
+  }
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
