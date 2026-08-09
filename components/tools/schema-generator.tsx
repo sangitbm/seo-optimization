@@ -253,9 +253,14 @@ const faqs = [
   },
 ];
 
-export function SchemaGeneratorTool() {
+export function SchemaGeneratorTool({ dict }: { dict?: any }) {
   const [activeType, setActiveType] = useState<SchemaType>("Organization");
   const [data, setData] = useState<Record<string, Record<string, string>>>({});
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.schema_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const currentData = data[activeType] || {};
 
@@ -269,10 +274,10 @@ export function SchemaGeneratorTool() {
   const output = generateSchema(activeType, currentData);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Schema Type</CardTitle>
+          <CardTitle className="text-lg">{t.configTitle || "Schema Type"}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
@@ -319,22 +324,22 @@ export function SchemaGeneratorTool() {
           ))}
           <Button
             onClick={() => {
-              toast.success(`${activeType} Schema generated successfully!`);
+              toast.success(t.successGenerate || `${activeType} Schema generated successfully!`);
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-6"
           >
-            <Code2 className="h-5 w-5" /> Generate Schema Markup
+            <Code2 className="h-5 w-5" /> {t.generateBtn || "Generate Schema Markup"}
           </Button>
         </CardContent>
       </Card>
 
       <div className="mt-6 space-y-4">
-        <CodePreview code={output} language="json" label="JSON-LD Output" />
+        <CodePreview code={output} language="json" label={t.generatedCode || "JSON-LD Output"} />
         <div className="flex flex-wrap gap-2">
-          <CopyButton text={`<script type="application/ld+json">\n${output}\n</script>`} label="Copy with Script Tag" />
-          <CopyButton text={output} label="Copy JSON" variant="outline" />
-          <DownloadButton content={output} filename={`${activeType.toLowerCase()}-schema.json`} mimeType="application/json" label="Download JSON" />
+          <CopyButton text={`<script type="application/ld+json">\n${output}\n</script>`} label={ui.copy || "Copy with Script Tag"} />
+          <CopyButton text={output} label={t.copyJson || "Copy JSON"} variant="outline" />
+          <DownloadButton content={output} filename={`${activeType.toLowerCase()}-schema.json`} mimeType="application/json" label={ui.download || "Download JSON"} />
           <ResetButton onReset={() => setData((prev) => ({ ...prev, [activeType]: {} }))} />
         </div>
       </div>

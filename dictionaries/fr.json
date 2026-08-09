@@ -423,6 +423,95 @@
           "answer": "La partie lisible d'une URL."
         }
       ]
+    },
+    "meta_tag_preview": {
+      "configTitle": "Métadonnées",
+      "urlLabel": "URL",
+      "titleLabel": "Méta Titre",
+      "descLabel": "Méta Description",
+      "previewTitle": "Aperçu de la Recherche",
+      "desktopTab": "Bureau",
+      "mobileTab": "Mobile",
+      "seoTips": [
+        "Gardez les titres sous 60 caractères."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce que c'est ?",
+          "answer": "Simule l'apparence sur Google."
+        }
+      ]
+    },
+    "open_graph_generator": {
+      "configTitle": "Balises Open Graph",
+      "titleLabel": "Titre",
+      "descLabel": "Description",
+      "urlLabel": "URL",
+      "imageLabel": "URL de l'Image",
+      "typeLabel": "Type de Contenu",
+      "generateBtn": "Générer les Balises OG",
+      "generatedCode": "Balises Open Graph",
+      "seoTips": [
+        "Contrôle l'apparence sur Facebook."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce que l'Open Graph ?",
+          "answer": "Protocole pour le partage social."
+        }
+      ]
+    },
+    "redirect_generator": {
+      "configTitle": "Paramètres de Redirection",
+      "typeLabel": "Serveur",
+      "redirectTypeLabel": "Type",
+      "fromLabel": "De l'URL",
+      "toLabel": "À l'URL",
+      "generateBtn": "Générer la Redirection",
+      "generatedCode": "Code de Redirection",
+      "seoTips": [
+        "Utilisez les redirections 301 pour le SEO."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce qu'une redirection 301 ?",
+          "answer": "Redirection permanente."
+        }
+      ]
+    },
+    "schema_generator": {
+      "configTitle": "Type de Schema",
+      "typeLabel": "Sélectionner",
+      "generateBtn": "Générer le Schema",
+      "generatedCode": "Schema JSON-LD",
+      "seoTips": [
+        "Le JSON-LD est recommandé par Google."
+      ],
+      "faqs": [
+        {
+          "question": "Qu'est-ce que le Schema ?",
+          "answer": "Code pour enrichir les résultats de recherche."
+        }
+      ]
+    },
+    "twitter_card_generator": {
+      "configTitle": "Paramètres Twitter Card",
+      "cardTypeLabel": "Type",
+      "usernameLabel": "Utilisateur Twitter",
+      "titleLabel": "Titre",
+      "descLabel": "Description",
+      "imageLabel": "Image URL",
+      "generateBtn": "Générer Twitter Card",
+      "generatedCode": "Balises Twitter Card",
+      "seoTips": [
+        "Fait ressortir vos tweets."
+      ],
+      "faqs": [
+        {
+          "question": "Impact sur le SEO ?",
+          "answer": "Améliore le taux de clics social."
+        }
+      ]
     }
   },
   "legal": {

@@ -5,6 +5,11 @@ import { SchemaGeneratorTool } from "@/components/tools/schema-generator";
 const tool = getToolBySlug("schema-generator")!;
 export const metadata = createToolMetadata(tool);
 
-export default function SchemaGeneratorPage() {
-  return <SchemaGeneratorTool />;
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/i18n-config";
+
+export default async function SchemaGeneratorPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  return <SchemaGeneratorTool dict={dict} />;
 }

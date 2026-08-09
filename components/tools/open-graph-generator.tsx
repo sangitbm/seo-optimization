@@ -44,9 +44,14 @@ const faqs = [
   { question: "Can I use these images commercially?", answer: "Yes! All generated images are created entirely in your browser and are free for commercial use." },
 ];
 
-export function OpenGraphGeneratorTool() {
+export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState<OGState>(defaultState);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.open_graph_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const update = (key: keyof OGState, value: string) => {
     setState((prev) => ({ ...prev, [key]: value }));
@@ -123,31 +128,31 @@ export function OpenGraphGeneratorTool() {
   });
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Image Settings</CardTitle>
+            <CardTitle className="text-lg">{t.configTitle || "Image Settings"}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Title</Label>
+              <Label>{t.titleLabel || "Title"}</Label>
               <Input value={state.title} onChange={(e) => { update("title", e.target.value); setTimeout(drawCanvas, 50); }} className="h-12 text-base" />
             </div>
             <div className="space-y-2">
-              <Label>Subtitle (optional)</Label>
+              <Label>{t.subtitleLabel || "Subtitle (optional)"}</Label>
               <Input value={state.subtitle} onChange={(e) => { update("subtitle", e.target.value); setTimeout(drawCanvas, 50); }} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Color 1</Label>
+                <Label>{t.color1 || "Color 1"}</Label>
                 <div className="flex gap-2">
                   <input type="color" value={state.bgColor1} onChange={(e) => { update("bgColor1", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
                   <Input value={state.bgColor1} onChange={(e) => { update("bgColor1", e.target.value); setTimeout(drawCanvas, 50); }} />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>Color 2</Label>
+                <Label>{t.color2 || "Color 2"}</Label>
                 <div className="flex gap-2">
                   <input type="color" value={state.bgColor2} onChange={(e) => { update("bgColor2", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
                   <Input value={state.bgColor2} onChange={(e) => { update("bgColor2", e.target.value); setTimeout(drawCanvas, 50); }} />
@@ -156,14 +161,14 @@ export function OpenGraphGeneratorTool() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Text Color</Label>
+                <Label>{t.textColor || "Text Color"}</Label>
                 <div className="flex gap-2">
                   <input type="color" value={state.textColor} onChange={(e) => { update("textColor", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
                   <Input value={state.textColor} onChange={(e) => { update("textColor", e.target.value); setTimeout(drawCanvas, 50); }} />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>Gradient Direction</Label>
+                <Label>{t.gradientDir || "Gradient Direction"}</Label>
                 <Select value={state.gradientDir} onValueChange={(v) => { update("gradientDir", v); setTimeout(drawCanvas, 50); }}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
@@ -177,12 +182,12 @@ export function OpenGraphGeneratorTool() {
             <Button
               onClick={() => {
                 drawCanvas();
-                toast.success("OG Image generated!");
+                toast.success(t.successGenerate || "OG Image generated!");
               }}
               size="lg"
               className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
             >
-              <ImageIcon className="h-5 w-5" /> Generate Open Graph Image
+              <ImageIcon className="h-5 w-5" /> {t.generateBtn || "Generate Open Graph Image"}
             </Button>
           </CardContent>
         </Card>
@@ -190,7 +195,7 @@ export function OpenGraphGeneratorTool() {
         <div className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Preview (1200×630)</CardTitle>
+              <CardTitle className="text-lg">{t.previewTitle || "Preview"} (1200×630)</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-hidden rounded-lg border border-border">
@@ -200,7 +205,7 @@ export function OpenGraphGeneratorTool() {
           </Card>
           <div className="flex gap-2">
             <Button onClick={exportPNG} className="gap-2">
-              <Download className="h-4 w-4" /> Export PNG
+              <Download className="h-4 w-4" /> {ui.download || "Export"} PNG
             </Button>
             <ResetButton onReset={() => { setState(defaultState); setTimeout(drawCanvas, 50); }} />
           </div>

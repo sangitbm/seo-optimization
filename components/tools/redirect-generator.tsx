@@ -59,8 +59,13 @@ const faqs = [
   { question: "How do redirects affect SEO?", answer: "Proper 301 redirects pass most link equity to the new URL. However, redirect chains (multiple redirects) can dilute link equity and slow page loading." },
 ];
 
-export function RedirectGeneratorTool() {
+export function RedirectGeneratorTool({ dict }: { dict?: any }) {
   const [redirects, setRedirects] = useState<Redirect[]>([{ from: "/old-page", to: "/new-page", type: "301" }]);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.redirect_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
 
   const add = () => setRedirects([...redirects, { from: "", to: "", type: "301" }]);
   const remove = (i: number) => setRedirects(redirects.filter((_, idx) => idx !== i));
@@ -69,25 +74,25 @@ export function RedirectGeneratorTool() {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg">Redirect Rules</CardTitle>
-          <Button onClick={add} size="sm" className="gap-1"><Plus className="h-4 w-4" /> Add</Button>
+          <CardTitle className="text-lg">{t.configTitle || "Redirect Rules"}</CardTitle>
+          <Button onClick={add} size="sm" className="gap-1"><Plus className="h-4 w-4" /> {t.addRule || "Add"}</Button>
         </CardHeader>
         <CardContent className="space-y-3">
           {redirects.map((r, i) => (
             <div key={i} className="flex items-end gap-2">
               <div className="flex-1 space-y-1">
-                <Label>From</Label>
+                <Label>{t.fromLabel || "From"}</Label>
                 <Input placeholder="/old-page" value={r.from} onChange={(e) => update(i, "from", e.target.value)} />
               </div>
               <div className="flex-1 space-y-1">
-                <Label>To</Label>
+                <Label>{t.toLabel || "To"}</Label>
                 <Input placeholder="/new-page" value={r.to} onChange={(e) => update(i, "to", e.target.value)} />
               </div>
               <div className="w-24 space-y-1">
-                <Label>Type</Label>
+                <Label>{t.typeLabel || "Type"}</Label>
                 <Select value={r.type} onValueChange={(v) => update(i, "type", v)}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
@@ -106,15 +111,15 @@ export function RedirectGeneratorTool() {
           <Button
             onClick={() => {
               if (!redirects.some((r) => r.from.trim() && r.to.trim())) {
-                toast.error("Please enter at least one redirect rule");
+                toast.error(t.errorEmpty || "Please enter at least one redirect rule");
                 return;
               }
-              toast.success("Redirect rules generated successfully!");
+              toast.success(t.successGenerate || "Redirect rules generated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <ArrowRightLeft className="h-5 w-5" /> Generate Redirects
+            <ArrowRightLeft className="h-5 w-5" /> {t.generateBtn || "Generate Redirects"}
           </Button>
         </CardContent>
       </Card>
@@ -129,26 +134,26 @@ export function RedirectGeneratorTool() {
         <TabsContent value="apache" className="mt-4 space-y-4">
           <CodePreview code={genApache(redirects)} language="apache" label=".htaccess" />
           <div className="flex gap-2">
-            <CopyButton text={genApache(redirects)} label="Copy" />
-            <DownloadButton content={genApache(redirects)} filename=".htaccess" label="Download .htaccess" />
+            <CopyButton text={genApache(redirects)} label={ui.copy || "Copy"} />
+            <DownloadButton content={genApache(redirects)} filename=".htaccess" label={`${ui.download || "Download"} .htaccess`} />
           </div>
         </TabsContent>
         <TabsContent value="nginx" className="mt-4 space-y-4">
           <CodePreview code={genNginx(redirects)} language="nginx" label="Nginx Config" />
-          <CopyButton text={genNginx(redirects)} label="Copy" />
+          <CopyButton text={genNginx(redirects)} label={ui.copy || "Copy"} />
         </TabsContent>
         <TabsContent value="vercel" className="mt-4 space-y-4">
           <CodePreview code={genVercel(redirects)} language="json" label="vercel.json" />
           <div className="flex gap-2">
-            <CopyButton text={genVercel(redirects)} label="Copy" />
-            <DownloadButton content={genVercel(redirects)} filename="vercel.json" mimeType="application/json" label="Download" />
+            <CopyButton text={genVercel(redirects)} label={ui.copy || "Copy"} />
+            <DownloadButton content={genVercel(redirects)} filename="vercel.json" mimeType="application/json" label={ui.download || "Download"} />
           </div>
         </TabsContent>
         <TabsContent value="netlify" className="mt-4 space-y-4">
           <CodePreview code={genNetlify(redirects)} language="text" label="_redirects" />
           <div className="flex gap-2">
-            <CopyButton text={genNetlify(redirects)} label="Copy" />
-            <DownloadButton content={genNetlify(redirects)} filename="_redirects" label="Download" />
+            <CopyButton text={genNetlify(redirects)} label={ui.copy || "Copy"} />
+            <DownloadButton content={genNetlify(redirects)} filename="_redirects" label={ui.download || "Download"} />
           </div>
         </TabsContent>
       </Tabs>

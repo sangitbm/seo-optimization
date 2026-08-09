@@ -35,49 +35,54 @@ const faqs = [
   { question: "Can I control what Facebook shows?", answer: "Yes! Use Open Graph meta tags (og:title, og:description, og:image) to control how your content appears when shared on Facebook." },
 ];
 
-export function MetaTagPreviewTool() {
+export function MetaTagPreviewTool({ dict }: { dict?: any }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
 
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.meta_tag_preview || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
+
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
-        <CardHeader><CardTitle className="text-lg">Page Information</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-lg">{t.configTitle || "Page Information"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Title</Label>
+            <Label>{t.titleLabel || "Title"}</Label>
             <Input placeholder="My Awesome Page Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <p className="text-xs text-muted-foreground">{title.length}/60 characters</p>
           </div>
           <div className="space-y-2">
-            <Label>Description</Label>
+            <Label>{t.descLabel || "Description"}</Label>
             <Textarea placeholder="A compelling description of your page..." value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
             <p className="text-xs text-muted-foreground">{description.length}/160 characters</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label>URL</Label>
+              <Label>{t.urlLabel || "URL"}</Label>
               <Input placeholder="https://example.com/page" value={url} onChange={(e) => setUrl(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>Image URL (for social)</Label>
+              <Label>{t.imageLabel || "Image URL (for social)"}</Label>
               <Input placeholder="https://example.com/image.jpg" value={image} onChange={(e) => setImage(e.target.value)} />
             </div>
           </div>
           <Button
             onClick={() => {
               if (!title.trim() && !description.trim()) {
-                toast.error("Please enter a title or description first");
+                toast.error(t.errorEmpty || "Please enter a title or description first");
                 return;
               }
-              toast.success("Previews updated successfully!");
+              toast.success(t.successUpdate || "Previews updated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
           >
-            <Eye className="h-5 w-5" /> Preview Meta Tags
+            <Eye className="h-5 w-5" /> {t.previewTitle || "Preview Meta Tags"}
           </Button>
         </CardContent>
       </Card>
@@ -96,7 +101,7 @@ export function MetaTagPreviewTool() {
               <div className="space-y-5">
                 {/* Desktop */}
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Desktop</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">{t.desktopTab || "Desktop"}</p>
                   <div className="rounded-lg border border-border bg-white p-4 dark:bg-zinc-950 max-w-xl">
                     <p className="text-sm text-green-700 dark:text-green-500 truncate">{url || "https://example.com"}</p>
                     <h3 className="text-xl font-medium text-blue-700 dark:text-blue-400 hover:underline cursor-pointer truncate">{title || "Page Title"}</h3>
@@ -105,7 +110,7 @@ export function MetaTagPreviewTool() {
                 </div>
                 {/* Mobile */}
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Mobile</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">{t.mobileTab || "Mobile"}</p>
                   <div className="rounded-lg border border-border bg-white p-3 dark:bg-zinc-950 max-w-sm">
                     <p className="text-xs text-green-700 dark:text-green-500 truncate">{url || "https://example.com"}</p>
                     <h3 className="text-base font-medium text-blue-700 dark:text-blue-400 truncate">{title || "Page Title"}</h3>

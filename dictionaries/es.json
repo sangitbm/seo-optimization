@@ -430,6 +430,95 @@
           "answer": "La parte final amigable de una URL."
         }
       ]
+    },
+    "meta_tag_preview": {
+      "configTitle": "Metadatos de Entrada",
+      "urlLabel": "URL de la Página",
+      "titleLabel": "Meta Título",
+      "descLabel": "Meta Descripción",
+      "previewTitle": "Vista Previa de Búsqueda",
+      "desktopTab": "Escritorio",
+      "mobileTab": "Móvil",
+      "seoTips": [
+        "Mantén los títulos bajo 60 caracteres."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es la vista previa de metaetiquetas?",
+          "answer": "Simula cómo aparecerá en Google."
+        }
+      ]
+    },
+    "open_graph_generator": {
+      "configTitle": "Etiquetas Open Graph",
+      "titleLabel": "Título",
+      "descLabel": "Descripción",
+      "urlLabel": "URL",
+      "imageLabel": "URL de la Imagen",
+      "typeLabel": "Tipo de Contenido",
+      "generateBtn": "Generar Etiquetas OG",
+      "generatedCode": "Metaetiquetas Open Graph",
+      "seoTips": [
+        "Controlan cómo se ve tu contenido en Facebook."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es Open Graph?",
+          "answer": "Un protocolo para estandarizar metadatos en redes."
+        }
+      ]
+    },
+    "redirect_generator": {
+      "configTitle": "Ajustes de Redirección",
+      "typeLabel": "Tipo de Servidor",
+      "redirectTypeLabel": "Tipo de Redirección",
+      "fromLabel": "URL de Origen",
+      "toLabel": "URL de Destino",
+      "generateBtn": "Generar Código de Redirección",
+      "generatedCode": "Código de Redirección",
+      "seoTips": [
+        "Usa redirecciones 301 para cambios permanentes."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es una redirección 301?",
+          "answer": "Una redirección permanente que preserva el SEO."
+        }
+      ]
+    },
+    "schema_generator": {
+      "configTitle": "Tipo de Schema",
+      "typeLabel": "Seleccionar Tipo",
+      "generateBtn": "Generar Marcado Schema",
+      "generatedCode": "Schema JSON-LD",
+      "seoTips": [
+        "JSON-LD es el formato recomendado por Google."
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué es Schema Markup?",
+          "answer": "Código para resultados de búsqueda más ricos."
+        }
+      ]
+    },
+    "twitter_card_generator": {
+      "configTitle": "Ajustes de Twitter Card",
+      "cardTypeLabel": "Tipo de Tarjeta",
+      "usernameLabel": "Usuario de Twitter",
+      "titleLabel": "Título",
+      "descLabel": "Descripción",
+      "imageLabel": "URL de la Imagen",
+      "generateBtn": "Generar Twitter Card",
+      "generatedCode": "Metaetiquetas Twitter Card",
+      "seoTips": [
+        "Hacen que tus tuits destaquen."
+      ],
+      "faqs": [
+        {
+          "question": "¿Afectan al SEO?",
+          "answer": "Mejoran el CTR social."
+        }
+      ]
     }
   },
   "legal": {

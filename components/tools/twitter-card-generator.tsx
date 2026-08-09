@@ -41,19 +41,24 @@ const faqs = [
   { question: "How do I validate my Twitter Card?", answer: "Use the Twitter Card Validator at cards-dev.twitter.com/validator to preview and debug your card markup." },
 ];
 
-export function TwitterCardGeneratorTool() {
+export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState(defaultState);
+
+  const ui = dict?.ui || {};
+  const t = dict?.tools_deep?.twitter_card_generator || {};
+  const toolFaqs = t.faqs || faqs;
+  const toolSeoTips = t.seoTips || seoTips;
   const update = (k: string, v: string) => setState((p) => ({ ...p, [k]: v }));
   const output = generateMeta(state);
 
   return (
-    <ToolLayout tool={tool} seoTips={seoTips} faqs={faqs}>
+    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <CardHeader><CardTitle className="text-lg">Card Settings</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-lg">{t.configTitle || "Card Settings"}</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Card Type</Label>
+              <Label>{t.cardTypeLabel || "Card Type"}</Label>
               <Select value={state.card} onValueChange={(v) => update("card", v)}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -63,42 +68,42 @@ export function TwitterCardGeneratorTool() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>@Username</Label>
+              <Label>{t.usernameLabel || "@Username"}</Label>
               <Input placeholder="@yourusername" value={state.site} onChange={(e) => update("site", e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>Title</Label>
+              <Label>{t.titleLabel || "Title"}</Label>
               <Input placeholder="Page title" value={state.title} onChange={(e) => update("title", e.target.value)} />
               <p className="text-xs text-muted-foreground">{state.title.length}/70 characters</p>
             </div>
             <div className="space-y-2">
-              <Label>Description</Label>
+              <Label>{t.descLabel || "Description"}</Label>
               <Textarea placeholder="Page description" value={state.description} onChange={(e) => update("description", e.target.value)} rows={3} />
               <p className="text-xs text-muted-foreground">{state.description.length}/200 characters</p>
             </div>
             <div className="space-y-2">
-              <Label>Image URL</Label>
+              <Label>{t.imageLabel || "Image URL"}</Label>
               <Input placeholder="https://example.com/image.jpg" value={state.image} onChange={(e) => update("image", e.target.value)} />
             </div>
             <Button
               onClick={() => {
                 if (!state.title.trim() && !state.description.trim()) {
-                  toast.error("Please enter a title or description first");
+                  toast.error(t.errorEmpty || "Please enter a title or description first");
                   return;
                 }
-                toast.success("Twitter Card tags generated successfully!");
+                toast.success(t.successGenerate || "Twitter Card tags generated successfully!");
               }}
               size="lg"
               className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"
             >
-              <Share2 className="h-5 w-5" /> Generate Twitter Card
+              <Share2 className="h-5 w-5" /> {t.generateBtn || "Generate Twitter Card"}
             </Button>
           </CardContent>
         </Card>
 
         <div className="space-y-4">
           <Card>
-            <CardHeader><CardTitle className="text-lg">Twitter Preview</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-lg">{t.previewTitle || "Twitter Preview"}</CardTitle></CardHeader>
             <CardContent>
               <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-zinc-900">
                 {state.image && state.card === "summary_large_image" && (
@@ -126,10 +131,10 @@ export function TwitterCardGeneratorTool() {
 
       {output && (
         <div className="mt-6 space-y-4">
-          <CodePreview code={output} language="html" label="Twitter Card Meta Tags" />
+          <CodePreview code={output} language="html" label={t.generatedCode || "Twitter Card Meta Tags"} />
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={output} label="Copy HTML" />
-            <DownloadButton content={output} filename="twitter-cards.html" mimeType="text/html" label="Download HTML" />
+            <CopyButton text={output} label={ui.copy || "Copy HTML"} />
+            <DownloadButton content={output} filename="twitter-cards.html" mimeType="text/html" label={ui.download || "Download HTML"} />
             <ResetButton onReset={() => setState(defaultState)} />
           </div>
         </div>

@@ -442,6 +442,101 @@
           "answer": "The part of a URL that identifies a particular page on a website in an easy-to-read form."
         }
       ]
+    },
+    "meta_tag_preview": {
+      "configTitle": "Input Metadata",
+      "urlLabel": "Page URL",
+      "titleLabel": "Meta Title",
+      "descLabel": "Meta Description",
+      "previewTitle": "Search Results Preview",
+      "desktopTab": "Desktop",
+      "mobileTab": "Mobile",
+      "seoTips": [
+        "Keep meta titles under 60 characters to avoid truncation.",
+        "Meta descriptions should be between 150-160 characters.",
+        "Include your primary keyword in the title and description naturally."
+      ],
+      "faqs": [
+        {
+          "question": "What is a meta tag preview?",
+          "answer": "It simulates how your webpage will appear in Google search results."
+        }
+      ]
+    },
+    "open_graph_generator": {
+      "configTitle": "Open Graph Tags",
+      "titleLabel": "Title",
+      "descLabel": "Description",
+      "urlLabel": "URL",
+      "imageLabel": "Image URL",
+      "typeLabel": "Content Type",
+      "generateBtn": "Generate OG Tags",
+      "generatedCode": "Open Graph Meta Tags",
+      "seoTips": [
+        "Open Graph tags control how your content appears when shared on Facebook and LinkedIn.",
+        "Use an image size of 1200x630 pixels for optimal display."
+      ],
+      "faqs": [
+        {
+          "question": "What is Open Graph?",
+          "answer": "An internet protocol created by Facebook to standardize the use of metadata within a webpage to represent the content of a page."
+        }
+      ]
+    },
+    "redirect_generator": {
+      "configTitle": "Redirect Settings",
+      "typeLabel": "Server Type",
+      "redirectTypeLabel": "Redirect Type",
+      "fromLabel": "From URL",
+      "toLabel": "To URL",
+      "generateBtn": "Generate Redirect Code",
+      "generatedCode": "Redirect Code",
+      "seoTips": [
+        "Use 301 redirects for permanent changes to preserve SEO value.",
+        "Avoid redirect chains (A -> B -> C) as they slow down page loading."
+      ],
+      "faqs": [
+        {
+          "question": "What is a 301 redirect?",
+          "answer": "A permanent redirect which passes between 90-99% of link equity (ranking power) to the redirected page."
+        }
+      ]
+    },
+    "schema_generator": {
+      "configTitle": "Schema Type",
+      "typeLabel": "Select Schema Type",
+      "generateBtn": "Generate Schema Markup",
+      "generatedCode": "JSON-LD Schema",
+      "seoTips": [
+        "JSON-LD is Google's recommended format for structured data.",
+        "Use Google's Rich Results Test tool to validate your schema."
+      ],
+      "faqs": [
+        {
+          "question": "What is Schema Markup?",
+          "answer": "Code (semantic vocabulary) that you put on your website to help the search engines return more informative results for users."
+        }
+      ]
+    },
+    "twitter_card_generator": {
+      "configTitle": "Twitter Card Settings",
+      "cardTypeLabel": "Card Type",
+      "usernameLabel": "Twitter Username",
+      "titleLabel": "Title",
+      "descLabel": "Description",
+      "imageLabel": "Image URL",
+      "generateBtn": "Generate Twitter Card",
+      "generatedCode": "Twitter Card Meta Tags",
+      "seoTips": [
+        "Twitter cards make your tweets stand out with rich media.",
+        "Summary Card with Large Image performs best for engagement."
+      ],
+      "faqs": [
+        {
+          "question": "Do Twitter cards affect SEO?",
+          "answer": "Not directly, but they improve click-through rates from social media, which can drive traffic."
+        }
+      ]
     }
   },
   "legal": {
