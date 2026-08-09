@@ -26,8 +26,8 @@ export default function ContactPage() {
             <p className="text-muted-foreground mb-4">
               For support or general inquiries, email us directly.
             </p>
-            <a href="mailto:support@seo-utilities.com" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
-              support@seo-utilities.com
+            <a href="mailto:sanmusic455@gmail.com" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
+              sanmusic455@gmail.com
             </a>
           </div>
           
@@ -37,9 +37,8 @@ export default function ContactPage() {
             </div>
             <h3 className="font-semibold text-lg mb-2">Location</h3>
             <p className="text-muted-foreground">
-              SEO Utilities<br />
-              123 Tech Avenue, Suite 100<br />
-              San Francisco, CA 94107
+              Kathmandu<br />
+              Nepal
             </p>
           </div>
         </div>
