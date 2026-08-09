@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AdProvider } from "@/components/providers/ad-provider";
+import { CookieConsent } from "@/components/cookie-consent";
 import "../globals.css";
 import { i18n } from "../../i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
@@ -97,8 +98,23 @@ export default async function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer dict={dict} lang={lang} />
             <Toaster richColors position="bottom-right" />
+            <CookieConsent />
           </AdProvider>
         </ThemeProvider>
+        {/* Google Consent Mode v2 — defaults (before any cookie loads) */}
+        <Script id="consent-mode-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied',
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'wait_for_update': 2000
+            });
+          `}
+        </Script>
         {/* AdSense */}
         <Script
           async

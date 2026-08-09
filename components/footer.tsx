@@ -2,15 +2,13 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { categories, getToolsByCategory } from "@/lib/tools-data";
+import { AdSlot } from "@/components/ad-slot";
 
 export function Footer({ dict, lang }: { dict?: any; lang: string }) {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
-      {/* Ad slot */}
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex min-h-[90px] items-center justify-center rounded-lg border border-dashed border-border bg-muted/50 text-xs text-muted-foreground">
-          Advertisement
-        </div>
+        <AdSlot variant="footer" slotId="1611016987" />
       </div>
 
       <Separator />

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ChevronLeft, Calendar, User, ArrowRight } from "lucide-react";
 import { i18n } from "@/i18n-config";
 import { getToolBySlug, tools } from "@/lib/tools-data";
+import { AuthorBio } from "@/components/author-bio";
 
 export async function generateMetadata({
   params,
@@ -154,6 +155,9 @@ export default async function BlogPostPage({
             </Link>
           </div>
         )}
+
+        {/* Author Bio */}
+        <AuthorBio author={post.meta.author} lang={lang} />
 
         {/* Related Tools */}
         <div className="mt-16">
