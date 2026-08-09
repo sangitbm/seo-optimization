@@ -78,6 +78,12 @@ export function Header({ dict }: { dict?: any }) {
             FAQ
           </Link>
           <Link
+            href={`/${currentLocale}/blog`}
+            className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Blog
+          </Link>
+          <Link
             href={`/${currentLocale}/about`}
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -172,6 +178,13 @@ export function Header({ dict }: { dict?: any }) {
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
                   {dict?.navigation?.home || "Home"}
+                </Link>
+                <Link
+                  href={`/${currentLocale}/blog`}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+                >
+                  Blog
                 </Link>
                 {categories.map((cat) => {
                   const translatedCat = dict?.categoriesMap?.[cat] || cat;
