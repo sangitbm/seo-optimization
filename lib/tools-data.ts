@@ -20,6 +20,9 @@ import {
   Link2,
   Type,
   KeyRound,
+  FileJson,
+  AlignLeft,
+  MousePointerClick
 } from "lucide-react";
 
 export interface Tool {
@@ -312,6 +315,45 @@ export const tools: Tool[] = [
     category: "Utilities",
     keywords: ["password generator", "strong password", "random password", "secure password"],
     dateAdded: "2026-08-09",
+    popular: true,
+  },
+  {
+    name: "JSON Formatter & Validator",
+    slug: "json-formatter",
+    description:
+      "Beautify, format, and validate your JSON code. Catch syntax errors quickly before deploying your Structured Data (JSON-LD) or API payloads.",
+    shortDescription:
+      "Beautify, format, and validate JSON code.",
+    icon: FileJson,
+    category: "Code",
+    keywords: ["json formatter", "json validator", "json beautifier", "format json"],
+    dateAdded: "2026-08-10",
+    popular: true,
+  },
+  {
+    name: "Lorem Ipsum Generator",
+    slug: "lorem-ipsum-generator",
+    description:
+      "Generate dummy text for your website mockups, designs, and templates. Customize the number of paragraphs, words, or lists you need instantly.",
+    shortDescription:
+      "Generate dummy text for your website mockups.",
+    icon: AlignLeft,
+    category: "Content",
+    keywords: ["lorem ipsum", "dummy text", "placeholder text", "text generator"],
+    dateAdded: "2026-08-10",
+    popular: true,
+  },
+  {
+    name: "Google SERP Simulator",
+    slug: "serp-simulator",
+    description:
+      "Preview how your web page will look in Google's search results. See if your title tag or meta description is too long and will get truncated on Desktop or Mobile.",
+    shortDescription:
+      "Preview your web page in Google's search results.",
+    icon: MousePointerClick,
+    category: "Meta Tags",
+    keywords: ["serp simulator", "google snippet preview", "meta description preview"],
+    dateAdded: "2026-08-10",
     popular: true,
   }
 ];
