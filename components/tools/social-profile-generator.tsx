@@ -32,7 +32,7 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [theme, setTheme] = useState<"dark" | "light" | "colorful">("dark");
-  const [links, setLinks] = useState<{ id: string; p: Platform; u: string }[]>([
+  const [links, setLinks] = useState<{ id: string; p: Platform; u: string; n?: string }>([
     { id: "1", p: "tw", u: "" }
   ]);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
@@ -47,7 +47,7 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
     setLinks(links.filter(l => l.id !== id));
   };
 
-  const updateLink = (id: string, field: "p" | "u", value: string) => {
+  const updateLink = (id: string, field: "p" | "u" | "n", value: string) => {
     setLinks(links.map(l => l.id === id ? { ...l, [field]: value } : l));
   };
 
@@ -64,7 +64,13 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
       n: name.trim(),
       b: bio.trim(),
       t: theme,
-      l: validLinks.map(l => ({ p: l.p, u: l.u.trim() }))
+      l: validLinks.map(l => {
+        const linkObj: { p: Platform; u: string; n?: string } = { p: l.p, u: l.u.trim() };
+        if (l.n && l.n.trim() !== "") {
+          linkObj.n = l.n.trim();
+        }
+        return linkObj;
+      })
     };
 
     // If completely empty, clear QR
@@ -208,6 +214,16 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
                           style={{ paddingLeft: `calc(1rem + ${platform.prefix.length * 7.5}px)` }}
                         />
                       </div>
+                      {link.p === "web" && (
+                        <div className="pt-1">
+                          <Input
+                            value={link.n || ""}
+                            onChange={(e) => updateLink(link.id, "n", e.target.value)}
+                            placeholder="Custom Link Name (e.g., Menu, Portfolio)"
+                            className="bg-background text-sm h-8"
+                          />
+                        </div>
+                      )}
                     </div>
                     <Button 
                       variant="ghost" 

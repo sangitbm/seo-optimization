@@ -22,7 +22,7 @@ interface ProfileData {
   n: string; // name
   b: string; // bio
   t: "dark" | "light" | "colorful"; // theme
-  l: Array<{ p: Platform; u: string }>;
+  l: Array<{ p: Platform; u: string; n?: string }>;
 }
 
 function BioContent() {
@@ -130,7 +130,7 @@ function BioContent() {
                   {platform.icon}
                 </div>
                 <span className="flex-1 text-center font-medium mr-10 group-hover:scale-105 transition-transform duration-300">
-                  {platform.label}
+                  {link.n || platform.label}
                 </span>
                 <ExternalLink className={`absolute right-4 w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity ${isColorful ? 'text-white' : isDark ? 'text-white' : 'text-gray-400'}`} />
               </a>
