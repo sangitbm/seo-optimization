@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "@/app/globals.css";
 
 const geistSans = Geist({
@@ -34,6 +35,18 @@ export default function BioLayout({
     >
       <body suppressHydrationWarning className="min-h-screen bg-background text-foreground">
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VFWZTJQKC5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VFWZTJQKC5');
+          `}
+        </Script>
       </body>
     </html>
   );
