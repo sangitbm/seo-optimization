@@ -32,7 +32,7 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [theme, setTheme] = useState<"dark" | "light" | "colorful">("dark");
-  const [links, setLinks] = useState<{ id: string; p: Platform; u: string; n?: string }>([
+  const [links, setLinks] = useState<{ id: string; p: Platform; u: string; n?: string }[]>([
     { id: "1", p: "tw", u: "" }
   ]);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
