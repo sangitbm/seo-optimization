@@ -247,16 +247,15 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
                         size="icon" 
                         title="Test Link"
                         className="text-muted-foreground hover:text-primary"
-                        asChild
+                        onClick={() => {
+                          if (!link.u) return;
+                          const url = link.p === "web" 
+                            ? (link.u.startsWith("http") ? link.u : `https://${link.u}`) 
+                            : `https://${platform.prefix}${link.u}`;
+                          window.open(url, "_blank", "noopener,noreferrer");
+                        }}
                       >
-                        <a 
-                          href={link.p === "web" ? (link.u.startsWith("http") ? link.u : `https://${link.u}`) : `https://${platform.prefix}${link.u}`} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          onClick={(e) => { if (!link.u) e.preventDefault(); }}
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
+                        <ExternalLink className="h-4 w-4" />
                       </Button>
                       <Button 
                         variant="ghost" 
