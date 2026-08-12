@@ -15,11 +15,12 @@ import Link from "next/link";
 
 const tool = getToolBySlug("social-profile-generator")!;
 
-type Platform = "tw" | "ig" | "li" | "yt" | "gh" | "fb" | "web";
+type Platform = "tw" | "ig" | "li" | "yt" | "gh" | "fb" | "tk" | "web";
 
 const PLATFORMS: { id: Platform; label: string; prefix: string; placeholder: string }[] = [
   { id: "tw", label: "Twitter / X", prefix: "x.com/", placeholder: "username" },
   { id: "ig", label: "Instagram", prefix: "instagram.com/", placeholder: "username" },
+  { id: "tk", label: "TikTok", prefix: "tiktok.com/@", placeholder: "username" },
   { id: "li", label: "LinkedIn", prefix: "linkedin.com/in/", placeholder: "username" },
   { id: "yt", label: "YouTube", prefix: "youtube.com/@", placeholder: "channel" },
   { id: "gh", label: "GitHub", prefix: "github.com/", placeholder: "username" },

@@ -5,11 +5,12 @@ import { useSearchParams } from "next/navigation";
 import LZString from "lz-string";
 import { ExternalLink, UserCircle2, AlertCircle } from "lucide-react";
 
-type Platform = "tw" | "ig" | "li" | "yt" | "gh" | "fb" | "web";
+type Platform = "tw" | "ig" | "li" | "yt" | "gh" | "fb" | "tk" | "web";
 
 const PLATFORMS: Record<Platform, { label: string; urlPrefix: string; color: string; icon: string }> = {
   tw: { label: "X (Twitter)", urlPrefix: "https://x.com/", color: "bg-black text-white hover:bg-zinc-800", icon: "X" },
   ig: { label: "Instagram", urlPrefix: "https://instagram.com/", color: "bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white hover:opacity-90", icon: "Ig" },
+  tk: { label: "TikTok", urlPrefix: "https://tiktok.com/@", color: "bg-black text-white border border-gray-700 hover:bg-zinc-900", icon: "Tk" },
   li: { label: "LinkedIn", urlPrefix: "https://linkedin.com/in/", color: "bg-[#0077b5] text-white hover:bg-[#006097]", icon: "In" },
   yt: { label: "YouTube", urlPrefix: "https://youtube.com/@", color: "bg-[#ff0000] text-white hover:bg-[#cc0000]", icon: "Yt" },
   gh: { label: "GitHub", urlPrefix: "https://github.com/", color: "bg-[#333] text-white hover:bg-[#111]", icon: "Gh" },
