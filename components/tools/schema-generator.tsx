@@ -13,7 +13,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -258,7 +258,7 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
   const [activeType, setActiveType] = useState<SchemaType>("Organization");
   const [data, setData] = useState<Record<string, Record<string, string>>>({});
   const [output, setOutput] = useState("");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.schema_generator || {};
@@ -326,10 +326,8 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
           ))}
           <Button
             onClick={() => {
-              showAd(() => {
-                setOutput(generateSchema(activeType, currentData));
-                toast.success(t.successGenerate || `${activeType} Schema generated successfully!`);
-              });
+              setOutput(generateSchema(activeType, currentData));
+              toast.success(t.successGenerate || `${activeType} Schema generated successfully!`);
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-6"

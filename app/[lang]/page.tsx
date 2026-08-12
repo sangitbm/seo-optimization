@@ -67,7 +67,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <ToolGrid tools={popularTools} dict={dict} lang={lang} />
         </section>
 
-        <AdSlot variant="banner" className="my-4" />
+        <div>
+          <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Advertisement</p>
+          <AdSlot variant="banner" className="my-4" />
+        </div>
 
         {/* All Tools */}
         <section id="tools" className="scroll-mt-20 py-16">
@@ -82,7 +85,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <ToolSearch dict={dict} lang={lang} />
         </section>
 
-        <AdSlot variant="in-content" className="my-4" />
+        <div>
+          <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Advertisement</p>
+          <AdSlot variant="in-content" className="my-4" />
+        </div>
 
         {/* Recently Added */}
         <section className="py-16">

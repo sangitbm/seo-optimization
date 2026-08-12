@@ -8,6 +8,7 @@ export function Footer({ dict, lang }: { dict?: any; lang: string }) {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Advertisement</p>
         <AdSlot variant="footer" slotId="1611016987" />
       </div>
 

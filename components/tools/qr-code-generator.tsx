@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -36,7 +36,7 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [qrSvg, setQrSvg] = useState<string>("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.qr_code_generator || {};
@@ -82,10 +82,8 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
   };
 
   const handleGenerateClick = async () => {
-    showAd(async () => {
-      await generateQR();
-      toast.success("QR Code generated!");
-    });
+    await generateQR();
+    toast.success("QR Code generated!");
   };
 
   const downloadPNG = () => {

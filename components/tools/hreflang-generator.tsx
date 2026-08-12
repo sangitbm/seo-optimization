@@ -11,7 +11,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -37,7 +37,7 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
     { lang: "x-default", url: "" },
   ]);
   const [output, setOutput] = useState("");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.hreflang_generator || {};
@@ -82,14 +82,12 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter at least one URL");
                 return;
               }
-              showAd(() => {
                 const out = entries
                   .filter((e) => e.lang && e.url)
                   .map((e) => `<link rel="alternate" hreflang="${e.lang}" href="${e.url}">`)
                   .join("\n");
                 setOutput(out);
                 toast.success(t.generatedCode || "Hreflang Tags generated!");
-              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

@@ -12,7 +12,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -113,7 +113,7 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
   const [entries, setEntries] = useState<SitemapEntry[]>([{ ...defaultEntry }]);
   const [outputXML, setOutputXML] = useState("");
   const [outputHTML, setOutputHTML] = useState("");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.sitemap_generator || {};
@@ -194,11 +194,9 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
                 toast.error("Please enter at least one URL");
                 return;
               }
-              showAd(() => {
-                setOutputXML(generateXML(entries));
+              setOutputXML(generateXML(entries));
                 setOutputHTML(generateHTML(entries));
                 toast.success(t.generatedCode || "Sitemaps generated successfully!");
-              });
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

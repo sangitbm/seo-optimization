@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Download, Image as ImageIcon } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -48,7 +48,7 @@ const faqs = [
 export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
   const [state, setState] = useState<OGState>(defaultState);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.open_graph_generator || {};
@@ -115,15 +115,13 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
   }, [state]);
 
   const exportPNG = () => {
-    showAd(() => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const a = document.createElement("a");
-      a.href = canvas.toDataURL("image/png");
-      a.download = "og-image.png";
-      a.click();
-      toast.success(ui.download || "OG Image exported!");
-    });
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = "og-image.png";
+    a.click();
+    toast.success(ui.download || "OG Image exported!");
   };
 
   // Draw on mount
@@ -185,10 +183,8 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
             </div>
             <Button
               onClick={() => {
-                showAd(() => {
-                  drawCanvas();
-                  toast.success(t.successGenerate || "OG Image generated!");
-                });
+                drawCanvas();
+                toast.success(t.successGenerate || "OG Image generated!");
               }}
               size="lg"
               className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

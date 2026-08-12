@@ -12,7 +12,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import type { Tool } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -44,7 +44,7 @@ export function MinifierTool({
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<"minify" | "beautify">("minify");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.[tool.slug.replace(/-/g, '_')] || {};
@@ -75,10 +75,8 @@ export function MinifierTool({
                 toast.error(t.errorEmpty || "Please paste some code first");
                 return;
               }
-              showAd(() => {
-                setOutput(mode === "minify" ? minify(input) : beautify(input));
-                toast.success(mode === "minify" ? (t.successMinify || "Code minified successfully!") : (t.successBeautify || "Code beautified successfully!"));
-              });
+              setOutput(mode === "minify" ? minify(input) : beautify(input));
+              toast.success(mode === "minify" ? (t.successMinify || "Code minified successfully!") : (t.successBeautify || "Code beautified successfully!"));
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"

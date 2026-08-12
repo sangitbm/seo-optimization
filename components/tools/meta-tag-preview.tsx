@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolLayout } from "@/components/tool-layout";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -42,7 +42,7 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState({ title: "", description: "", url: "", image: "" });
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.meta_tag_preview || {};
@@ -80,10 +80,8 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter a title or description first");
                 return;
               }
-              showAd(() => {
-                setPreview({ title, description, url, image });
-                toast.success(t.successUpdate || "Previews updated successfully!");
-              });
+              setPreview({ title, description, url, image });
+              toast.success(t.successUpdate || "Previews updated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

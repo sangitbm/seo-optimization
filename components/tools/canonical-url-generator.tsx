@@ -11,7 +11,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -34,7 +34,7 @@ const faqs = [
 export function CanonicalUrlGeneratorTool({ dict }: { dict?: any }) {
   const [url, setUrl] = useState("");
   const [output, setOutput] = useState("");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.canonical_url_generator || {};
@@ -57,10 +57,8 @@ export function CanonicalUrlGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter a URL first");
                 return;
               }
-              showAd(() => {
-                setOutput(`<link rel="canonical" href="${url}">`);
-                toast.success(t.generatedCode || "Canonical Tag generated!");
-              });
+              setOutput(`<link rel="canonical" href="${url}">`);
+              toast.success(t.generatedCode || "Canonical Tag generated!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

@@ -13,7 +13,7 @@ import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -63,7 +63,7 @@ const faqs = [
 export function RedirectGeneratorTool({ dict }: { dict?: any }) {
   const [redirects, setRedirects] = useState<Redirect[]>([{ from: "/old-page", to: "/new-page", type: "301" }]);
   const [isGenerated, setIsGenerated] = useState(false);
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.redirect_generator || {};
@@ -118,10 +118,8 @@ export function RedirectGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter at least one redirect rule");
                 return;
               }
-              showAd(() => {
-                setIsGenerated(true);
-                toast.success(t.successGenerate || "Redirect rules generated successfully!");
-              });
+              setIsGenerated(true);
+              toast.success(t.successGenerate || "Redirect rules generated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

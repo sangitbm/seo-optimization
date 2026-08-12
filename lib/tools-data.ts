@@ -22,7 +22,8 @@ import {
   KeyRound,
   FileJson,
   AlignLeft,
-  MousePointerClick
+  MousePointerClick,
+  Terminal
 } from "lucide-react";
 
 export interface Tool {
@@ -44,7 +45,8 @@ export type ToolCategory =
   | "Social Media"
   | "Content"
   | "Code"
-  | "Utilities";
+  | "Utilities"
+  | "Developer Tools";
 
 export const categories: ToolCategory[] = [
   "Meta Tags",
@@ -54,6 +56,7 @@ export const categories: ToolCategory[] = [
   "Content",
   "Code",
   "Utilities",
+  "Developer Tools",
 ];
 
 export const tools: Tool[] = [
@@ -354,6 +357,19 @@ export const tools: Tool[] = [
     category: "Meta Tags",
     keywords: ["serp simulator", "google snippet preview", "meta description preview"],
     dateAdded: "2026-08-10",
+    popular: true,
+  },
+  {
+    name: "Code Generator",
+    slug: "code-generator",
+    description:
+      "Generate production-ready code snippets for CRUD operations, authentication, file handling, API calls, database queries, and more. Supports Python, Django, FastAPI, Node.js, Express, Laravel, and Rails.",
+    shortDescription:
+      "Generate CRUD, Auth & more code in Python, Django, Node.js and others.",
+    icon: Terminal,
+    category: "Developer Tools",
+    keywords: ["code generator", "crud generator", "python code", "django code", "fastapi", "nodejs", "express", "laravel", "developer tools"],
+    dateAdded: "2026-08-12",
     popular: true,
   }
 ];

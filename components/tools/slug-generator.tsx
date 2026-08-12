@@ -11,7 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { ToolLayout } from "@/components/tool-layout";
 import { CopyButton } from "@/components/copy-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -50,7 +50,7 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
   const [lowercase, setLowercase] = useState(true);
   const [maxLength, setMaxLength] = useState(0);
   const [slug, setSlug] = useState("");
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.slug_generator || {};
@@ -95,10 +95,8 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please enter some text to generate a slug");
                 return;
               }
-              showAd(() => {
-                setSlug(generateSlug(text, separator, lowercase, maxLength));
-                toast.success(t.successGenerate || "Slug generated successfully!");
-              });
+              setSlug(generateSlug(text, separator, lowercase, maxLength));
+              toast.success(t.successGenerate || "Slug generated successfully!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95 mt-4"

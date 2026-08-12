@@ -11,7 +11,7 @@ const homeFAQs = [
   {
     question: "Are these SEO tools really free?",
     answer:
-      "Yes! All tools on SEO Utilities are completely free to use with no sign-up required. We support the site through non-intrusive advertisements.",
+      "Yes! All tools on SEO Utilities are completely free to use with no sign-up required.",
   },
   {
     question: "Is my data safe? Do you store any information?",

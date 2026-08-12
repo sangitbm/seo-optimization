@@ -10,7 +10,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
-import { useAd } from "@/components/providers/ad-provider";
+
 import { getToolBySlug } from "@/lib/tools-data";
 import { toast } from "sonner";
 
@@ -59,7 +59,7 @@ const faqs = [
 export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
   const [text, setText] = useState("");
   const [analysis, setAnalysis] = useState<ReturnType<typeof analyzeText> | null>(null);
-  const { showAd } = useAd();
+
 
   const ui = dict?.ui || {};
   const t = dict?.tools_deep?.keyword_density_checker || {};
@@ -87,10 +87,8 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
                 toast.error(t.errorEmpty || "Please paste your text first");
                 return;
               }
-              showAd(() => {
-                setAnalysis(analyzeText(text));
-                toast.success(t.successAnalyze || "Keyword density analyzed!");
-              });
+              setAnalysis(analyzeText(text));
+              toast.success(t.successAnalyze || "Keyword density analyzed!");
             }}
             size="lg"
             className="w-full gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md hover:opacity-95"
