@@ -33,8 +33,8 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
             <p className="text-muted-foreground mb-4">
               {t.emailDesc || "For support or general inquiries, email us directly."}
             </p>
-            <a href="mailto:sanmusic455@gmail.com" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
-              sanmusic455@gmail.com
+            <a href="mailto:seoopti654@gmail.com" className="text-violet-600 dark:text-violet-400 font-medium hover:underline">
+              seoopti654@gmail.com
             </a>
           </div>
           
