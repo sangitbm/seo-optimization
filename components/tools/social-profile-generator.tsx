@@ -47,8 +47,24 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
     setLinks(links.filter(l => l.id !== id));
   };
 
+  const cleanInput = (platform: Platform, value: string) => {
+    let clean = value.trim();
+    if (platform !== "web") {
+      // Remove URLs, trailing slashes, and leading @
+      clean = clean.replace(/^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,}\/)?(@)?/i, "");
+      clean = clean.replace(/\/$/, "");
+      clean = clean.replace(/^@/, "");
+    }
+    return clean;
+  };
+
   const updateLink = (id: string, field: "p" | "u" | "n", value: string) => {
-    setLinks(links.map(l => l.id === id ? { ...l, [field]: value } : l));
+    setLinks(links.map(l => {
+      if (l.id !== id) return l;
+      
+      const newValue = field === "u" ? cleanInput(l.p, value) : value;
+      return { ...l, [field]: newValue };
+    }));
   };
 
   useEffect(() => {
@@ -225,15 +241,34 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
                         </div>
                       )}
                     </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="text-muted-foreground hover:text-destructive mt-1 shrink-0"
-                      onClick={() => removeLink(link.id)}
-                      disabled={links.length === 1}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                    <div className="flex flex-col gap-1 shrink-0 mt-1">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        title="Test Link"
+                        className="text-muted-foreground hover:text-primary"
+                        asChild
+                      >
+                        <a 
+                          href={link.p === "web" ? (link.u.startsWith("http") ? link.u : `https://${link.u}`) : `https://${platform.prefix}${link.u}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          onClick={(e) => { if (!link.u) e.preventDefault(); }}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        title="Remove Link"
+                        className="text-muted-foreground hover:text-destructive"
+                        onClick={() => removeLink(link.id)}
+                        disabled={links.length === 1}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
