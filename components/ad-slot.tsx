@@ -27,14 +27,24 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
 
   const resolvedSlot = slotId || SLOT_IDS[variant] || SLOT_IDS["banner"];
 
+  // Constrain sizes on mobile so they don't take up the whole screen
+  const sizeClasses = {
+    banner: "w-full max-h-[100px] overflow-hidden flex justify-center", // Force horizontal banner on mobile
+    sidebar: "w-full min-h-[250px] flex justify-center", // standard square/vertical on desktop
+    "in-content": "w-full flex justify-center max-h-[250px]", // Limit height on mobile
+    footer: "w-full max-h-[100px] overflow-hidden flex justify-center",
+  };
+
+  const adFormat = (variant === "banner" || variant === "footer") ? "horizontal" : "auto";
+
   return (
-    <div className={className}>
+    <div className={`${sizeClasses[variant]} ${className}`}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{ display: "block", width: "100%" }}
         data-ad-client="ca-pub-4705897632786514"
         data-ad-slot={resolvedSlot}
-        data-ad-format="auto"
+        data-ad-format={adFormat}
         data-full-width-responsive="true"
       />
     </div>
