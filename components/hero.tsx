@@ -53,15 +53,15 @@ export function Hero({ dict, lang }: { dict?: any; lang?: string }) {
           </div>
 
           {/* Stats */}
-          <div className="mt-16 grid grid-cols-3 gap-8">
+          <div className="mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8">
             {[
               { value: "17+", label: "Free Tools" },
               { value: "100%", label: "Privacy Friendly" },
               { value: "0", label: "Sign-ups Needed" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-2xl font-bold sm:text-3xl">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-xl font-bold sm:text-2xl lg:text-3xl">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-tight">{stat.label}</p>
               </div>
             ))}
           </div>

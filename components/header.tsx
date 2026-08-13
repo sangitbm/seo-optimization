@@ -160,13 +160,12 @@ export function Header({ dict }: { dict?: any }) {
           {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger
-              render={
-                <Button variant="ghost" size="icon" className="rounded-full md:hidden">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              }
-            />
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full md:hidden hover:bg-accent transition-colors"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Open menu</span>
+            </SheetTrigger>
             <SheetContent side="right" className="w-80 overflow-y-auto">
               <SheetTitle className="text-lg font-bold">
                 SEO<span className="text-violet-500">Utilities</span>
