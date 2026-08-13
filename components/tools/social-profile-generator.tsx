@@ -38,6 +38,7 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
   ]);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [bioUrl, setBioUrl] = useState<string>("");
+  const [qrError, setQrError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,15 +51,15 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
       img.onload = () => {
         // Resize to 96x96 using canvas to keep URL small
         const canvas = document.createElement("canvas");
-        canvas.width = 96;
-        canvas.height = 96;
+        canvas.width = 40;
+        canvas.height = 40;
         const ctx = canvas.getContext("2d")!;
         // Crop to square from center
         const size = Math.min(img.width, img.height);
         const sx = (img.width - size) / 2;
         const sy = (img.height - size) / 2;
-        ctx.drawImage(img, sx, sy, size, size, 0, 0, 96, 96);
-        const base64 = canvas.toDataURL("image/jpeg", 0.7);
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 40, 40);
+        const base64 = canvas.toDataURL("image/jpeg", 0.4);
         setAvatar(base64);
       };
       img.src = ev.target?.result as string;
@@ -134,6 +135,7 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://seoopti.vercel.app";
     const fullUrl = `${baseUrl}/bio?d=${compressed}`;
     setBioUrl(fullUrl);
+    setQrError("");
 
     try {
       const QRCode = (await import("qrcode")).default;
@@ -145,6 +147,11 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
       setQrDataUrl(dataUrl);
     } catch (err) {
       console.error("Error generating QR:", err);
+      setQrDataUrl("");
+      setQrError(avatar
+        ? "QR code is too large because of the profile photo. Try removing it — you can still share the link below."
+        : "Could not generate QR code. Your content may be too long."
+      );
     }
   };
 
@@ -364,20 +371,47 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
                 </Link>
               )}
             </div>
-            <CardContent className="p-6 flex flex-col items-center">
+            <CardContent className="p-6 flex flex-col items-center gap-4">
               {qrDataUrl ? (
                 <>
-                  <div className="bg-white p-4 rounded-xl shadow-sm mb-6 w-full max-w-[280px] aspect-square flex items-center justify-center border">
+                  <div className="bg-white p-4 rounded-xl shadow-sm w-full max-w-[280px] aspect-square flex items-center justify-center border">
                     <img src={qrDataUrl} alt="QR Code" className="w-full h-full object-contain" />
                   </div>
                   <Button onClick={downloadQR} className="w-full gap-2 font-semibold" size="lg">
                     <Download className="h-5 w-5" /> Download QR Code (PNG)
                   </Button>
                 </>
+              ) : qrError ? (
+                <div className="w-full rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-4 text-sm text-yellow-600 dark:text-yellow-400 text-center">
+                  ⚠️ {qrError}
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
                   <Smartphone className="h-12 w-12 mb-4 opacity-20" />
                   <p>Start typing your name or adding links to generate your QR Code.</p>
+                </div>
+              )}
+
+              {/* Always show copyable link when available */}
+              {bioUrl && (
+                <div className="w-full space-y-1.5">
+                  <p className="text-xs font-medium text-muted-foreground">Shareable Link</p>
+                  <div className="flex gap-2">
+                    <input
+                      readOnly
+                      value={bioUrl}
+                      className="flex-1 rounded-md border bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground truncate select-all"
+                      onClick={(e) => (e.target as HTMLInputElement).select()}
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="shrink-0 text-xs"
+                      onClick={() => { navigator.clipboard.writeText(bioUrl); }}
+                    >
+                      Copy
+                    </Button>
+                  </div>
                 </div>
               )}
             </CardContent>
