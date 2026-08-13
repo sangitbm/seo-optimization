@@ -27,12 +27,12 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
 
   const resolvedSlot = slotId || SLOT_IDS[variant] || SLOT_IDS["banner"];
 
-  // Constrain sizes on mobile so they don't take up the whole screen
+  // Hide all ads on mobile to ensure perfect responsiveness and clean UX
   const sizeClasses = {
-    banner: "w-full max-h-[100px] overflow-hidden flex justify-center", // Force horizontal banner on mobile
-    sidebar: "w-full min-h-[250px] flex justify-center", // standard square/vertical on desktop
-    "in-content": "w-full flex justify-center max-h-[250px]", // Limit height on mobile
-    footer: "w-full max-h-[100px] overflow-hidden flex justify-center",
+    banner: "hidden md:flex w-full max-h-[100px] overflow-hidden justify-center",
+    sidebar: "hidden lg:flex w-full min-h-[250px] justify-center",
+    "in-content": "hidden md:flex w-full justify-center max-h-[250px]",
+    footer: "hidden md:flex w-full max-h-[100px] overflow-hidden justify-center",
   };
 
   const adFormat = (variant === "banner" || variant === "footer") ? "horizontal" : "auto";
