@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink, Upload, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -31,12 +31,40 @@ const PLATFORMS: { id: Platform; label: string; prefix: string; placeholder: str
 export function SocialProfileGenerator({ dict }: { dict?: any }) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
+  const [avatar, setAvatar] = useState<string>(""); // base64 or URL
   const [theme, setTheme] = useState<"dark" | "light" | "colorful">("dark");
   const [links, setLinks] = useState<{ id: string; p: Platform; u: string; n?: string }[]>([
     { id: "1", p: "tw", u: "" }
   ]);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [bioUrl, setBioUrl] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onload = () => {
+        // Resize to 96x96 using canvas to keep URL small
+        const canvas = document.createElement("canvas");
+        canvas.width = 96;
+        canvas.height = 96;
+        const ctx = canvas.getContext("2d")!;
+        // Crop to square from center
+        const size = Math.min(img.width, img.height);
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, 96, 96);
+        const base64 = canvas.toDataURL("image/jpeg", 0.7);
+        setAvatar(base64);
+      };
+      img.src = ev.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const addLink = () => {
     if (links.length >= 7) return; // Limit to 7 links to keep QR code scannable
@@ -69,14 +97,13 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
 
   useEffect(() => {
     generateBioLink();
-  }, [name, bio, theme, links]);
+  }, [name, bio, avatar, theme, links]);
 
   const generateBioLink = async () => {
     // Filter out empty links
     const validLinks = links.filter(l => l.u.trim() !== "");
     
-    // Create compact payload
-    const payload = {
+    const payload: Record<string, any> = {
       n: name.trim(),
       b: bio.trim(),
       t: theme,
@@ -88,6 +115,9 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
         return linkObj;
       })
     };
+
+    // Only include avatar if set (keeps URL short for profiles without photo)
+    if (avatar) payload.a = avatar;
 
     // If completely empty, clear QR
     if (!payload.n && validLinks.length === 0) {
@@ -150,6 +180,51 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
               <CardTitle>Profile Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Avatar Upload */}
+              <div className="space-y-2">
+                <Label>Profile Photo</Label>
+                <div className="flex items-center gap-4">
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted border-2 border-border flex items-center justify-center shrink-0">
+                    {avatar ? (
+                      <img src={avatar} alt="Profile" className="w-full h-full object-cover" />
+                    ) : (
+                      <Upload className="h-6 w-6 text-muted-foreground" />
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                      id="avatar-upload"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="gap-2"
+                    >
+                      <Upload className="h-4 w-4" />
+                      {avatar ? "Change Photo" : "Upload Photo"}
+                    </Button>
+                    {avatar && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => { setAvatar(""); if (fileInputRef.current) fileInputRef.current.value = ""; }}
+                        className="gap-2 text-muted-foreground hover:text-destructive"
+                      >
+                        <X className="h-4 w-4" /> Remove
+                      </Button>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Supports JPG, PNG, WebP. Will be cropped to a circle.
+                  </p>
+                </div>
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="name">Display Name</Label>
                 <Input 
