@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink, Upload, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -31,41 +31,12 @@ const PLATFORMS: { id: Platform; label: string; prefix: string; placeholder: str
 export function SocialProfileGenerator({ dict }: { dict?: any }) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
-  const [avatar, setAvatar] = useState<string>(""); // base64 or URL
   const [theme, setTheme] = useState<"dark" | "light" | "colorful">("dark");
   const [links, setLinks] = useState<{ id: string; p: Platform; u: string; n?: string }[]>([
     { id: "1", p: "tw", u: "" }
   ]);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [bioUrl, setBioUrl] = useState<string>("");
-  const [qrError, setQrError] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const img = new Image();
-      img.onload = () => {
-        // Resize to 96x96 using canvas to keep URL small
-        const canvas = document.createElement("canvas");
-        canvas.width = 40;
-        canvas.height = 40;
-        const ctx = canvas.getContext("2d")!;
-        // Crop to square from center
-        const size = Math.min(img.width, img.height);
-        const sx = (img.width - size) / 2;
-        const sy = (img.height - size) / 2;
-        ctx.drawImage(img, sx, sy, size, size, 0, 0, 40, 40);
-        const base64 = canvas.toDataURL("image/jpeg", 0.4);
-        setAvatar(base64);
-      };
-      img.src = ev.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-  };
 
   const addLink = () => {
     if (links.length >= 7) return; // Limit to 7 links to keep QR code scannable
@@ -98,13 +69,14 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
 
   useEffect(() => {
     generateBioLink();
-  }, [name, bio, avatar, theme, links]);
+  }, [name, bio, theme, links]);
 
   const generateBioLink = async () => {
     // Filter out empty links
     const validLinks = links.filter(l => l.u.trim() !== "");
     
-    const payload: Record<string, any> = {
+    // Create compact payload
+    const payload = {
       n: name.trim(),
       b: bio.trim(),
       t: theme,
@@ -116,9 +88,6 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
         return linkObj;
       })
     };
-
-    // Only include avatar if set (keeps URL short for profiles without photo)
-    if (avatar) payload.a = avatar;
 
     // If completely empty, clear QR
     if (!payload.n && validLinks.length === 0) {
@@ -135,7 +104,6 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://seoopti.vercel.app";
     const fullUrl = `${baseUrl}/bio?d=${compressed}`;
     setBioUrl(fullUrl);
-    setQrError("");
 
     try {
       const QRCode = (await import("qrcode")).default;
@@ -147,11 +115,6 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
       setQrDataUrl(dataUrl);
     } catch (err) {
       console.error("Error generating QR:", err);
-      setQrDataUrl("");
-      setQrError(avatar
-        ? "QR code is too large because of the profile photo. Try removing it — you can still share the link below."
-        : "Could not generate QR code. Your content may be too long."
-      );
     }
   };
 
@@ -187,51 +150,6 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
               <CardTitle>Profile Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Avatar Upload */}
-              <div className="space-y-2">
-                <Label>Profile Photo</Label>
-                <div className="flex items-center gap-4">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted border-2 border-border flex items-center justify-center shrink-0">
-                    {avatar ? (
-                      <img src={avatar} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                      <Upload className="h-6 w-6 text-muted-foreground" />
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={handleImageUpload}
-                      id="avatar-upload"
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="gap-2"
-                    >
-                      <Upload className="h-4 w-4" />
-                      {avatar ? "Change Photo" : "Upload Photo"}
-                    </Button>
-                    {avatar && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => { setAvatar(""); if (fileInputRef.current) fileInputRef.current.value = ""; }}
-                        className="gap-2 text-muted-foreground hover:text-destructive"
-                      >
-                        <X className="h-4 w-4" /> Remove
-                      </Button>
-                    )}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Supports JPG, PNG, WebP. Will be cropped to a circle.
-                  </p>
-                </div>
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="name">Display Name</Label>
                 <Input 
@@ -371,47 +289,20 @@ export function SocialProfileGenerator({ dict }: { dict?: any }) {
                 </Link>
               )}
             </div>
-            <CardContent className="p-6 flex flex-col items-center gap-4">
+            <CardContent className="p-6 flex flex-col items-center">
               {qrDataUrl ? (
                 <>
-                  <div className="bg-white p-4 rounded-xl shadow-sm w-full max-w-[280px] aspect-square flex items-center justify-center border">
+                  <div className="bg-white p-4 rounded-xl shadow-sm mb-6 w-full max-w-[280px] aspect-square flex items-center justify-center border">
                     <img src={qrDataUrl} alt="QR Code" className="w-full h-full object-contain" />
                   </div>
                   <Button onClick={downloadQR} className="w-full gap-2 font-semibold" size="lg">
                     <Download className="h-5 w-5" /> Download QR Code (PNG)
                   </Button>
                 </>
-              ) : qrError ? (
-                <div className="w-full rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-4 text-sm text-yellow-600 dark:text-yellow-400 text-center">
-                  ⚠️ {qrError}
-                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
                   <Smartphone className="h-12 w-12 mb-4 opacity-20" />
                   <p>Start typing your name or adding links to generate your QR Code.</p>
-                </div>
-              )}
-
-              {/* Always show copyable link when available */}
-              {bioUrl && (
-                <div className="w-full space-y-1.5">
-                  <p className="text-xs font-medium text-muted-foreground">Shareable Link</p>
-                  <div className="flex gap-2">
-                    <input
-                      readOnly
-                      value={bioUrl}
-                      className="flex-1 rounded-md border bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground truncate select-all"
-                      onClick={(e) => (e.target as HTMLInputElement).select()}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="shrink-0 text-xs"
-                      onClick={() => { navigator.clipboard.writeText(bioUrl); }}
-                    >
-                      Copy
-                    </Button>
-                  </div>
                 </div>
               )}
             </CardContent>

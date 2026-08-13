@@ -23,7 +23,6 @@ interface ProfileData {
   b: string; // bio
   t: "dark" | "light" | "colorful"; // theme
   l: Array<{ p: Platform; u: string; n?: string }>;
-  a?: string; // avatar base64
 }
 
 function BioContent() {
@@ -92,12 +91,8 @@ function BioContent() {
       <div className="max-w-md mx-auto px-4 py-16 flex flex-col items-center">
         {/* Avatar */}
         <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 p-1 mb-6 shadow-xl">
-          <div className={`w-full h-full rounded-full overflow-hidden flex items-center justify-center ${isColorful ? 'bg-white/20 backdrop-blur-md' : isDark ? 'bg-[#111]' : 'bg-white'}`}>
-            {data.a ? (
-              <img src={data.a} alt={data.n || "Profile"} className="w-full h-full object-cover" />
-            ) : (
-              <UserCircle2 className={`w-12 h-12 ${isColorful ? 'text-white' : isDark ? 'text-white' : 'text-gray-400'}`} />
-            )}
+          <div className={`w-full h-full rounded-full flex items-center justify-center ${isColorful ? 'bg-white/20 backdrop-blur-md' : isDark ? 'bg-[#111]' : 'bg-white'}`}>
+            <UserCircle2 className={`w-12 h-12 ${isColorful ? 'text-white' : isDark ? 'text-white' : 'text-gray-400'}`} />
           </div>
         </div>
 
