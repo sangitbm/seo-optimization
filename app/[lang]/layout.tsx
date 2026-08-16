@@ -39,6 +39,7 @@ export async function generateMetadata({
       default: "SEO Utilities — Free Online SEO Tools",
       template: "%s | SEO Utilities",
     },
+    applicationName: "SEO Utilities",
     description:
       "Free online SEO tools for developers and marketers. Generate meta tags, schema markup, sitemaps, robots.txt, and more. No sign-up required.",
     metadataBase: new URL("https://seoopti.vercel.app"),
