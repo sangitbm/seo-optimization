@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AdProvider } from "@/components/providers/ad-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { NewsletterPopup } from "@/components/newsletter-popup";
 import "../globals.css";
 import { i18n } from "../../i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
@@ -100,6 +101,7 @@ export default async function RootLayout({
             <Footer dict={dict} lang={lang} />
             <Toaster richColors position="bottom-right" />
             <CookieConsent />
+            <NewsletterPopup />
           </AdProvider>
         </ThemeProvider>
         {/* Google Consent Mode v2 — defaults (before any cookie loads) */}
