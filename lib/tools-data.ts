@@ -24,7 +24,12 @@ import {
   AlignLeft,
   MousePointerClick,
   Terminal,
-  Contact
+  Contact,
+  ShieldCheck,
+  Binary,
+  Braces,
+  Unplug,
+  ListTree
 } from "lucide-react";
 
 export interface Tool {
@@ -47,7 +52,8 @@ export type ToolCategory =
   | "Content"
   | "Code"
   | "Utilities"
-  | "Developer Tools";
+  | "Developer Tools"
+  | "API Tools";
 
 export const categories: ToolCategory[] = [
   "Meta Tags",
@@ -58,6 +64,7 @@ export const categories: ToolCategory[] = [
   "Code",
   "Utilities",
   "Developer Tools",
+  "API Tools",
 ];
 
 export const tools: Tool[] = [
@@ -385,7 +392,72 @@ export const tools: Tool[] = [
     keywords: ["link in bio", "social profile", "multiple links qr code", "linktree alternative", "qr code bio"],
     dateAdded: "2026-08-12",
     popular: true,
-  }
+  },
+  {
+    name: "JWT Decoder",
+    slug: "jwt-decoder",
+    description:
+      "Decode and inspect JSON Web Tokens (JWT) instantly in your browser. View the header, payload, and signature of any JWT. Verify expiry, issuer, and claims without sending your token to a server.",
+    shortDescription:
+      "Decode and inspect JWT tokens — header, payload, expiry, and claims.",
+    icon: ShieldCheck,
+    category: "API Tools",
+    keywords: ["jwt", "json web token", "jwt decoder", "jwt parser", "bearer token", "oauth"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
+  {
+    name: "JSON Validator",
+    slug: "json-validator",
+    description:
+      "Validate and lint any JSON string instantly. Detect syntax errors, unexpected tokens, and formatting issues with detailed error messages and line numbers. Supports JSON5 comments detection.",
+    shortDescription:
+      "Validate JSON syntax and detect errors with line-by-line feedback.",
+    icon: Braces,
+    category: "API Tools",
+    keywords: ["json validator", "json lint", "validate json", "json checker", "json syntax"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
+  {
+    name: "JSON Schema Generator",
+    slug: "json-schema-generator",
+    description:
+      "Paste any JSON object and automatically generate a JSON Schema (Draft-07) that validates it. Perfect for API documentation, form validation, and data contract generation.",
+    shortDescription:
+      "Generate a JSON Schema automatically from any JSON object.",
+    icon: ListTree,
+    category: "API Tools",
+    keywords: ["json schema", "json schema generator", "openapi schema", "json validation", "draft-07"],
+    dateAdded: "2026-08-17",
+    popular: false,
+  },
+  {
+    name: "Base64 Encoder / Decoder",
+    slug: "base64-encoder",
+    description:
+      "Encode any text or string to Base64 and decode Base64 back to plain text instantly in your browser. Useful for API authentication, data URIs, and encoding binary data.",
+    shortDescription:
+      "Encode text to Base64 and decode Base64 back to plain text.",
+    icon: Binary,
+    category: "API Tools",
+    keywords: ["base64", "base64 encoder", "base64 decoder", "encode base64", "decode base64"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
+  {
+    name: "API Request Builder",
+    slug: "api-request-builder",
+    description:
+      "Build and format HTTP API requests visually. Generate ready-to-use fetch(), axios, curl, and HTTPie code snippets for any API endpoint with custom headers, query params, and request body.",
+    shortDescription:
+      "Build API requests visually and generate fetch, axios, and curl snippets.",
+    icon: Unplug,
+    category: "API Tools",
+    keywords: ["api request builder", "curl generator", "fetch generator", "http client", "api tester", "postman alternative"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
