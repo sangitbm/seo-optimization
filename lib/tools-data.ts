@@ -29,7 +29,11 @@ import {
   Binary,
   Braces,
   Unplug,
-  ListTree
+  ListTree,
+  Clock,
+  Fingerprint,
+  FileBox,
+  LayoutTemplate
 } from "lucide-react";
 
 export interface Tool {
@@ -458,6 +462,58 @@ export const tools: Tool[] = [
     dateAdded: "2026-08-17",
     popular: true,
   },
+  {
+    name: "Cron Job Generator",
+    slug: "cron-job-generator",
+    description:
+      "Generate and translate cron job expressions easily. Create complex schedules for your background jobs and see the human-readable translation instantly. Supports standard 5-part cron syntax.",
+    shortDescription:
+      "Generate and translate cron job schedule expressions easily.",
+    icon: Clock,
+    category: "Developer Tools",
+    keywords: ["cron", "crontab", "cron generator", "cron expression", "cron job", "schedule"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
+  {
+    name: "UUID / GUID Generator",
+    slug: "uuid-generator",
+    description:
+      "Generate secure, random UUIDs (Universally Unique Identifiers) instantly. Create version 4 UUIDs for your database keys, sessions, and APIs. Supports bulk generation and one-click copy.",
+    shortDescription:
+      "Generate secure, random UUIDs (v4) instantly.",
+    icon: Fingerprint,
+    category: "Developer Tools",
+    keywords: ["uuid", "guid", "uuid generator", "guid generator", "unique id", "random id"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  },
+  {
+    name: ".gitignore Generator",
+    slug: "gitignore-generator",
+    description:
+      "Generate boilerplate .gitignore files for your GitHub repositories. Combine multiple templates for different operating systems, programming languages, and IDEs into one clean file.",
+    shortDescription:
+      "Generate boilerplate .gitignore files for your projects.",
+    icon: FileBox,
+    category: "Developer Tools",
+    keywords: ["gitignore", "git", "github", "ignore file", "gitignore generator", "developer tools"],
+    dateAdded: "2026-08-17",
+    popular: false,
+  },
+  {
+    name: "CSS Flexbox Generator",
+    slug: "css-flexbox-generator",
+    description:
+      "Design flexible layouts visually with the CSS Flexbox Generator. Tweak container properties, align items, and instantly copy the generated CSS or Tailwind code for your project.",
+    shortDescription:
+      "Design CSS Flexbox layouts visually and generate CSS/Tailwind code.",
+    icon: LayoutTemplate,
+    category: "Code",
+    keywords: ["css", "flexbox", "flexbox generator", "css layout", "tailwind flex", "css generator"],
+    dateAdded: "2026-08-17",
+    popular: true,
+  }
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
