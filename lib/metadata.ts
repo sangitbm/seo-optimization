@@ -1,4 +1,5 @@
 import { type Tool, tools } from "./tools-data";
+import { i18n } from "@/i18n-config";
 
 const SITE_URL = "https://seoopti.vercel.app";
 const SITE_NAME = "SEO Utilities";
@@ -19,12 +20,18 @@ export function createMetadata({
   const path = slug ? (lang ? `/${lang}/${slug}` : `/${slug}`) : (lang ? `/${lang}` : "");
   const url = `${SITE_URL}${path}`;
 
+  const languages = i18n.locales.reduce((acc, locale) => {
+    acc[locale] = slug ? `/${locale}/${slug}` : `/${locale}`;
+    return acc;
+  }, {} as Record<string, string>);
+
   return {
     title: slug ? `${title} — Free Online Tool | ${SITE_NAME}` : title,
     description,
     ...(noIndex && { robots: "noindex, nofollow" }),
     alternates: {
       canonical: url,
+      languages: languages,
     },
     openGraph: {
       title,
