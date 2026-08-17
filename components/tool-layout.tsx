@@ -69,8 +69,11 @@ export function ToolLayout({ tool, children, seoTips, faqs }: ToolLayoutProps) {
           </p>
         </div>
 
-        {/* Top Ad — below page title, clearly separated from navigation */}
-        <AdSlot variant="banner" className="mb-8" />
+        {/* Top Ad — below page title, clearly labeled and separated from navigation */}
+        <div className="mb-8">
+          <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Advertisement</p>
+          <AdSlot variant="banner" />
+        </div>
 
         {/* Content + Sidebar */}
         <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
