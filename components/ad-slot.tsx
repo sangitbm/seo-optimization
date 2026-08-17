@@ -27,12 +27,13 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
 
   const resolvedSlot = slotId || SLOT_IDS[variant] || SLOT_IDS["banner"];
 
-  // Hide all ads on mobile to ensure perfect responsiveness and clean UX
+  // Show compact ad on mobile for banner/footer (required for AdSense approval).
+  // Keep sidebar/in-content desktop only as they are large and intrusive on mobile.
   const sizeClasses = {
-    banner: "hidden md:flex w-full max-h-[100px] overflow-hidden justify-center",
-    sidebar: "hidden lg:flex w-full min-h-[250px] justify-center",
+    banner:       "flex w-full max-h-[60px] md:max-h-[100px] overflow-hidden justify-center",
+    sidebar:      "hidden lg:flex w-full min-h-[250px] justify-center",
     "in-content": "hidden md:flex w-full justify-center max-h-[250px]",
-    footer: "hidden md:flex w-full max-h-[100px] overflow-hidden justify-center",
+    footer:       "flex w-full max-h-[60px] md:max-h-[100px] overflow-hidden justify-center",
   };
 
   const adFormat = (variant === "banner" || variant === "footer") ? "horizontal" : "auto";
