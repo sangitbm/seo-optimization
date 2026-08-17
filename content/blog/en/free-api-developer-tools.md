@@ -11,24 +11,24 @@ We've been there too. That's why we built a free, privacy-first suite of **API d
 
 Here's a look at all 5 tools and when you should use each one.
 
-## 1. JWT Decoder — Instantly Inspect Any JSON Web Token
+## 1. JWT Decoder — Decode JWT Token Online
 
 **→ [Try the Free JWT Decoder](/en/jwt-decoder)**
 
-JSON Web Tokens (JWTs) are everywhere in modern APIs. Every time you log in to a web app that uses OAuth 2.0 or a Bearer token, a JWT is being passed behind the scenes.
+Whether you need to **decode a JWT token online** to debug an authentication issue, or simply want an **online JWT viewer tool** to inspect claims, JSON Web Tokens (JWTs) are everywhere in modern APIs. Every time you log in to a web app that uses OAuth 2.0 or a Bearer token, a JWT is being passed behind the scenes.
 
-But when something goes wrong — like a `401 Unauthorized` error — you need to quickly inspect the token. What algorithm is it using? Has it expired? What claims does it carry?
+But when something goes wrong — like a `401 Unauthorized` error — you need a reliable **jwt inspector browser based** tool to quickly inspect the token. What algorithm is it using? Has it expired? What claims does it carry?
 
 ### What our free JWT decoder shows you:
 - **Header:** The token type (`typ`) and signing algorithm (`alg` — e.g., HS256, RS256)
 - **Payload:** All claims including `sub` (subject/user ID), `iat` (issued at), `exp` (expiry), and any custom claims
-- **Expiry Status:** A clear ✅ Valid or ❌ Expired banner with a human-readable timestamp
+- **Expiry Status:** Easily **check jwt expiry online** with a clear ✅ Valid or ❌ Expired banner and a human-readable timestamp
 - **Quick Info panel:** Key claims summarized at a glance
 
-### Important note on security
-Our JWT decoder works 100% client-side. Your token is **never sent to our servers**. This is critical because JWTs from production systems can contain sensitive user data. Unlike many online JWT decoders, yours stays in your browser tab.
+### Important note on security (Client-Side Only)
+Our JWT decoder works 100% client-side. Your token is **never sent to our servers**. This is critical because JWTs from production systems can contain sensitive user data. If you are looking for a secure way to inspect tokens, you can trust our tool because yours stays entirely in your browser tab.
 
-> **Pro Tip:** The JWT signature cannot be verified without the secret key. Use this tool to inspect token contents and expiry during development — always verify signatures on your server.
+> **Pro Tip:** While you can inspect the payload here, you cannot **verify jwt signature online** without the server's secret key. Use this tool to inspect token contents and expiry during development, but always verify signatures securely on your backend.
 
 ---
 
@@ -76,26 +76,27 @@ Draft-07 is the most widely supported version across popular validation librarie
 
 ---
 
-## 4. Free Base64 Encoder & Decoder
+## 4. Base64 Encoder & Decoder — Base64 Encode Online Free
 
 **→ [Try the Free Base64 Encoder/Decoder](/en/base64-encoder)**
 
-Base64 is one of the most misunderstood concepts in web development. Developers often confuse it with encryption — it is not. Base64 is simply a way to represent binary data as printable ASCII text.
+If you are looking to **Base64 encode online**, you're not alone. Base64 is one of the most misunderstood concepts in web development. Developers often confuse it with encryption — it is not. Base64 is simply a way to represent binary data as printable ASCII text.
 
-You'll encounter Base64 constantly in API development:
+Our tool serves as a complete **Base64 encode decode tool** and **text to Base64 converter**. You'll encounter Base64 constantly in API development:
 - **HTTP Basic Auth:** `Authorization: Basic base64("username:password")`
+- **Authentication Tokens:** Used to **decode JWT Base64** headers/payloads and **SAML Base64 encode** messages
 - **Data URIs:** `src="data:image/png;base64,..."`
-- **JWT tokens:** The header and payload sections are Base64URL encoded
 - **Email attachments:** MIME encoding uses Base64
-- **API payloads:** Embedding small images or files in JSON
+- **API payloads:** Embedding binary files in JSON
 
-### Features of our free Base64 tool:
-- **Encode:** Convert any UTF-8 text string to Base64
-- **Decode:** Convert any Base64 string back to plain text
-- **URL-Safe mode:** Replaces `+` with `-` and `/` with `_` for use in URLs and query parameters (no padding)
+### Features of our Private Base64 Encoder:
+- **Base64 Encode Online:** Convert any UTF-8 text string to Base64
+- **Base64 Decode Free:** Convert any Base64 string back to plain text
+- **URL-safe Base64 encoder:** A built-in toggle replaces `+` with `-` and `/` with `_` for safe use in URLs and query parameters
+- **100% Client-side Base64 converter:** Your text and decoded data never leave your device. This acts as a truly **private Base64 encoder**.
 - **Swap button:** Instantly swap the input and output to encode/decode in reverse
 
-> **Security Reminder:** Base64 is NOT encryption. Never use it to hide passwords, API keys, or sensitive data. Anyone can decode it instantly.
+> **Security Reminder:** Base64 is NOT encryption. Never use it to hide passwords, API keys, or sensitive data. Anyone can decode it instantly using any **Base64 decode free** tool.
 
 ---
 
