@@ -37,8 +37,8 @@ export function SerpSimulator() {
   const formatUrl = (fullUrl: string) => {
     try {
       const u = new URL(fullUrl.startsWith("http") ? fullUrl : `https://${fullUrl}`);
-      let domain = u.hostname;
-      let path = u.pathname;
+      const domain = u.hostname;
+      const path = u.pathname;
       if (path === "/") return domain;
       
       const segments = path.split("/").filter(Boolean);

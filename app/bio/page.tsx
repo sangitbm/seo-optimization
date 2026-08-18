@@ -25,6 +25,29 @@ interface ProfileData {
   l: Array<{ p: Platform; u: string; n?: string }>;
 }
 
+function isProfileData(value: unknown): value is ProfileData {
+  if (!value || typeof value !== "object") return false;
+  const profile = value as Partial<ProfileData>;
+  const validThemes = ["dark", "light", "colorful"];
+
+  return (
+    typeof profile.n === "string" &&
+    typeof profile.b === "string" &&
+    typeof profile.t === "string" &&
+    validThemes.includes(profile.t) &&
+    Array.isArray(profile.l) &&
+    profile.l.every(
+      (link) =>
+        link &&
+        typeof link === "object" &&
+        typeof link.p === "string" &&
+        link.p in PLATFORMS &&
+        typeof link.u === "string" &&
+        (link.n === undefined || typeof link.n === "string")
+    )
+  );
+}
+
 function BioContent() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<ProfileData | null>(null);
@@ -40,8 +63,10 @@ function BioContent() {
     try {
       const decompressed = LZString.decompressFromEncodedURIComponent(d);
       if (!decompressed) throw new Error("Decompression failed");
-      const parsed = JSON.parse(decompressed);
-      if (!parsed.n && (!parsed.l || parsed.l.length === 0)) throw new Error("Invalid data");
+      const parsed: unknown = JSON.parse(decompressed);
+      if (!isProfileData(parsed) || (!parsed.n && parsed.l.length === 0)) {
+        throw new Error("Invalid data");
+      }
       setData(parsed);
     } catch (err) {
       console.error(err);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -124,10 +124,11 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
     toast.success(ui.download || "OG Image exported!");
   };
 
-  // Draw on mount
-  useState(() => {
-    setTimeout(drawCanvas, 100);
-  });
+  // State updates are asynchronous, so drawing in event handlers can use the
+  // previous render's state. Keep the canvas synchronized after each render.
+  useEffect(() => {
+    drawCanvas();
+  }, [drawCanvas]);
 
   return (
     <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
@@ -139,25 +140,25 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label>{t.titleLabel || "Title"}</Label>
-              <Input value={state.title} onChange={(e) => { update("title", e.target.value); setTimeout(drawCanvas, 50); }} className="h-12 text-base" />
+              <Input value={state.title} onChange={(e) => update("title", e.target.value)} className="h-12 text-base" />
             </div>
             <div className="space-y-2">
               <Label>{t.subtitleLabel || "Subtitle (optional)"}</Label>
-              <Input value={state.subtitle} onChange={(e) => { update("subtitle", e.target.value); setTimeout(drawCanvas, 50); }} />
+              <Input value={state.subtitle} onChange={(e) => update("subtitle", e.target.value)} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>{t.color1 || "Color 1"}</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={state.bgColor1} onChange={(e) => { update("bgColor1", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
-                  <Input value={state.bgColor1} onChange={(e) => { update("bgColor1", e.target.value); setTimeout(drawCanvas, 50); }} />
+                  <input type="color" value={state.bgColor1} onChange={(e) => update("bgColor1", e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
+                  <Input value={state.bgColor1} onChange={(e) => update("bgColor1", e.target.value)} />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{t.color2 || "Color 2"}</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={state.bgColor2} onChange={(e) => { update("bgColor2", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
-                  <Input value={state.bgColor2} onChange={(e) => { update("bgColor2", e.target.value); setTimeout(drawCanvas, 50); }} />
+                  <input type="color" value={state.bgColor2} onChange={(e) => update("bgColor2", e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
+                  <Input value={state.bgColor2} onChange={(e) => update("bgColor2", e.target.value)} />
                 </div>
               </div>
             </div>
@@ -165,13 +166,13 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
               <div className="space-y-2">
                 <Label>{t.textColor || "Text Color"}</Label>
                 <div className="flex gap-2">
-                  <input type="color" value={state.textColor} onChange={(e) => { update("textColor", e.target.value); setTimeout(drawCanvas, 50); }} className="h-10 w-10 cursor-pointer rounded border" />
-                  <Input value={state.textColor} onChange={(e) => { update("textColor", e.target.value); setTimeout(drawCanvas, 50); }} />
+                  <input type="color" value={state.textColor} onChange={(e) => update("textColor", e.target.value)} className="h-10 w-10 cursor-pointer rounded border" />
+                  <Input value={state.textColor} onChange={(e) => update("textColor", e.target.value)} />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{t.gradientDir || "Gradient Direction"}</Label>
-                <Select value={state.gradientDir} onValueChange={(v) => { update("gradientDir", v); setTimeout(drawCanvas, 50); }}>
+                <Select value={state.gradientDir} onValueChange={(v) => update("gradientDir", v)}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="to right">Left → Right</SelectItem>
@@ -209,7 +210,7 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
             <Button onClick={exportPNG} className="gap-2">
               <Download className="h-4 w-4" /> {ui.download || "Export"} PNG
             </Button>
-            <ResetButton onReset={() => { setState(defaultState); setTimeout(drawCanvas, 50); }} />
+            <ResetButton onReset={() => setState(defaultState)} />
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export function UtmBuilder() {
   const [content, setContent] = useState("");
 
   const generateUtmLink = () => {
-    if (!url) return "";
+    if (!url || !source || !medium) return "";
     
     try {
       const baseUrl = url.startsWith("http") ? url : `https://${url}`;

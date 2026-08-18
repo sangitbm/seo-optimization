@@ -11,7 +11,25 @@ type ConsentState = {
   advertising: boolean;
 };
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const CONSENT_KEY = "seoutilities_cookie_consent";
+export const CONSENT_CHANGE_EVENT = "seoutilities:consent-change";
+
+function updateGoogleConsent(state: ConsentState) {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: state.analytics ? "granted" : "denied",
+      ad_storage: state.advertising ? "granted" : "denied",
+      ad_user_data: state.advertising ? "granted" : "denied",
+      ad_personalization: state.advertising ? "granted" : "denied",
+    });
+  }
+}
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -29,24 +47,35 @@ export function CookieConsent() {
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);
-    if (!stored) {
-      // Slight delay so banner doesn't flash immediately on load
-      const timer = setTimeout(() => setVisible(true), 1500);
-      return () => clearTimeout(timer);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (
+          typeof parsed.analytics === "boolean" &&
+          typeof parsed.advertising === "boolean"
+        ) {
+          const restoredConsent: ConsentState = {
+            necessary: true,
+            analytics: parsed.analytics,
+            advertising: parsed.advertising,
+          };
+          updateGoogleConsent(restoredConsent);
+          return;
+        }
+      } catch {
+        localStorage.removeItem(CONSENT_KEY);
+      }
     }
+
+    // Slight delay so banner doesn't flash immediately on load.
+    const timer = setTimeout(() => setVisible(true), 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   const saveConsent = (state: ConsentState) => {
     localStorage.setItem(CONSENT_KEY, JSON.stringify({ ...state, timestamp: Date.now() }));
-    // Push consent to Google Consent Mode v2
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
-        analytics_storage: state.analytics ? "granted" : "denied",
-        ad_storage: state.advertising ? "granted" : "denied",
-        ad_user_data: state.advertising ? "granted" : "denied",
-        ad_personalization: state.advertising ? "granted" : "denied",
-      });
-    }
+    updateGoogleConsent(state);
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
     setVisible(false);
   };
 
@@ -196,15 +225,32 @@ export function useCookieConsent(): ConsentState | null {
   const [consent, setConsent] = useState<ConsentState | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (stored) {
+    const readConsent = () => {
+      const stored = localStorage.getItem(CONSENT_KEY);
+      if (!stored) {
+        setConsent(null);
+        return;
+      }
+
       try {
         const parsed = JSON.parse(stored);
-        setConsent(parsed);
+        if (typeof parsed.analytics === "boolean" && typeof parsed.advertising === "boolean") {
+          setConsent({
+            necessary: true,
+            analytics: parsed.analytics,
+            advertising: parsed.advertising,
+          });
+        } else {
+          setConsent(null);
+        }
       } catch {
         setConsent(null);
       }
-    }
+    };
+
+    readConsent();
+    window.addEventListener(CONSENT_CHANGE_EVENT, readConsent);
+    return () => window.removeEventListener(CONSENT_CHANGE_EVENT, readConsent);
   }, []);
 
   return consent;

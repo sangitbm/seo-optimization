@@ -46,7 +46,6 @@ export function UuidGenerator() {
 
   useEffect(() => {
     generate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [version, uppercase]);
 
   const copyAll = () => {

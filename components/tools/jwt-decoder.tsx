@@ -29,7 +29,8 @@ const faqs = [
 function base64UrlDecode(str: string) {
   str = str.replace(/-/g, "+").replace(/_/g, "/");
   while (str.length % 4) str += "=";
-  return JSON.parse(atob(str));
+  const bytes = Uint8Array.from(atob(str), (character) => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
 }
 
 function formatDate(ts: number) {

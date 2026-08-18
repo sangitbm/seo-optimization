@@ -190,12 +190,13 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
           ))}
           <Button
             onClick={() => {
-              if (!entries.some((e) => e.url.trim())) {
-                toast.error("Please enter at least one URL");
+              const validEntries = entries.filter((entry) => isValidUrl(entry.url));
+              if (validEntries.length === 0) {
+                toast.error("Please enter at least one valid http:// or https:// URL");
                 return;
               }
-              setOutputXML(generateXML(entries));
-                setOutputHTML(generateHTML(entries));
+              setOutputXML(generateXML(validEntries));
+              setOutputHTML(generateHTML(validEntries));
                 toast.success(t.generatedCode || "Sitemaps generated successfully!");
             }}
             size="lg"

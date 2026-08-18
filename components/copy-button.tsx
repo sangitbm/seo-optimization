@@ -29,7 +29,7 @@ export function CopyButton({
       size={size}
       onClick={() => copy(text, label)}
       className={`gap-2 transition-all ${className}`}
-      disabled={copied}
+      disabled={!text || copied}
     >
       {copied ? (
         <>

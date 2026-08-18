@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useCookieConsent } from "@/components/cookie-consent";
 
 interface AdSlotProps {
   variant?: "banner" | "sidebar" | "in-content" | "footer";
@@ -17,13 +18,18 @@ const SLOT_IDS: Record<string, string> = {
 };
 
 export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotProps) {
+  const consent = useCookieConsent();
+  const cmpReady = process.env.NEXT_PUBLIC_ADSENSE_CMP_READY === "true";
+
   useEffect(() => {
+    if (!cmpReady || !consent?.advertising) return;
+
     try {
       ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
     } catch (e) {
       // adsbygoogle not yet loaded — safe to ignore
     }
-  }, []);
+  }, [cmpReady, consent?.advertising]);
 
   const resolvedSlot = slotId || SLOT_IDS[variant] || SLOT_IDS["banner"];
 
@@ -37,6 +43,9 @@ export function AdSlot({ variant = "banner", className = "", slotId }: AdSlotPro
   };
 
   const adFormat = (variant === "banner" || variant === "footer") ? "horizontal" : "auto";
+
+  // Do not create an ad request before the visitor opts in to advertising.
+  if (!cmpReady || !consent?.advertising) return null;
 
   return (
     <div className={`${sizeClasses[variant]} ${className}`}>

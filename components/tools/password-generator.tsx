@@ -18,26 +18,40 @@ export function PasswordGenerator() {
   const [includeSymbols, setIncludeSymbols] = useState(true);
 
   const generatePassword = () => {
-    let charset = "";
-    if (includeUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (includeLowercase) charset += "abcdefghijklmnopqrstuvwxyz";
-    if (includeNumbers) charset += "0123456789";
-    if (includeSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    const characterSets = [
+      includeUppercase ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "",
+      includeLowercase ? "abcdefghijklmnopqrstuvwxyz" : "",
+      includeNumbers ? "0123456789" : "",
+      includeSymbols ? "!@#$%^&*()_+~`|}{[]:;?><,./-=" : "",
+    ].filter(Boolean);
+    const charset = characterSets.join("");
 
     if (charset === "") {
       setPassword("Please select at least one option");
       return;
     }
 
-    let newPassword = "";
-    const array = new Uint32Array(length);
-    window.crypto.getRandomValues(array);
+    const randomIndex = (max: number) => {
+      const limit = Math.floor(0x1_0000_0000 / max) * max;
+      const array = new Uint32Array(1);
+      do {
+        window.crypto.getRandomValues(array);
+      } while (array[0] >= limit);
+      return array[0] % max;
+    };
 
-    for (let i = 0; i < length; i++) {
-      newPassword += charset[array[i] % charset.length];
+    // Include every selected class, then shuffle to avoid predictable positions.
+    const characters = characterSets.map((set) => set[randomIndex(set.length)]);
+    while (characters.length < length) {
+      characters.push(charset[randomIndex(charset.length)]);
     }
 
-    setPassword(newPassword);
+    for (let index = characters.length - 1; index > 0; index--) {
+      const swapIndex = randomIndex(index + 1);
+      [characters[index], characters[swapIndex]] = [characters[swapIndex], characters[index]];
+    }
+
+    setPassword(characters.join(""));
   };
 
   // Generate on mount

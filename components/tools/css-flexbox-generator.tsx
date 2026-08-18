@@ -36,7 +36,7 @@ export function CssFlexboxGenerator() {
   const [outputMode, setOutputMode] = useState<"css" | "tailwind">("css");
 
   const getTailwindClasses = () => {
-    let classes = ["flex"];
+    const classes = ["flex"];
     
     if (direction === "row-reverse") classes.push("flex-row-reverse");
     if (direction === "column") classes.push("flex-col");
