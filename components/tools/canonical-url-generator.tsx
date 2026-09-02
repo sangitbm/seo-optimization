@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -31,7 +32,8 @@ const faqs = [
   { question: "Can canonical tags point to a different domain?", answer: "Yes, cross-domain canonical tags are supported and can be used when content is syndicated across different domains." },
 ];
 
-export function CanonicalUrlGeneratorTool({ dict }: { dict?: any }) {
+export function CanonicalUrlGeneratorTool() {
+  const dict: any = {};
   const [url, setUrl] = useState("");
   const [output, setOutput] = useState("");
 
@@ -42,7 +44,7 @@ export function CanonicalUrlGeneratorTool({ dict }: { dict?: any }) {
   const toolSeoTips = t.seoTips || seoTips;
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["canonical-url-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader><CardTitle className="text-lg">{t.configTitle || "Enter Your Canonical URL"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">

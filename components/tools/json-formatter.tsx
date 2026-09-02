@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CopyButton } from "@/components/copy-button";
 import { RefreshCw, Code, CheckCircle2, XCircle } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { getToolBySlug } from "@/lib/tools-data";
 
 export function JsonFormatter() {
@@ -51,7 +52,7 @@ export function JsonFormatter() {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={[]} faqs={[]}>
+    <ToolLayout tool={tool} content={toolContent["json-formatter"]} seoTips={[]} faqs={[]}>
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="space-y-4">
           <div className="flex items-center justify-between">

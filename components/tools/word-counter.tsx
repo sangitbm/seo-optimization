@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RefreshCw, Type, Hash, AlignLeft, BarChart } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { getToolBySlug } from "@/lib/tools-data";
 
 export function WordCounter() {
@@ -55,7 +56,7 @@ export function WordCounter() {
   const keywords = getKeywordDensity();
 
   return (
-    <ToolLayout tool={tool} seoTips={[]} faqs={[]}>
+    <ToolLayout tool={tool} content={toolContent["word-counter"]} seoTips={[]} faqs={[]}>
       <div className="grid gap-8 lg:grid-cols-3">
       <div className="lg:col-span-2 space-y-4">
         <div className="flex items-center justify-between">

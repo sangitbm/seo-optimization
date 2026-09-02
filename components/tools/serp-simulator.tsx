@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { getToolBySlug } from "@/lib/tools-data";
 import { Monitor, Smartphone, Search, MoreVertical, Globe } from "lucide-react";
 
@@ -55,7 +56,7 @@ export function SerpSimulator() {
   const displayDesc = description.length > maxDescChars ? description.substring(0, maxDescChars) + "..." : description;
 
   return (
-    <ToolLayout tool={tool} seoTips={[]} faqs={[]}>
+    <ToolLayout tool={tool} content={toolContent["serp-simulator"]} seoTips={[]} faqs={[]}>
       <div className="grid gap-12 lg:grid-cols-2">
         
         {/* Editor */}

@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function Hero({ dict, lang }: { dict?: any; lang?: string }) {
+export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border/40">
       {/* Background gradient */}
@@ -21,14 +21,14 @@ export function Hero({ dict, lang }: { dict?: any; lang?: string }) {
           </div>
 
           <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            {dict?.title || "Powerful"}{" "}
+            Powerful{" "}
             <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-              {dict?.titleHighlight || "SEO Utilities"}
+              SEO Utilities
             </span>
           </h1>
 
           <p className="mb-10 text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            {dict?.subtitle || "A collection of free, fast, and privacy-friendly SEO tools."}
+            A collection of free, fast, and privacy-friendly SEO tools. Generate meta tags, schema markup, sitemaps, and more — all running in your browser with zero server round-trips.
           </p>
 
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -37,8 +37,8 @@ export function Hero({ dict, lang }: { dict?: any; lang?: string }) {
               nativeButton={false}
               className="gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:scale-[1.02]"
               render={
-                <Link href={`/${lang}/#tools`}>
-                  {dict?.ctaPrimary || "Explore Tools"}
+                <Link href="/#tools">
+                  Explore Tools
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               }
@@ -48,7 +48,7 @@ export function Hero({ dict, lang }: { dict?: any; lang?: string }) {
               size="lg"
               nativeButton={false}
               className="gap-2"
-              render={<Link href={`/${lang}/about`}>{dict?.ctaSecondary || "Learn More"}</Link>}
+              render={<Link href="/about">Learn More</Link>}
             />
           </div>
 

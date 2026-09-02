@@ -14,14 +14,6 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
-  // NOTE: A Content-Security-Policy is intentionally omitted here.
-  // Next.js (especially in dev with HMR) and AdSense both require a nonce-based
-  // CSP to work without breaking stylesheet/script loading. A nonce-based CSP
-  // requires Next.js middleware and is a separate implementation effort.
-  // The high-severity XSS risks are already mitigated by:
-  //   - safeJsonLd() escaping </ sequences in all JSON-LD script tags
-  //   - URL validation in sitemap generator blocking javascript: URIs
-  //   - React's built-in JSX escaping for all rendered content
 ];
 
 const nextConfig: NextConfig = {
@@ -31,6 +23,20 @@ const nextConfig: NextConfig = {
         // Apply security headers to all routes
         source: "/(.*)",
         headers: securityHeaders,
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:lang(en|es|fr|de|it|pt)/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:lang(en|es|fr|de|it|pt)",
+        destination: "/",
+        permanent: true,
       },
     ];
   },

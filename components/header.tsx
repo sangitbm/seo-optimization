@@ -1,10 +1,9 @@
 "use client";
 
-import { Moon, Sun, Menu, Globe, Search } from "lucide-react";
+import { Moon, Sun, Menu, Search } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,34 +11,14 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { categories, getToolsByCategory } from "@/lib/tools-data";
-import { i18n } from "@/i18n-config";
 
-export function Header({ dict }: { dict?: any }) {
+export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => setMounted(true), []);
-
-  const switchLanguage = (newLocale: string) => {
-    if (!pathname) return;
-    const segments = pathname.split('/');
-    if (i18n.locales.includes(segments[1] as any)) {
-      segments[1] = newLocale;
-      router.push(segments.join('/'));
-    }
-  };
-
-  const currentLocale = pathname ? pathname.split('/')[1] : i18n.defaultLocale;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
@@ -60,87 +39,39 @@ export function Header({ dict }: { dict?: any }) {
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <Link
-            href={`/${currentLocale}`}
+            href="/"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.navigation?.home || "Home"}
+            Home
           </Link>
           <Link
-            href={`/${currentLocale}/#tools`}
+            href="/#tools"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.navigation?.tools || "Tools"}
+            Tools
           </Link>
           <Link
-            href={`/${currentLocale}/#faq`}
+            href="/#faq"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             FAQ
           </Link>
           <Link
-            href={`/${currentLocale}/blog`}
+            href="/blog"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Blog
           </Link>
           <Link
-            href={`/${currentLocale}/about`}
+            href="/about"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            {dict?.navigation?.about || "About"}
+            About
           </Link>
         </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          {/* Language Switcher */}
-          {mounted && (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-accent transition-colors">
-                <Globe className="h-4 w-4" />
-                <span className="sr-only">Switch language</span>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("en")}
-                  className={currentLocale === "en" ? "bg-accent" : ""}
-                >
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("es")}
-                  className={currentLocale === "es" ? "bg-accent" : ""}
-                >
-                  Español
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("fr")}
-                  className={currentLocale === "fr" ? "bg-accent" : ""}
-                >
-                  Français
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("de")}
-                  className={currentLocale === "de" ? "bg-accent" : ""}
-                >
-                  Deutsch
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("it")}
-                  className={currentLocale === "it" ? "bg-accent" : ""}
-                >
-                  Italiano
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => switchLanguage("pt")}
-                  className={currentLocale === "pt" ? "bg-accent" : ""}
-                >
-                  Português
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-
           {mounted && (
             <Button
               variant="ghost"
@@ -172,43 +103,37 @@ export function Header({ dict }: { dict?: any }) {
               </SheetTitle>
               <nav className="mt-6 flex flex-col gap-1">
                 <Link
-                  href={`/${currentLocale}`}
+                  href="/"
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
-                  {dict?.navigation?.home || "Home"}
+                  Home
                 </Link>
                 <Link
-                  href={`/${currentLocale}/blog`}
+                  href="/blog"
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
                   Blog
                 </Link>
-                {categories.map((cat) => {
-                  const translatedCat = dict?.categoriesMap?.[cat] || cat;
-                  return (
+                {categories.map((cat) => (
                   <div key={cat} className="mt-4">
                     <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {translatedCat}
+                      {cat}
                     </p>
-                    {getToolsByCategory(cat).map((tool) => {
-                      const translatedName = dict?.toolsMap?.[tool.slug]?.name || tool.name;
-                      return (
+                    {getToolsByCategory(cat).map((tool) => (
                       <Link
                         key={tool.slug}
-                        href={`/${currentLocale}/${tool.slug}`}
+                        href={`/${tool.slug}`}
                         onClick={() => setMobileOpen(false)}
                         className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent"
                       >
                         <tool.icon className="h-4 w-4 text-muted-foreground" />
-                        {translatedName}
+                        {tool.name}
                       </Link>
-                      )
-                    })}
+                    ))}
                   </div>
-                  )
-                })}
+                ))}
               </nav>
             </SheetContent>
           </Sheet>

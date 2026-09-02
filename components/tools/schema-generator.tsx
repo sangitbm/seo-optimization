@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -254,7 +255,8 @@ const faqs = [
   },
 ];
 
-export function SchemaGeneratorTool({ dict }: { dict?: any }) {
+export function SchemaGeneratorTool() {
+  const dict: any = {};
   const [activeType, setActiveType] = useState<SchemaType>("Organization");
   const [data, setData] = useState<Record<string, Record<string, string>>>({});
   const [output, setOutput] = useState("");
@@ -276,7 +278,7 @@ export function SchemaGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["schema-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">{t.configTitle || "Schema Type"}</CardTitle>

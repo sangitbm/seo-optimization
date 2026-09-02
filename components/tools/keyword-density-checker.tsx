@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
 import { ResetButton } from "@/components/reset-button";
@@ -56,7 +57,8 @@ const faqs = [
   { question: "What is the ideal keyword density?", answer: "Most SEO experts recommend a keyword density of 1-2% for primary keywords. More important than density is natural, reader-friendly writing." },
 ];
 
-export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
+export function KeywordDensityCheckerTool() {
+  const dict: any = {};
   const [text, setText] = useState("");
   const [analysis, setAnalysis] = useState<ReturnType<typeof analyzeText> | null>(null);
 
@@ -76,7 +78,7 @@ export function KeywordDensityCheckerTool({ dict }: { dict?: any }) {
   }, [analysis]);
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["keyword-density-checker"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader><CardTitle className="text-lg">{t.inputLabel || "Paste Your Content"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">

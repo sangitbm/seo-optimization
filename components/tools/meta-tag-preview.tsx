@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { ResetButton } from "@/components/reset-button";
 
 import { getToolBySlug } from "@/lib/tools-data";
@@ -36,7 +37,8 @@ const faqs = [
   { question: "Can I control what Facebook shows?", answer: "Yes! Use Open Graph meta tags (og:title, og:description, og:image) to control how your content appears when shared on Facebook." },
 ];
 
-export function MetaTagPreviewTool({ dict }: { dict?: any }) {
+export function MetaTagPreviewTool() {
+  const dict: any = {};
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
@@ -50,7 +52,7 @@ export function MetaTagPreviewTool({ dict }: { dict?: any }) {
   const toolSeoTips = t.seoTips || seoTips;
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["meta-tag-preview"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader><CardTitle className="text-lg">{t.configTitle || "Page Information"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">

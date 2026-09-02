@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -60,7 +61,8 @@ const faqs = [
   { question: "How do redirects affect SEO?", answer: "Proper 301 redirects pass most link equity to the new URL. However, redirect chains (multiple redirects) can dilute link equity and slow page loading." },
 ];
 
-export function RedirectGeneratorTool({ dict }: { dict?: any }) {
+export function RedirectGeneratorTool() {
+  const dict: any = {};
   const [redirects, setRedirects] = useState<Redirect[]>([{ from: "/old-page", to: "/new-page", type: "301" }]);
   const [isGenerated, setIsGenerated] = useState(false);
 
@@ -78,7 +80,7 @@ export function RedirectGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["redirect-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">{t.configTitle || "Redirect Rules"}</CardTitle>

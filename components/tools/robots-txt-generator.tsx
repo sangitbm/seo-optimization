@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -63,7 +64,8 @@ const faqs = [
   { question: "Where should robots.txt be placed?", answer: "It must be placed at the root of your domain: https://example.com/robots.txt" },
 ];
 
-export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
+export function RobotsTxtGeneratorTool() {
+  const dict: any = {};
   const [blocks, setBlocks] = useState<UserAgentBlock[]>([{ ...defaultBlock, rules: [{ type: "Allow", path: "/" }] }]);
   const [sitemapUrl, setSitemapUrl] = useState("");
   const [output, setOutput] = useState("");
@@ -101,7 +103,7 @@ export function RobotsTxtGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["robots-txt-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="space-y-4">
         {blocks.map((block, bi) => (
           <Card key={bi}>

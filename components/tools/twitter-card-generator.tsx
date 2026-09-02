@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -42,7 +43,8 @@ const faqs = [
   { question: "How do I validate my Twitter Card?", answer: "Use the Twitter Card Validator at cards-dev.twitter.com/validator to preview and debug your card markup." },
 ];
 
-export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
+export function TwitterCardGeneratorTool() {
+  const dict: any = {};
   const [state, setState] = useState(defaultState);
   const [output, setOutput] = useState("");
 
@@ -54,7 +56,7 @@ export function TwitterCardGeneratorTool({ dict }: { dict?: any }) {
   const update = (k: string, v: string) => { setState((p) => ({ ...p, [k]: v })); setOutput(""); };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["twitter-card-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader><CardTitle className="text-lg">{t.configTitle || "Card Settings"}</CardTitle></CardHeader>

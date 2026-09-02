@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CopyButton } from "@/components/copy-button";
 import { ResetButton } from "@/components/reset-button";
 
@@ -44,7 +45,8 @@ const faqs = [
   { question: "Why are SEO-friendly URLs important?", answer: "Clean, descriptive URLs help search engines understand your content and improve click-through rates from search results." },
 ];
 
-export function SlugGeneratorTool({ dict }: { dict?: any }) {
+export function SlugGeneratorTool() {
+  const dict: any = {};
   const [text, setText] = useState("");
   const [separator, setSeparator] = useState("-");
   const [lowercase, setLowercase] = useState(true);
@@ -60,7 +62,7 @@ export function SlugGeneratorTool({ dict }: { dict?: any }) {
   const handleChange = () => setSlug("");
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["slug-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader><CardTitle className="text-lg">{t.configTitle || "Input"}</CardTitle></CardHeader>
         <CardContent className="space-y-4">

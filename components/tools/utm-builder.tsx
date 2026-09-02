@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { CopyButton } from "@/components/copy-button";
 import { Link as LinkIcon, RefreshCw } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { getToolBySlug } from "@/lib/tools-data";
 
 export function UtmBuilder() {
@@ -49,7 +50,7 @@ export function UtmBuilder() {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={[]} faqs={[]}>
+    <ToolLayout tool={tool} content={toolContent["utm-builder"]} seoTips={[]} faqs={[]}>
       <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="space-y-2">

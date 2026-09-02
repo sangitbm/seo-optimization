@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { ResetButton } from "@/components/reset-button";
 
 import { getToolBySlug } from "@/lib/tools-data";
@@ -32,7 +33,8 @@ const faqs = [
   { question: "Can I track scans on these QR codes?", answer: "Since these are static QR codes that encode your data directly, they do not include built-in tracking. You can track scans by using a URL shortener or adding UTM parameters to your web links." },
 ];
 
-export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
+export function QRCodeGeneratorTool() {
+  const dict: any = {};
   const [activeTab, setActiveTab] = useState("url");
   
   // Settings
@@ -166,7 +168,7 @@ export function QRCodeGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["qr-code-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-7 space-y-6">
           <Card>

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Download, Image as ImageIcon } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { ResetButton } from "@/components/reset-button";
 
 import { getToolBySlug } from "@/lib/tools-data";
@@ -45,7 +46,8 @@ const faqs = [
   { question: "Can I use these images commercially?", answer: "Yes! All generated images are created entirely in your browser and are free for commercial use." },
 ];
 
-export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
+export function OpenGraphGeneratorTool() {
+  const dict: any = {};
   const [state, setState] = useState<OGState>(defaultState);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -131,7 +133,7 @@ export function OpenGraphGeneratorTool({ dict }: { dict?: any }) {
   }, [drawCanvas]);
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["open-graph-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>

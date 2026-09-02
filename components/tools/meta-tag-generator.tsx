@@ -16,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -145,7 +146,8 @@ const faqs = [
   },
 ];
 
-export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
+export function MetaTagGeneratorTool() {
+  const dict: any = {};
   const [state, setState] = useState<MetaState>(defaultState);
   const [output, setOutput] = useState("");
 
@@ -162,7 +164,7 @@ export function MetaTagGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["meta-tag-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Tabs defaultValue="basic" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="basic">{t.basic || "Basic"}</TabsTrigger>

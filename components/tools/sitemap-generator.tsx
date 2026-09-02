@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -109,7 +110,8 @@ const faqs = [
   { question: "Where should I place my sitemap?", answer: "Place your sitemap.xml in the root of your domain (e.g., https://example.com/sitemap.xml) and reference it in your robots.txt file." },
 ];
 
-export function SitemapGeneratorTool({ dict }: { dict?: any }) {
+export function SitemapGeneratorTool() {
+  const dict: any = {};
   const [entries, setEntries] = useState<SitemapEntry[]>([{ ...defaultEntry }]);
   const [outputXML, setOutputXML] = useState("");
   const [outputHTML, setOutputHTML] = useState("");
@@ -135,7 +137,7 @@ export function SitemapGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["sitemap-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">{t.urls || "URL Entries"}</CardTitle>

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ToolLayout } from "@/components/tool-layout";
+import { toolContent } from "@/lib/tool-content";
 import { CodePreview } from "@/components/code-preview";
 import { CopyButton } from "@/components/copy-button";
 import { DownloadButton } from "@/components/download-button";
@@ -31,7 +32,8 @@ const faqs = [
   { question: "When should I use hreflang?", answer: "Use hreflang when you have the same content in multiple languages or regional variations (e.g., English for US vs UK)." },
 ];
 
-export function HreflangGeneratorTool({ dict }: { dict?: any }) {
+export function HreflangGeneratorTool() {
+  const dict: any = {};
   const [entries, setEntries] = useState<HreflangEntry[]>([
     { lang: "en", url: "" },
     { lang: "x-default", url: "" },
@@ -52,7 +54,7 @@ export function HreflangGeneratorTool({ dict }: { dict?: any }) {
   };
 
   return (
-    <ToolLayout tool={tool} seoTips={toolSeoTips} faqs={toolFaqs}>
+    <ToolLayout tool={tool} content={toolContent["hreflang-generator"]} seoTips={toolSeoTips} faqs={toolFaqs}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">{t.urlsTitle || "Language Versions"}</CardTitle>

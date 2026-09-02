@@ -21,7 +21,7 @@ const homeFAQs = [
   {
     question: "What SEO tools are available?",
     answer:
-      "We offer 17+ tools including Meta Tag Generator, Schema Markup Generator, Sitemap Generator, Robots.txt Generator, Keyword Density Checker, QR Code Generator, code minifiers, and many more. Each tool is designed to help with a specific aspect of SEO.",
+      "We offer 17+ tools including Meta Tag Generator, Schema Markup Generator, Sitemap Generator, Robots.txt Generator, Keyword Density Checker, QR Code Generator, and many more. Each tool is designed to help with a specific aspect of SEO.",
   },
   {
     question: "Can I use these tools for commercial projects?",
@@ -40,22 +40,20 @@ const homeFAQs = [
   },
 ];
 
-export function FAQSection({ dict }: { dict?: any }) {
-  const faqsToUse = dict?.faq?.questions || homeFAQs;
-
+export function FAQSection() {
   return (
     <section id="faq" className="scroll-mt-20">
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          {dict?.faq?.title || "Frequently Asked Questions"}
+          Frequently Asked Questions
         </h2>
         <p className="mt-3 text-lg text-muted-foreground">
-          {dict?.features?.subtitle || "Everything you need to know about SEO Utilities"}
+          Everything you need to know about SEO Utilities
         </p>
       </div>
       <div className="mx-auto max-w-3xl">
         <Accordion defaultValue={[]} className="w-full">
-          {faqsToUse.map((faq: { question: string; answer: string }, i: number) => (
+          {homeFAQs.map((faq, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>
               <AccordionTrigger className="text-left text-base">
                 {faq.question}

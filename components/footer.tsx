@@ -2,18 +2,10 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { categories, getToolsByCategory } from "@/lib/tools-data";
-import { AdSlot } from "@/components/ad-slot";
 
-export function Footer({ dict, lang }: { dict?: any; lang: string }) {
+export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Advertisement</p>
-        <AdSlot variant="footer" slotId="1611016987" />
-      </div>
-
-      <Separator />
-
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -33,29 +25,23 @@ export function Footer({ dict, lang }: { dict?: any; lang: string }) {
           </div>
 
           {/* Tool Categories */}
-          {categories.map((cat) => {
-            const translatedCat = dict?.categoriesMap?.[cat] || cat;
-            return (
+          {categories.map((cat) => (
             <div key={cat}>
-              <h3 className="mb-3 text-sm font-semibold">{translatedCat}</h3>
+              <h3 className="mb-3 text-sm font-semibold">{cat}</h3>
               <ul className="space-y-2">
-                {getToolsByCategory(cat as any).map((tool) => {
-                  const translatedName = dict?.toolsMap?.[tool.slug]?.name || tool.name;
-                  return (
+                {getToolsByCategory(cat as any).map((tool) => (
                   <li key={tool.slug}>
                     <Link
-                      href={`/${lang}/${tool.slug}`}
+                      href={`/${tool.slug}`}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {translatedName}
+                      {tool.name}
                     </Link>
                   </li>
-                  )
-                })}
+                ))}
               </ul>
             </div>
-            )
-          })}
+          ))}
         </div>
 
         <Separator className="my-8" />
@@ -66,28 +52,28 @@ export function Footer({ dict, lang }: { dict?: any; lang: string }) {
           </p>
           <div className="flex gap-6 flex-wrap justify-center">
             <Link
-              href={`/${lang}/about`}
+              href="/about"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.navigation?.about || "About"}
+              About
             </Link>
             <Link
-              href={`/${lang}/contact`}
+              href="/contact"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.navigation?.contact || "Contact"}
+              Contact
             </Link>
             <Link
-              href={`/${lang}/privacy`}
+              href="/privacy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.navigation?.privacy || "Privacy Policy"}
+              Privacy Policy
             </Link>
             <Link
-              href={`/${lang}/terms`}
+              href="/terms"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {dict?.navigation?.terms || "Terms of Service"}
+              Terms of Service
             </Link>
           </div>
         </div>

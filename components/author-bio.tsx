@@ -2,10 +2,9 @@ import Link from "next/link";
 
 interface AuthorBioProps {
   author?: string;
-  lang: string;
 }
 
-export function AuthorBio({ author = "SEO Utilities Team", lang }: AuthorBioProps) {
+export function AuthorBio({ author = "SEO Utilities Team" }: AuthorBioProps) {
   return (
     <div className="mt-16 rounded-2xl border border-border/60 bg-gradient-to-br from-card to-muted/30 p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row items-start gap-5">
@@ -29,13 +28,13 @@ export function AuthorBio({ author = "SEO Utilities Team", lang }: AuthorBioProp
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
-              href={`/${lang}/about`}
+              href={`/about`}
               className="inline-flex items-center rounded-lg border border-violet-500/30 bg-violet-500/5 px-3 py-1.5 text-xs font-medium text-violet-500 hover:bg-violet-500/10 transition-colors"
             >
               About Us
             </Link>
             <Link
-              href={`/${lang}/blog`}
+              href={`/blog`}
               className="inline-flex items-center rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-border/80 transition-colors"
             >
               More Articles

@@ -73,7 +73,7 @@ export function createWebsiteSchema() {
     potentialAction: [
       {
         "@type": "SearchAction",
-        target: `${SITE_URL}/en?q={search_term_string}`,
+        target: `${SITE_URL}?q={search_term_string}`,
         "query-input": "required name=search_term_string",
       },
     ],
@@ -90,7 +90,7 @@ export function createSiteLinksSearchBoxSchema() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/en?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },

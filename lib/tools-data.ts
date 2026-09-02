@@ -1,7 +1,5 @@
 import {
   Code,
-  FileCode,
-  FileText,
   Globe,
   Hash,
   Image,
@@ -13,27 +11,12 @@ import {
   Search,
   Settings,
   Share2,
-  SlidersHorizontal,
-  Sparkles,
   Tag,
   MessageSquareShare,
   Link2,
   Type,
-  KeyRound,
   FileJson,
-  AlignLeft,
   MousePointerClick,
-  Terminal,
-  Contact,
-  ShieldCheck,
-  Binary,
-  Braces,
-  Unplug,
-  ListTree,
-  Clock,
-  Fingerprint,
-  FileBox,
-  LayoutTemplate
 } from "lucide-react";
 
 export interface Tool {
@@ -54,10 +37,7 @@ export type ToolCategory =
   | "Technical SEO"
   | "Social Media"
   | "Content"
-  | "Code"
-  | "Utilities"
-  | "Developer Tools"
-  | "API Tools";
+  | "Utilities";
 
 export const categories: ToolCategory[] = [
   "Meta Tags",
@@ -65,10 +45,7 @@ export const categories: ToolCategory[] = [
   "Technical SEO",
   "Social Media",
   "Content",
-  "Code",
   "Utilities",
-  "Developer Tools",
-  "API Tools",
 ];
 
 export const tools: Tool[] = [
@@ -216,19 +193,6 @@ export const tools: Tool[] = [
     popular: true,
   },
   {
-    name: "Favicon Generator",
-    slug: "favicon-generator",
-    description:
-      "Upload an image and generate all the favicon sizes you need: favicon.ico, PNG sizes (16x16 to 512x512), and Apple Touch icons. Download everything as a ZIP file.",
-    shortDescription:
-      "Generate all favicon sizes from a single image.",
-    icon: Sparkles,
-    category: "Utilities",
-    keywords: ["favicon", "favicon generator", "icon generator", "apple touch icon"],
-    dateAdded: "2025-04-10",
-    popular: false,
-  },
-  {
     name: "Slug Generator",
     slug: "slug-generator",
     description:
@@ -239,45 +203,6 @@ export const tools: Tool[] = [
     category: "Utilities",
     keywords: ["url slug", "slug generator", "seo url", "friendly url"],
     dateAdded: "2025-04-15",
-    popular: false,
-  },
-  {
-    name: "HTML Minifier",
-    slug: "html-minifier",
-    description:
-      "Minify HTML code to reduce file size and improve page load speed. Also includes an HTML beautifier to format minified code for readability.",
-    shortDescription:
-      "Minify and beautify HTML code for better performance.",
-    icon: FileCode,
-    category: "Code",
-    keywords: ["html minifier", "html beautifier", "html compress", "minify html"],
-    dateAdded: "2025-05-01",
-    popular: false,
-  },
-  {
-    name: "CSS Minifier",
-    slug: "css-minifier",
-    description:
-      "Minify CSS code to reduce stylesheet file size. Includes a CSS beautifier to format compressed CSS into readable, well-indented code.",
-    shortDescription:
-      "Minify and beautify CSS stylesheets.",
-    icon: SlidersHorizontal,
-    category: "Code",
-    keywords: ["css minifier", "css beautifier", "css compress", "minify css"],
-    dateAdded: "2025-05-05",
-    popular: false,
-  },
-  {
-    name: "JavaScript Minifier",
-    slug: "js-minifier",
-    description:
-      "Minify JavaScript code to reduce script file size and improve performance. Includes a JS beautifier to make minified code readable again.",
-    shortDescription:
-      "Minify and beautify JavaScript code.",
-    icon: FileText,
-    category: "Code",
-    keywords: ["js minifier", "javascript minifier", "js beautifier", "minify js"],
-    dateAdded: "2025-05-10",
     popular: false,
   },
   {
@@ -320,19 +245,6 @@ export const tools: Tool[] = [
     popular: false,
   },
   {
-    name: "Password Generator",
-    slug: "password-generator",
-    description:
-      "Generate secure, random passwords instantly. Customize length, include symbols, numbers, and uppercase letters. Keep your online accounts safe from hackers.",
-    shortDescription:
-      "Create strong, secure random passwords instantly.",
-    icon: KeyRound,
-    category: "Utilities",
-    keywords: ["password generator", "strong password", "random password", "secure password"],
-    dateAdded: "2026-08-09",
-    popular: true,
-  },
-  {
     name: "JSON Formatter & Validator",
     slug: "json-formatter",
     description:
@@ -340,21 +252,8 @@ export const tools: Tool[] = [
     shortDescription:
       "Beautify, format, and validate JSON code.",
     icon: FileJson,
-    category: "Code",
+    category: "Utilities",
     keywords: ["json formatter", "json validator", "json beautifier", "format json"],
-    dateAdded: "2026-08-10",
-    popular: true,
-  },
-  {
-    name: "Lorem Ipsum Generator",
-    slug: "lorem-ipsum-generator",
-    description:
-      "Generate dummy text for your website mockups, designs, and templates. Customize the number of paragraphs, words, or lists you need instantly.",
-    shortDescription:
-      "Generate dummy text for your website mockups.",
-    icon: AlignLeft,
-    category: "Content",
-    keywords: ["lorem ipsum", "dummy text", "placeholder text", "text generator"],
     dateAdded: "2026-08-10",
     popular: true,
   },
@@ -371,149 +270,6 @@ export const tools: Tool[] = [
     dateAdded: "2026-08-10",
     popular: true,
   },
-  {
-    name: "Code Generator",
-    slug: "code-generator",
-    description:
-      "Generate production-ready code snippets for CRUD operations, authentication, file handling, API calls, database queries, and more. Supports Python, Django, FastAPI, Node.js, Express, Laravel, and Rails.",
-    shortDescription:
-      "Generate CRUD, Auth & more code in Python, Django, Node.js and others.",
-    icon: Terminal,
-    category: "Developer Tools",
-    keywords: ["code generator", "crud generator", "python code", "django code", "fastapi", "nodejs", "express", "laravel", "developer tools"],
-    dateAdded: "2026-08-12",
-    popular: true,
-  },
-  {
-    name: "Link in Bio Generator",
-    slug: "social-profile-generator",
-    description:
-      "Create a beautiful, mobile-friendly Link in Bio page with all your social profiles. Generates a single QR code you can share anywhere. 100% free and hosted entirely in the QR code.",
-    shortDescription:
-      "Create a Link in Bio page and share it via a single QR code.",
-    icon: Contact,
-    category: "Social Media",
-    keywords: ["link in bio", "social profile", "multiple links qr code", "linktree alternative", "qr code bio"],
-    dateAdded: "2026-08-12",
-    popular: true,
-  },
-  {
-    name: "JWT Decoder",
-    slug: "jwt-decoder",
-    description:
-      "Decode and inspect JSON Web Tokens (JWT) instantly in your browser. View the header, payload, and signature of any JWT. Verify expiry, issuer, and claims without sending your token to a server.",
-    shortDescription:
-      "Decode and inspect JWT tokens — header, payload, expiry, and claims.",
-    icon: ShieldCheck,
-    category: "API Tools",
-    keywords: ["jwt", "json web token", "jwt decoder", "jwt parser", "bearer token", "oauth"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: "JSON Validator",
-    slug: "json-validator",
-    description:
-      "Validate and lint any JSON string instantly. Detect syntax errors, unexpected tokens, and formatting issues with detailed error messages and line numbers. Supports JSON5 comments detection.",
-    shortDescription:
-      "Validate JSON syntax and detect errors with line-by-line feedback.",
-    icon: Braces,
-    category: "API Tools",
-    keywords: ["json validator", "json lint", "validate json", "json checker", "json syntax"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: "JSON Schema Generator",
-    slug: "json-schema-generator",
-    description:
-      "Paste any JSON object and automatically generate a JSON Schema (Draft-07) that validates it. Perfect for API documentation, form validation, and data contract generation.",
-    shortDescription:
-      "Generate a JSON Schema automatically from any JSON object.",
-    icon: ListTree,
-    category: "API Tools",
-    keywords: ["json schema", "json schema generator", "openapi schema", "json validation", "draft-07"],
-    dateAdded: "2026-08-17",
-    popular: false,
-  },
-  {
-    name: "Base64 Encoder / Decoder",
-    slug: "base64-encoder",
-    description:
-      "Encode any text or string to Base64 and decode Base64 back to plain text instantly in your browser. Useful for API authentication, data URIs, and encoding binary data.",
-    shortDescription:
-      "Encode text to Base64 and decode Base64 back to plain text.",
-    icon: Binary,
-    category: "API Tools",
-    keywords: ["base64", "base64 encoder", "base64 decoder", "encode base64", "decode base64"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: "API Request Builder",
-    slug: "api-request-builder",
-    description:
-      "Build and format HTTP API requests visually. Generate ready-to-use fetch(), axios, curl, and HTTPie code snippets for any API endpoint with custom headers, query params, and request body.",
-    shortDescription:
-      "Build API requests visually and generate fetch, axios, and curl snippets.",
-    icon: Unplug,
-    category: "API Tools",
-    keywords: ["api request builder", "curl generator", "fetch generator", "http client", "api tester", "postman alternative"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: "Cron Job Generator",
-    slug: "cron-job-generator",
-    description:
-      "Generate and translate cron job expressions easily. Create complex schedules for your background jobs and see the human-readable translation instantly. Supports standard 5-part cron syntax.",
-    shortDescription:
-      "Generate and translate cron job schedule expressions easily.",
-    icon: Clock,
-    category: "Developer Tools",
-    keywords: ["cron", "crontab", "cron generator", "cron expression", "cron job", "schedule"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: "UUID / GUID Generator",
-    slug: "uuid-generator",
-    description:
-      "Generate secure, random UUIDs (Universally Unique Identifiers) instantly. Create version 4 UUIDs for your database keys, sessions, and APIs. Supports bulk generation and one-click copy.",
-    shortDescription:
-      "Generate secure, random UUIDs (v4) instantly.",
-    icon: Fingerprint,
-    category: "Developer Tools",
-    keywords: ["uuid", "guid", "uuid generator", "guid generator", "unique id", "random id"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  },
-  {
-    name: ".gitignore Generator",
-    slug: "gitignore-generator",
-    description:
-      "Generate boilerplate .gitignore files for your GitHub repositories. Combine multiple templates for different operating systems, programming languages, and IDEs into one clean file.",
-    shortDescription:
-      "Generate boilerplate .gitignore files for your projects.",
-    icon: FileBox,
-    category: "Developer Tools",
-    keywords: ["gitignore", "git", "github", "ignore file", "gitignore generator", "developer tools"],
-    dateAdded: "2026-08-17",
-    popular: false,
-  },
-  {
-    name: "CSS Flexbox Generator",
-    slug: "css-flexbox-generator",
-    description:
-      "Design flexible layouts visually with the CSS Flexbox Generator. Tweak container properties, align items, and instantly copy the generated CSS or Tailwind code for your project.",
-    shortDescription:
-      "Design CSS Flexbox layouts visually and generate CSS/Tailwind code.",
-    icon: LayoutTemplate,
-    category: "Code",
-    keywords: ["css", "flexbox", "flexbox generator", "css layout", "tailwind flex", "css generator"],
-    dateAdded: "2026-08-17",
-    popular: true,
-  }
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
