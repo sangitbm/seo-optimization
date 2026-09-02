@@ -17,6 +17,7 @@ import {
   Type,
   FileJson,
   MousePointerClick,
+  Contact,
 } from "lucide-react";
 
 export interface Tool {
@@ -268,6 +269,19 @@ export const tools: Tool[] = [
     category: "Meta Tags",
     keywords: ["serp simulator", "google snippet preview", "meta description preview"],
     dateAdded: "2026-08-10",
+    popular: true,
+  },
+  {
+    name: "Link in Bio Generator",
+    slug: "social-profile-generator",
+    description:
+      "Create a beautiful, mobile-friendly Link in Bio page with all your social profiles. Generates a single QR code you can share anywhere. 100% free and hosted entirely in the QR code.",
+    shortDescription:
+      "Create a Link in Bio page and share it via a single QR code.",
+    icon: Contact,
+    category: "Social Media",
+    keywords: ["link in bio", "social profile", "multiple links qr code", "linktree alternative", "qr code bio"],
+    dateAdded: "2026-08-12",
     popular: true,
   },
 ];
