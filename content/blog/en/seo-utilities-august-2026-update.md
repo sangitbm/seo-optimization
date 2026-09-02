@@ -28,11 +28,6 @@ This release focuses on four areas:
 
 Small edge cases can make a utility tool frustrating—especially when you are preparing content, launch assets, or technical SEO files under a deadline. We addressed several of those edge cases.
 
-### Stronger Password Generator Output
-
-The [Password Generator](/password-generator) now guarantees that a password includes at least one character from every category you select: uppercase letters, lowercase letters, numbers, and symbols.
-
-Previously, a randomly generated password could theoretically omit a selected category. The updated generator first includes every selected character class, then securely shuffles the finished password. This makes the output better suited to password policies that require a mix of character types.
 
 ### Open Graph Preview Updates Instantly
 
@@ -49,11 +44,7 @@ Two technical SEO workflows also received validation improvements:
 
 These checks help prevent incomplete campaign URLs and empty or invalid sitemap files from reaching production.
 
-### Better JWT Support for International Text
 
-The [JWT Decoder](/jwt-decoder) now correctly reads UTF-8 JSON content. JWT claims containing names, labels, or other non-English characters can be decoded without corrupted text.
-
----
 
 ## Improved Privacy Controls and Consent Handling
 
@@ -102,14 +93,12 @@ Explore the latest improvements in our free browser-based tools:
 - [Open Graph Generator](/open-graph-generator)
 - [Sitemap Generator](/sitemap-generator)
 - [UTM Builder](/utm-builder)
-- [Password Generator](/password-generator)
-- [JWT Decoder](/jwt-decoder)
 
 All tools run in your browser, require no sign-up, and are designed to help developers, marketers, and site owners move from idea to implementation faster.
 
 ## Conclusion
 
-The August 2026 SEO Utilities update is about making everyday SEO work more dependable. From password generation and social previews to consent-aware advertising and safer production builds, each improvement is designed to reduce friction without compromising user trust.
+The August 2026 SEO Utilities update is about making everyday SEO work more dependable. From social previews to consent-aware advertising and safer production builds, each improvement is designed to reduce friction without compromising user trust.
 
 We will continue refining the tools that help you create cleaner metadata, stronger technical SEO foundations, and better-performing web experiences.
 
