@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink } from "lucide-react";
+import { Plus, Trash2, Download, QrCode, Smartphone, ExternalLink, Info } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -143,6 +143,13 @@ export function SocialProfileGenerator({ content }: { content?: any }) {
         { question: "Can I update my links later?", answer: "Because we don't store your data, you cannot edit an existing QR code. If you need to change a link, you will need to generate a new QR code." }
       ]}
     >
+      <div className="bg-muted/50 border border-border rounded-lg p-4 mb-8 flex gap-3 text-sm text-muted-foreground">
+        <Info className="h-5 w-5 shrink-0 text-primary" />
+        <p>
+          <strong>Note:</strong> While most tools on this site are strictly for Search Engine Optimization (SEO), this Link in Bio generator is provided as a general-purpose social media utility for your convenience.
+        </p>
+      </div>
+
       <div className="grid gap-8 lg:grid-cols-[1fr_400px]">
         {/* Editor Side */}
         <div className="space-y-6">
