@@ -1,0 +1,64 @@
+diff --git a/components/cookie-consent.tsx b/components/cookie-consent.tsx
+index 6e31c8d..99eac22 100644
+--- a/components/cookie-consent.tsx
++++ b/components/cookie-consent.tsx
+@@ -2,7 +2,6 @@
+ 
+ import { useEffect, useState } from "react";
+ import Link from "next/link";
+-import { usePathname } from "next/navigation";
+ import { Cookie, X, CheckCircle2, Settings2, ChevronDown, ChevronUp } from "lucide-react";
+ 
+ type ConsentState = {
+@@ -39,11 +38,9 @@ export function CookieConsent() {
+     analytics: false,
+     advertising: false,
+   });
+-  const pathname = usePathname();
+-
+-  // Extract locale from pathname
+-  const lang = pathname?.split("/")[1] || "en";
+-  const privacyUrl = `/${lang}/privacy`;
++  // The site currently uses flat routing with a single locale ("en"), so the
++  // privacy policy always lives at /privacy — no locale prefix exists.
++  const privacyUrl = "/privacy";
+ 
+   useEffect(() => {
+     const stored = localStorage.getItem(CONSENT_KEY);
+diff --git a/lib/metadata.ts b/lib/metadata.ts
+index 809d60b..7020b02 100644
+--- a/lib/metadata.ts
++++ b/lib/metadata.ts
+@@ -8,17 +8,23 @@ export function createMetadata({
+   description,
+   slug,
+   noIndex = false,
++  titleSuffix,
+ }: {
+   title: string;
+   description: string;
+   slug?: string;
+   noIndex?: boolean;
++  /** Optional suffix appended as "Title — Suffix". The site name is added
++   *  automatically once via the title template in app/layout.tsx, so it
++   *  must never be included here. */
++  titleSuffix?: string;
+ }) {
+   const path = slug ? `/${slug}` : "";
+   const url = `${SITE_URL}${path}`;
++  const fullTitle = titleSuffix ? `${title} — ${titleSuffix}` : title;
+ 
+   return {
+-    title: slug ? `${title} — Free Online Tool | ${SITE_NAME}` : title,
++    title: fullTitle,
+     description,
+     ...(noIndex && { robots: "noindex, nofollow" }),
+     alternates: {
+@@ -45,6 +51,7 @@ export function createToolMetadata(tool: Tool) {
+     title: tool.name,
+     description: tool.description,
+     slug: tool.slug,
++    titleSuffix: "Free Online Tool",
+   });
+ }
+ 

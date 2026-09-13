@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Cookie, X, CheckCircle2, Settings2, ChevronDown, ChevronUp } from "lucide-react";
 
 type ConsentState = {
@@ -39,11 +38,9 @@ export function CookieConsent() {
     analytics: false,
     advertising: false,
   });
-  const pathname = usePathname();
-
-  // Extract locale from pathname
-  const lang = pathname?.split("/")[1] || "en";
-  const privacyUrl = `/${lang}/privacy`;
+  // The site currently uses flat routing with a single locale ("en"), so the
+  // privacy policy always lives at /privacy — no locale prefix exists.
+  const privacyUrl = "/privacy";
 
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_KEY);

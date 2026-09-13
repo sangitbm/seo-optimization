@@ -8,17 +8,23 @@ export function createMetadata({
   description,
   slug,
   noIndex = false,
+  titleSuffix,
 }: {
   title: string;
   description: string;
   slug?: string;
   noIndex?: boolean;
+  /** Optional suffix appended as "Title — Suffix". The site name is added
+   *  automatically once via the title template in app/layout.tsx, so it
+   *  must never be included here. */
+  titleSuffix?: string;
 }) {
   const path = slug ? `/${slug}` : "";
   const url = `${SITE_URL}${path}`;
+  const fullTitle = titleSuffix ? `${title} — ${titleSuffix}` : title;
 
   return {
-    title: slug ? `${title} — Free Online Tool | ${SITE_NAME}` : title,
+    title: fullTitle,
     description,
     ...(noIndex && { robots: "noindex, nofollow" }),
     alternates: {
@@ -45,6 +51,7 @@ export function createToolMetadata(tool: Tool) {
     title: tool.name,
     description: tool.description,
     slug: tool.slug,
+    titleSuffix: "Free Online Tool",
   });
 }
 
