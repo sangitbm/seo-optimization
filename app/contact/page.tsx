@@ -17,7 +17,7 @@ export default function ContactPage() {
 
         <h2>Get in Touch</h2>
         <p>
-          You can reach our team via email at <strong>support@seoopti.vercel.app</strong> (Note: this is a placeholder email for demonstration purposes).
+          You can reach our team via email at <strong>support@seoopti.vercel.app</strong>.
         </p>
 
         <h2>Support FAQ</h2>

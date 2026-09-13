@@ -21,7 +21,7 @@ export function ToolFAQ({ faqs, className = "" }: ToolFAQProps) {
   return (
     <div className={className}>
       <h2 className="mb-6 text-2xl font-bold">Frequently Asked Questions</h2>
-      <Accordion defaultValue={[]} className="w-full">
+      <Accordion defaultValue={[]} hiddenUntilFound className="w-full">
         {faqs.map((faq, i) => (
           <AccordionItem key={i} value={`faq-${i}`}>
             <AccordionTrigger className="text-left text-base">

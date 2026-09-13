@@ -1,0 +1,39 @@
+diff --git a/app/contact/page.tsx b/app/contact/page.tsx
+index 17e9f7f..bef085f 100644
+--- a/app/contact/page.tsx
++++ b/app/contact/page.tsx
+@@ -17,7 +17,7 @@ export default function ContactPage() {
+ 
+         <h2>Get in Touch</h2>
+         <p>
+-          You can reach our team via email at <strong>support@seoopti.vercel.app</strong> (Note: this is a placeholder email for demonstration purposes).
++          You can reach our team via email at <strong>support@seoopti.vercel.app</strong>.
+         </p>
+ 
+         <h2>Support FAQ</h2>
+diff --git a/components/faq-section.tsx b/components/faq-section.tsx
+index 4867195..91d4fb2 100644
+--- a/components/faq-section.tsx
++++ b/components/faq-section.tsx
+@@ -52,7 +52,7 @@ export function FAQSection() {
+         </p>
+       </div>
+       <div className="mx-auto max-w-3xl">
+-        <Accordion defaultValue={[]} className="w-full">
++        <Accordion defaultValue={[]} hiddenUntilFound className="w-full">
+           {homeFAQs.map((faq, i) => (
+             <AccordionItem key={i} value={`faq-${i}`}>
+               <AccordionTrigger className="text-left text-base">
+diff --git a/components/tool-faq.tsx b/components/tool-faq.tsx
+index 684cfcf..a6f616b 100644
+--- a/components/tool-faq.tsx
++++ b/components/tool-faq.tsx
+@@ -21,7 +21,7 @@ export function ToolFAQ({ faqs, className = "" }: ToolFAQProps) {
+   return (
+     <div className={className}>
+       <h2 className="mb-6 text-2xl font-bold">Frequently Asked Questions</h2>
+-      <Accordion defaultValue={[]} className="w-full">
++      <Accordion defaultValue={[]} hiddenUntilFound className="w-full">
+         {faqs.map((faq, i) => (
+           <AccordionItem key={i} value={`faq-${i}`}>
+             <AccordionTrigger className="text-left text-base">

@@ -52,7 +52,7 @@ export function FAQSection() {
         </p>
       </div>
       <div className="mx-auto max-w-3xl">
-        <Accordion defaultValue={[]} className="w-full">
+        <Accordion defaultValue={[]} hiddenUntilFound className="w-full">
           {homeFAQs.map((faq, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>
               <AccordionTrigger className="text-left text-base">
